@@ -1,0 +1,27 @@
+/*******************************
+              Tab
+*******************************/
+@tabsBlockColor: @textColor;
+@tabActiveItemHoverColor: @secondaryColor;
+
+@mobileItemFontSize: 1rem;
+@mobileItemPadding: 1rem 0.25rem;
+
+@headerSize: @h4;
+@headerSizeResponsive: @fontSize;
+@contentSize: @fontSize;
+
+/* Loading */
+@loadingMinHeight: 250px;
+@loadingContentPosition: relative;
+@loadingContentOffset: -10000px;
+
+@loaderDistanceFromTop: 100px;
+@loaderSize: 2.5em;
+
+/* Scrollbar */
+@mobileTabScrollbarHeight: 0;
+@tabletTabScrollbarHeight: 0.3rem;
+
+/* Images */
+@verticalTabPaneImageMaxWidth: 100%;

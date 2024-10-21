@@ -1,0 +1,275 @@
+@type: 'extra';
+@element: 'footer';
+
+@import (multiple) '../../theme.config';
+
+/*-------------------
+      FOOTER
+--------------------*/
+
+footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: @mobileFooterBackgroundGradient;
+  color: @white;
+
+  .footer-wrapper {
+    width: @wrapperWidth;
+    padding: @mobileWrapperPadding;
+    background-image: @wrapperBackgroundImage;
+    background-position: @wrapperBackgroundPosition;
+    background-size: @mobileWrapperBackgroundSize;
+  }
+  .footer-wrapper-nobg {
+    width: @wrapperWidth;
+    padding: @mobileWrapperPadding;
+  }
+}
+
+footer .theme-sites {
+  padding: @mobileThemeSitesPadding;
+
+  .logos .ui.grid {
+    align-items: center;
+  }
+
+  .logos .logo img {
+    margin: @mobileThemeSitesLogoMargin;
+  }
+
+  .header {
+    font-size: @mobileFooterTitleFontSize;
+  }
+}
+
+.subfooter .item .ui.grid {
+  align-items: center;
+}
+
+.subfooter .item {
+  .header {
+    margin-bottom: @mobileItemHeaderMarginBottom;
+    text-align: center;
+  }
+}
+
+.subfooter .contact-block {
+  margin-bottom: @tabletContactBlockMarginBottom;
+}
+
+.contact-block .subcontact a {
+  font-size: @computerSubContactIconFontSize;
+  margin-right: @computerSubContactIconMarginRight;
+  font-weight: @computerSubContactIconFontWeight;
+}
+
+.subfooter .contact {
+  display: block;
+  margin: @mobileContactMargin;
+  font-size: @contactFontSize;
+  gap: @contactGap;
+
+  a {
+    color: @menuLinkColor;
+  }
+
+  i.big.icon {
+    margin-right: @mobileContactIconMarginRight;
+    font-size: @mobileContactIconFontSize;
+  }
+}
+
+.subfooter .social {
+  display: flex;
+  justify-content: @mobileSocialJustifyContent;
+  margin: @mobileSocialIconsMargin;
+
+  a {
+    color: @socialIconColor;
+
+    &:active,
+    &:hover {
+      color: @socialIconColor;
+    }
+
+    i.icon {
+      font-size: @mobileSocialIconSize;
+    }
+  }
+}
+
+.subfooter .footer-description {
+  margin: @mobileFooterDescriptionMargin;
+  text-align: @footerDescriptionTextAlign;
+
+  p {
+    font-size: @mobileFooterDescriptionFontSize;
+  }
+}
+
+footer .footer-wrapper .menu {
+  .actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: @menuFooterActionsGap;
+  }
+
+  .copyright {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: @menuFooterCopyrightGap;
+  }
+
+  a {
+    color: @menuLinkColor;
+    font-weight: @menuFontWeight;
+    font-size: @mobileMenuFontSize;
+    text-align: @menuLinkTextAlign;
+    cursor: pointer;
+    margin-inline: 12px;
+
+    &:hover,
+    &:active {
+      color: @menuLinkColor;
+    }
+  }
+}
+
+@media only screen and (max-width: @largestMobileScreen) {
+  .footer-wrapper > .container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  footer .footer-wrapper .menu .copyright a {
+    font-size: @mobileMenuCopyrightFontSize;
+    font-weight: @mobileMenuCopyrightFontWeight;
+  }
+
+  .contact-block .subcontact {
+    margin-top: @mobileSubcontactBlockMarginTop;
+  }
+}
+
+@media only screen and (min-width: @tabletBreakpoint) {
+  footer {
+    background: @computerFooterBackgroundGradient;
+  }
+
+  footer .theme-sites .header {
+    font-size: @tabletFooterTitleFontSize;
+  }
+
+  .subfooter .item {
+    .logo img {
+      max-height: 100px;
+    }
+
+    .site.logo img {
+      padding-right: @siteLogoPaddingRight;
+    }
+
+    .contact-block {
+      padding-left: @siteLogoPaddingRight;
+    }
+  }
+
+  .subfooter .contact {
+    display: flex;
+    font-size: @tabletContactFontSize;
+    margin: @tabletContactMargin;
+    gap: @tabletContactGap;
+  }
+
+  .subfooter .contact-block {
+    margin-inline: @tabletContactBlockMarginInline;
+  }
+
+  .contact-block .subcontact a {
+    font-size: @tabletSubContactIconFontSize;
+    margin-right: @tabletSubContactIconMarginRight;
+  }
+
+  .subfooter .footer-description {
+    margin: @tabletFooterDescriptionMargin;
+  }
+
+  .subfooter .social {
+    justify-content: @tabletSocialJustifyContent;
+    gap: @tabletSocialGap;
+    margin: @tabletSocialIconsMargin;
+
+    a {
+      i.icon {
+        font-size: @tabletSocialIconSize;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: @computerBreakpoint) {
+  footer {
+    .footer-wrapper {
+      padding: @computerWrapperPadding;
+      background-size: @computerWrapperBackgroundSize;
+    }
+  }
+
+  footer .theme-sites {
+    padding: @computerThemeSitesPadding;
+
+    .logos .logo img {
+      margin: @computerThemeSitesLogoMargin;
+    }
+  }
+
+  .subfooter .logo-header {
+    // To match the figma align
+    margin-left: @computerLogoHeaderMarginLeft;
+
+    .subfooter .item {
+      .header {
+        margin-bottom: @computerItemHeaderMarginBottom;
+      }
+
+    }
+
+    .contact-block .subcontact a {
+      font-size: @computerSubContactIconFontSize;
+      margin-right: @computerSubContactIconMarginRight;
+    }
+
+    .subfooter .contact {
+      align-items: center;
+      font-size: @contactFontSize;
+      gap: @contactGap;
+
+      i.big.icon {
+        font-size: @computerContactIconFontSize;
+      }
+    }
+
+    .subfooter .footer-description {
+      margin: @computerFooterDescriptionMargin;
+
+      p {
+        font-size: @computerFooterDescriptionFontSize;
+      }
+    }
+
+    .subfooter .social {
+      margin: @computerSocialIconsMargin;
+    }
+
+    .footer .footer-wrapper .menu {
+      a {
+        font-size: @computerMenuFontSize;
+      }
+    }
+  }
+}
+
+.loadUIOverrides();

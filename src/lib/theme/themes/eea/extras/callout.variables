@@ -1,0 +1,19 @@
+/*******************************
+            Callout
+*******************************/
+/* Body */
+@mobileCalloutBorderLeft : @5px solid @borderColorSecondaryCSSVar;
+@tabletCalloutBorderLeft : @10px solid @borderColorSecondaryCSSVar;
+
+/* Text */
+@quoteColor            : @textColorCSSVar;
+@mobileQuoteFontSize   : 1rem;
+@tabletQuoteFontSize   : @h6;
+@computerQuoteFontSize : @h5;
+@quoteFontWeight       : 400;
+
+/* Layout */
+@calloutBorder        : none;
+@calloutBoxShadow     : none;
+@calloutBorderRadius  : 0;
+@calloutPadding       : 0;

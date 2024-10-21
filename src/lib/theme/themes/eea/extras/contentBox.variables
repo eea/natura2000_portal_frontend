@@ -1,0 +1,21 @@
+/*******************************
+            Content Box
+*******************************/
+
+/* Content Box */
+@contentBoxWidth : 100vw;
+@contentBoxColor : @white;
+@contentBoxBackgroundColor: @grey-1;
+@contentBoxNoBackground: transparent;
+@contentBoxColorInverted : inherit;
+
+/* Themes */
+@contentBoxBackgroundColorPrimary: @primaryColor;
+@contentBoxBackgroundColorSecondary: @secondaryColor;
+@contentBoxBackgroundColorTertiary: @tertiaryColor;
+
+
+/* Container */
+@contentBoxContainerMarginTop    : @bigGap;
+@contentBoxContainerMarginBottom : @bigGap;
+@contentBoxContainerZIndex : 1;

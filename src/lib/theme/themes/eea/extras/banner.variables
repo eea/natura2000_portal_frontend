@@ -1,0 +1,90 @@
+/*******************************
+            Page Banner
+*******************************/
+
+@bannerBackgroundColor   : @secondaryColor;
+
+/* Background Image */
+@imageBackgroundRepeat   : no-repeat;
+@imageBackgroundSize     : cover;
+@imageBackgroundPosition : center;
+
+/* Gradient */
+@backgroundGradient           : linear-gradient(8deg,rgba(12,27,40, 0.7) 32%,rgba(0,36,78,0) 80%);
+@backgroundGradientOpacity    : 1;
+
+/* Content */
+@mobileContentPadding      : 1rem 0 1.25rem;
+@tabletContentPadding      : 3rem 0 1.25rem;
+@computerContentPadding    : 5rem 0 1.25rem;
+
+@mobileContentPaddingWithImage      : 6.25rem 0 1.25rem;
+@tabletContentPaddingWithImage      : 12.5rem 0 1.25rem;
+@computerContentPaddingWithImage    : 15.625rem 0 1.25rem;
+
+/* Title */
+@titleFontWeight           : @bold;
+@titleMaxWidth             : 100%;
+@titleMarginBottom         : 0;
+@titleBorderBottom         : none;
+@mobileTitleFontSize       : @mobileH1;
+@tabletTitleFontSize       : @h2;
+@computerTitleFontSize     : @h1;
+@mobileTitleLineHeight     : @headerLineHeight;
+@tabletTitleLineHeight     : @headerLineHeight;
+@computerTitleLineHeight   : @headerLineHeight;
+@mobileTitleMargin         : 0 0 0 0;
+@tabletTitleMargin         : 0 0 0 0;
+@computerTitleMargin       : 0 0 0 0;
+
+
+/* Subtitle */
+@subtitleFontWeight        : @bold;
+@subtitleMaxWidth          : 100%;
+@mobileSubtitleFontSize    : 0.875rem;
+@computerSubtitleFontSize  : 1.125rem;
+@mobileSubtitleLineHeight  : 1rem;
+@computerSubtitleLineHeight: 1.625rem;
+@mobileSubtitleMargin      : 0 0 1.125rem 0;
+@computerSubtitleMargin    : 0 0 1.25rem 0;
+
+/* Metadata */
+@metadataTypeFontWeight    : @bold;
+@mobileMetadataFontSize    : 0.75rem;
+@tabletMetadataFontSize    : 0.875rem;
+@mobileMetadataLineHeight  : 1.2;
+@tabletMetadataLineHeight  : 1rem;
+// Metadata field
+@metadataFieldDividerContent: ' | ';
+
+/* Actions */
+@mobileActionsAlignItems                 : center;
+@tabletActionsAlignItems                 : flex-end;
+@tabletActionsFlexDirection              : column;
+// Action
+@mobileActionsActionMarginBottom         : 0.5rem;
+@tabletActionsActionMinWidth             : 95px;
+// Button
+@mobileBannerActionButtonFontSize        : 0.75rem;
+@tabletBannerActionButtonFontSize        : 0.875rem;
+@bannerActionButtonBoxShadow             : none;
+@bannerActionButtonActiveBackgroundColor : transparent;
+@mobileBannerActionButtonMargin          : 0;
+@tabletBannerActionButtonMargin          : 0 0.313rem 0 0;
+// Button Icon
+@bannerActionButtonIconVerticalAlign     : text-bottom;
+@bannerActionButtonIconOpacity           : 1;
+@mobileBannerActionButtonIconFontSize    : 1rem;
+@tabletBannerActionButtonIconFontSize    : 1.1rem;
+
+/* Share Popup */
+@sharePopupPadding: @tinyGap;
+@sharePopupFilter:  drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.25));
+@tabletSharePopupMinWidth: 120px;
+// Text
+@sharePopupFontSize: 0.875rem;
+@sharePopupFontWeight: 500;
+@sharePopupLineHeight: 1rem;
+// Actions
+@sharePopupActionsIconColor: @pineGreen;
+@sharePopupActionsIconMargin: 0;

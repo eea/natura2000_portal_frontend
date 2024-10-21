@@ -1,0 +1,128 @@
+.homepage {
+    .content-area {
+        padding-top: 0 !important;
+    }
+    .eea.header {
+        z-index: 10;
+    }
+}
+
+.ui.form, .ui.segment, .ui.segments {
+    position: static !important;
+}
+
+.search-action {
+    background-color: $naturaGreen;
+}
+.burger-action {
+    background-color: $naturaBlue;
+}
+
+.eea.header {
+    .logo {
+        margin: auto 0;
+    }
+    .eea-logo {
+        max-height: 3.5rem;
+        margin-top: 0;
+    }
+}
+@media only screen and (min-width: 992px) {
+    .eea.header .eea-logo {
+        max-height: 5rem;
+    }
+}
+@media only screen and (min-width: 768px) {
+    .eea.header .eea-logo {
+        max-height: 5.5rem;
+    }
+}
+
+.main-bar-container {
+    .grid {
+        justify-content: space-between;
+    }
+    .main-menu {
+        width: auto;
+        .menu {
+            gap: 1rem;
+        }
+    }
+    .main-menu .menu {
+        gap: 1rem;
+    }
+}
+@media only screen and (min-width: 992px) {
+    .main.bar .ui.container .ui.text.menu {
+        width: auto;
+    }
+}
+
+#mega-menu {
+    width: 100%;
+    min-height: auto;
+    background-color: $naturaBlue;
+    .ui.accordion {
+        .content {
+            background-color: $naturaBlue;
+        }
+        .title i {
+            color: $white;
+        }
+    }
+    .ui.container {
+        padding-top: 1rem;
+        padding-bottom: 2rem;
+    }
+    .icon {
+        margin-left: 0.25rem;
+        vertical-align: text-top;
+        text-decoration: none;
+    }
+}
+
+.main-menu {
+    position: relative;
+    &:not(.inverted) {
+        .item {
+            a {
+                color: $naturaGreen;
+                &:hover {
+                    border-bottom-color: $naturaGreen;
+                }
+            }
+            &.active {
+                a {
+                    border-bottom-color: $naturaGreen;
+                    color: $naturaGreen;
+                }
+            }
+        }
+    }
+}
+
+#main main {
+    overflow: inherit;
+}
+
+footer {
+    .footer-wrapper {
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    @media all and (max-width: 992px) { 
+        .footer-wrapper {
+            background-size: inherit;
+        }
+    }
+    .theme-sites {
+        font-size: 1.25rem;
+        font-weight: bold;
+        padding-bottom: 0;
+    }
+    @media only screen and (min-width: 768px) {
+        .subfooter .contact {
+            display: block;
+        }
+    }
+}

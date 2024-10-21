@@ -1,0 +1,69 @@
+@type: 'extra';
+@element: 'testimonial';
+
+@import (multiple) '../../theme.config';
+
+/*-------------------
+      TESTIMONIAL
+--------------------*/
+
+.eea.testimonial {
+  display: flex;
+  flex-direction: column;
+  gap: @testimonialGap;
+  width: @testimonialWidth;
+
+  .eea.pullquote {
+    padding: 1.25rem 0 0;
+  }
+
+  .avatar-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: @testimonialAvatarWrapperHeight;
+  }
+
+  .ui.card.rounded {
+    flex-direction: row-reverse;
+    align-items: center;
+  }
+}
+
+.eea.testimonial .content h3.title {
+  margin: @testimonialContentTitleMarginVertical
+    @mobileTestimonialContentTitleMarginHorizontal;
+  font-weight: @testimonialContentTitleFontWeight;
+  color: @testimonialContentTitleColor;
+}
+
+.eea.testimonial .ui.grid div:first-child {
+  order: 1;
+}
+
+
+@media only screen and (min-width: @tabletBreakpoint) {
+
+  .eea.testimonial .ui.card.rounded {
+    flex-direction: column;
+  }
+  
+  .eea.testimonial .content h3.title {
+    margin: @testimonialContentTitleMarginVertical
+      @tabletTestimonialContentTitleMarginHorizontal;
+  }
+
+  .eea.testimonial .ui.grid div:first-child {
+    order: 0;
+  }
+}
+
+// Override image default size for mobile
+@media only screen and (max-width: @largestMobileScreen) {
+  .eea.testimonial .ui.card.rounded img {
+    width: @mobileCardImageWidth;
+    height: @mobileCardImageHeight;
+  }
+}
+
+.loadUIOverrides();

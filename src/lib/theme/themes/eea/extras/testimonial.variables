@@ -1,0 +1,21 @@
+/*******************************
+            Testimonial
+*******************************/
+
+
+@testimonialWidth                           : 100%;
+@testimonialGap                             : @largeGap;
+@testimonialAvatarWrapperHeight             : 100%;
+
+/* Pullquote */
+
+/* Title */
+@testimonialContentTitleMarginVertical         : 0;
+@mobileTestimonialContentTitleMarginHorizontal : 0;
+@tabletTestimonialContentTitleMarginHorizontal : 3.125rem;
+@testimonialContentTitleFontWeight             : 500;
+@testimonialContentTitleColor                  : @deepBlue;
+
+/* Image */
+@mobileCardImageWidth  : 100px;
+@mobileCardImageHeight : 100px;

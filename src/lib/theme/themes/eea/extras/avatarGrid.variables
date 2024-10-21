@@ -1,0 +1,16 @@
+/*******************************
+            Avatar Grid
+*******************************/
+
+@avatarGridWidth                    : 100%;
+@avatarGridWrapperWidth             : 100%;
+@avatarGridContentWidth             : 100%;
+
+/* Grid Title */
+@avatarGridContentTitleTextAlign    : center;
+@avatarGridContentTitleWidth        : 100%;
+@avatarGridContentTitleFontWeight   : @bold;
+
+/* Avatar Group */
+@avatarGroupWidth                   : 100%;
+@avatarGroupMargin                  : @largeGap 0;

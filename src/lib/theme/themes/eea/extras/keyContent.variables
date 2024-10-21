@@ -1,0 +1,24 @@
+/*******************************
+            Key Content
+*******************************/
+
+
+/* Title */
+
+/* List */
+@keyContentListGap:  @largeGap;
+
+/* Item */
+@keyContentItemColor : @japaneseIndigo;
+@mobileKeyContentItemFontSize : 1rem;
+@computerKeyContentItemFontSize: 1.25rem;
+@keyContentItemMarginLeft : @hugeGap;
+@keyContentItemMarginLeftNegative: -2rem;
+
+/* Bullet */
+@keyContentListBulletColor :  @secondaryColor;
+@keyContentListBulletFontSize : 3rem;
+
+/* Colored Title */
+@keyContentColoredTitleColor : @secondaryColor;
+@keyContentTitleMarginLeft : 2.8rem;

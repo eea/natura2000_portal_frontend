@@ -1,0 +1,222 @@
+/*******************************
+             Item
+*******************************/
+
+/*-------------------
+         View
+--------------------*/
+
+/* Group */
+@groupMargin: @rem-space-6 0em;
+
+/* Item */
+@display: flex;
+@background: transparent;
+@borderRadius: 0rem;
+@minHeight: 0px;
+@padding: 0em;
+@width: 100%;
+@boxShadow: none;
+@border: none;
+@zIndex: '';
+@transition: box-shadow @defaultDuration @defaultEasing;
+// black to desired color filter option resulted from https://codepen.io/sosuke/pen/Pjoqqp
+@itemPrimaryFilterColor: invert(9%) sepia(89%) saturate(5332%) hue-rotate(194deg) brightness(98%) contrast(101%);
+@itemSecondaryFilterColor: invert(33%) sepia(14%) saturate(5566%) hue-rotate(139deg) brightness(98%) contrast(101%);
+@itemTertiaryFilterColor: invert(27%) sepia(15%) saturate(1161%) hue-rotate(167deg) brightness(93%) contrast(80%);
+
+/* Responsive */
+@itemSpacing: 1em;
+@imageWidth: 175px;
+@contentImageDistance: 2rem;
+
+@tabletItemSpacing: 1em;
+@tabletImageWidth: 150px;
+@tabletContentImageDistance: 2rem;
+
+@mobileItemSpacing: 2em;
+@mobileImageWidth: 100%;
+@mobileImageMaxHeight: 100%;
+@mobileContentImageDistance: 1.5em;
+
+
+/*-------------------
+       Content
+--------------------*/
+
+/* Image */
+@imageDisplay: block;
+@imageFloat: none;
+@imageMaxHeight: '';
+@imageVerticalAlign: top;
+@imageMargin: 0em;
+@imagePadding: 0em;
+@imageBorder: none;
+@imageBorderRadius: 0.125rem;
+@imageBoxShadow: none;
+@imageBorder: none;
+
+/* Image & Icon size */
+@tinyMediaSize  : 1.5rem;
+@smallMediaSize  : 3rem;
+@mediumMediaSize : 4rem;
+@largeMediaSize  : 5rem;
+
+/* Content */
+@contentDisplay: block;
+@contentVerticalAlign: top;
+
+@contentWidth: auto;
+@contentOffset: 0em;
+@contentBackground: none;
+@contentMargin: 0em;
+@contentPadding: 0em;
+@contentFontSize: 1em;
+@contentBorder: none;
+@contentBorderRadius: 0em;
+@contentBoxShadow: none;
+
+/* Header */
+@headerMargin: -@lineHeightOffset 0em 0em;
+@headerFontWeight: @bold;
+@headerFontSize: @relativeBig;
+@headerColor: @darkTextColor;
+
+/* Metadata */
+@metaMargin: 0.5em 0em 0.5em;
+@metaFontSize: 1em;
+@metaLineHeight: 1em;
+@metaSpacing: 0.3em;
+@metaColor: rgba(0, 0, 0, 0.6);
+
+/* Icons */
+@actionOpacity: 0.75;
+@actionHoverOpacity: 1;
+@actionTransition: color @defaultDuration @defaultEasing;
+
+/* Actions */
+@favoriteColor: #FFB70A;
+@favoriteActiveColor: #FFE623;
+@likeColor: #FF2733;
+@likeActiveColor: #FF2733;
+
+/* Links */
+@headerLinkColor: @headerColor;
+@headerLinkHoverColor: @linkHoverColor;
+@metaLinkColor: @lightTextColor;
+@metaLinkHoverColor: @textColor;
+@contentLinkColor: '';
+@contentLinkHoverColor: '';
+@contentLinkTransition: color @defaultDuration @defaultEasing;
+
+/* Description */
+@descriptionDistance: 0;
+@descriptionMaxWidth: auto;
+@descriptionFontSize: 1em;
+@descriptionLineHeight: @lineHeight;
+@descriptionColor: @textColorCSSVar;
+
+/* Content Image */
+@contentImageWidth: '';
+@contentImageVerticalAlign: middle;
+
+/* Avatar Image */
+@avatarSize: @contentImageWidth;
+@avatarBorderRadius: @circularRadius;
+
+/* Paragraph */
+@paragraphDistance: 0.5em;
+
+/* Additional Content */
+@extraDivider: none;
+@extraHorizontalSpacing: 0.5rem;
+@extraRowSpacing: 0.5rem;
+
+@extraBackground: none;
+@extraDisplay: block;
+@extraPosition: relative;
+@extraMargin: (1rem - @extraRowSpacing) 0em 0em;
+@extraTop: 0em;
+@extraLeft: 0em;
+@extraWidth: 100%;
+@extraPadding: 0em 0em 0em;
+@extraBoxShadow: none;
+@extraColor: @black;
+@extraTransition: color @defaultDuration @defaultEasing;
+
+/*-------------------
+      Variations
+--------------------*/
+
+/* Flex item */
+@mobileFlexItemWidth: 100%;
+@tabletFlexItemWidth: 48.8%;
+@desktopFlexItemWidth: 49%;
+
+/* Relaxed */
+@relaxedItemSpacing: 1.5em;
+@veryRelaxedItemSpacing: 2em;
+
+/* Divided */
+@dividedBorder: 1px solid @borderColor;
+@dividedMargin: 0em;
+@dividedPadding: 1em 0em;
+
+@dividedFirstLastMargin: 0em;
+@dividedFirstLastPadding: 0em;
+
+/* Unstackable items */
+@unstackableMobileImageWidth: 125px;
+
+/* Stackable item */
+@stackableContentPaddingTop: @rem-space-4;
+@stackableContentPaddingLeft: 0;
+
+/* Row */
+@mobileRowItemMargin  : 1rem 0;
+@tabletRowItemMargin  : 1.5rem 0;
+@desktopRowItemMargin : 2rem 0;
+
+/*-------------------
+      Default
+--------------------*/
+@defaultItemImageHeight: 100%;
+@tabletDefaultItemWidth: 35%;
+
+@defaultItemBackgroundColor: @white;
+@defaultItemColor: @deepBlue;
+
+/* Extra */
+@mobileDefaultItemExtraMarginBottom: 1.5rem;
+@tabletDefaultItemExtraMarginBottom: 2.5rem;
+@computerDefaultItemExtraMarginBottom: 4.5rem;
+@mobileDefaultItemExtraMarginTop: 0;
+
+/* Meta */
+@defaultItemMetaFontSize: 1rem;
+@defaultItemMetaOpacity: 1;
+@defaultItemMetaFontWeight: 100;
+
+@defaultItemDateMetaFontSize: 1.125rem;
+@defaultItemDateMetaOpacity: 1;
+@defaultItemDateMetaFontWeight: 400;
+
+/* Header */
+@mobileDefaultItemHeaderFontSize: 1.125rem;
+@tabletDefaultItemHeaderFontSize: 1rem;
+@desktopDefaultItemHeaderFontSize: 1.5rem;
+@defaultItemHeaderFontWeight: 700;
+@mobileDefaultItemHeaderMarginBottom: 0.375rem;
+@tabletDefaultItemHeaderMarginBottom: 0.875rem;
+@computerDefaultItemHeaderMarginBottom: 1.25rem;
+
+/* Description */
+@mobileDefaultItemDescriptionFontSize: 1rem;
+@desktopDefaultItemDescriptionFontSize: 1.25rem;
+@defaultItemDescriptionFontWeight: 400;
+@defaultItemDescriptionLineClamp: 4;
+
+/* Content */
+@mobileDefaultItemContentPadding: 1.5em;
+@tabletDefaultItemContentPadding: 1em;
+@computerDefaultItemContentPadding: 1.5em;

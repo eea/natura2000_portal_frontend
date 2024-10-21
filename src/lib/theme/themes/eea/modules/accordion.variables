@@ -1,0 +1,115 @@
+/*******************************
+           Accordion
+*******************************/
+
+@boxShadow: none;
+@itemsMargin: 0;
+
+/* Title */
+@titleFont: @headerFont;
+@titlePadding: 1rem 1.563rem;
+@titlePadding: @rectangleMedium;
+@titleFontSize: 1.125rem;
+@titleColor: @textColorCSSVar;
+@titleBorderBottom: @1px solid @silverGray;
+@titleColorHover:var(--text-color-hover, @grey-5);
+@titleJustifyContent: space-between;
+
+/* Icon */
+@iconColor: var(--text-color, @oldSilver);
+@iconColorActive: @white;
+@iconOpacity: 1;
+@iconFontSize: 3rem;
+@iconFloat: none;
+@iconWidth: auto;
+@iconHeight: 1rem;
+@iconDisplay: inline-block;
+@iconMargin: 0em;
+@iconPadding: 0em;
+@iconTransition:
+  transform @defaultDuration @defaultEasing,
+  opacity @defaultDuration @defaultEasing
+;
+@iconVerticalAlign: baseline;
+@iconTransform: none;
+@iconColorHover: @titleColorHover;
+@iconInactive: "\ea4e"; // Icon of closed accordion
+@iconActive: "\EA78"; // Icon of open accordion
+@iconOrder: 1; // Icon after text of the title
+
+/* Child Accordion */
+@childAccordionMargin: 1em 0em 0em;
+@childAccordionPadding: 0em;
+
+/* Content */
+@contentMargin: 0;
+@contentPaddingBottom: 1.563rem;
+@contentPadding: @squareMedium;
+@contentBackground: @grey-1;
+@contentColor: @tertiaryColor;
+
+/*-------------------
+       Coupling
+--------------------*/
+
+@menuTitlePadding: 0em;
+@menuIconFloat: right;
+@menuIconMargin: @lineHeightOffset 0em 0em 1em;
+@menuIconTransform: rotate(180deg);
+
+
+/*-------------------
+       States
+--------------------*/
+
+@activeIconTransform: none;
+@activeTitleBackground: var(--bg-color, @white);
+@activeTitleColor: @grey-5;
+@activeTitleBorderBottom: 0;
+
+/*-------------------
+      Variations
+--------------------*/
+
+/* Styled */
+@styledWidth: 600px;
+@styledBackground: @activeTitleBackground;
+@styledBorderRadius: 0;
+@styledBoxShadow: none;
+
+/* Content */
+@styledContentMargin: 0em;
+@styledContentPadding: @contentPadding;
+@contentBorder: @relative2px solid @secondaryColor;
+
+/* Child Content */
+@styledChildContentMargin: 0em;
+@styledChildContentPadding: @styledContentPadding;
+
+/* Styled Title */
+@styledTitleMargin: 0em;
+@styledTitlePadding: 0.75em 1em;
+@styledTitleFontWeight: @normal;
+@styledTitleColor: @titleColor;
+@styledTitleTransition: background-color @defaultDuration @defaultEasing;
+@styledTitleBorder: none;
+@styledTitleTransition:
+  background @defaultDuration @defaultEasing,
+  color @defaultDuration @defaultEasing
+;
+
+/* Styled Title States */
+@styledTitleHoverBackground: transparent;
+@styledTitleHoverColor: @activeTitleColor;
+@styledActiveTitleBackground: @activeTitleBackground;
+@styledActiveTitleColor: @activeTitleColor;
+
+/* Styled Child Title States */
+@styledHoverChildTitleBackground: @styledTitleHoverBackground;
+@styledHoverChildTitleColor: @styledTitleHoverColor;
+@styledActiveChildTitleBackground: @styledActiveTitleBackground;
+@styledActiveChildTitleColor: @styledActiveTitleColor;
+
+/* Inverted */
+@invertedTitleColor: @invertedTextColor;
+

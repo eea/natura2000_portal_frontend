@@ -1,0 +1,264 @@
+/*******************************
+         Theme Overrides
+*******************************/
+
+/* Align item image left with text */
+.ui.items:not(.unstackable) > .item > .image {
+  margin: @imageMargin;
+}
+
+.ui.items {
+  &:not(.unstackable) > .item.default > .content {
+    padding: @mobileDefaultItemContentPadding;
+  }
+
+  .item.default {
+    background-color: @defaultItemBackgroundColor;
+
+    .image {
+      img {
+        height: @defaultItemImageHeight;
+        border-radius: 0;
+        object-fit: cover;
+      }
+    }
+
+    .content {
+      .extra {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: @mobileDefaultItemExtraMarginTop;
+        margin-bottom: @mobileDefaultItemExtraMarginBottom;
+
+        .meta {
+          color: @defaultItemColor;
+          font-size: @defaultItemMetaFontSize;
+          font-weight: @defaultItemMetaFontWeight;
+          opacity: @defaultItemMetaOpacity;
+
+          &.date {
+            font-size: @defaultItemDateMetaFontSize;
+            font-weight: @defaultItemDateMetaFontWeight;
+            opacity: @defaultItemDateMetaOpacity;
+          }
+        }
+
+        &:after {
+          display: none;
+        }
+      }
+
+      .header {
+        margin-bottom: @mobileDefaultItemHeaderMarginBottom;
+        color: @defaultItemColor;
+        font-size: @mobileDefaultItemHeaderFontSize;
+        font-weight: @defaultItemHeaderFontWeight;
+      }
+
+      .description {
+        color: @defaultItemColor;
+        font-size: @mobileDefaultItemDescriptionFontSize;
+        font-weight: @defaultItemDescriptionFontWeight;
+        display: -webkit-box;
+        overflow: hidden;
+        -webkit-box-orient: vertical;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: @defaultItemDescriptionLineClamp;
+      }
+    }
+  }
+}
+
+// color item images that are svg files
+.item.primary img {
+  filter: @itemPrimaryFilterColor;
+}
+
+.item.secondary img {
+  filter: @itemSecondaryFilterColor;
+}
+
+.item.tertiary img {
+  filter: @itemTertiaryFilterColor;
+}
+
+// decrease margin when using icons instead of images
+// since the icons have themselves extra whitespace
+// and we should aim to get about 32px as seen in the figma design
+.item .icon {
+  width: auto;
+  margin-right: 0;
+}
+
+/* Image & Icon size */
+.item .image {
+  overflow: hidden;
+}
+
+// Tiny - 24px
+.item .tiny.image,
+.block .item .tiny.image,
+.item i.tiny.icon,
+.item i.tiny.icons {
+  width: @tinyMediaSize;
+  height: @tinyMediaSize;
+  font-size: @tinyMediaSize;
+}
+
+// SMALL - 48px
+.item .small.image,
+.block .item .small.image,
+.item i.small.icon,
+.item i.small.icons {
+  width: @smallMediaSize;
+  height: @smallMediaSize;
+  font-size: @smallMediaSize;
+}
+
+// MEDIUM - 64px
+.item .medium.image,
+.block .item .medium.image,
+.item i.medium.icon,
+.item i.medium.icons {
+  width: @mediumMediaSize;
+  height: @mediumMediaSize;
+  font-size: @mediumMediaSize;
+}
+
+// BIG - 80px
+.item .big.image,
+.block .item .big.image,
+.item i.big.icon,
+.item i.big.icons {
+  width: @largeMediaSize;
+  height: @largeMediaSize;
+  font-size: @largeMediaSize;
+}
+
+.ui.items.row > .item {
+  margin: @mobileRowItemMargin;
+}
+
+// As semantic does for non unstackable items
+// so columns does not affect margin in mobiles
+.ui.items.row:not(.flex-items-wrapper) > .item:last-child {
+  margin-bottom: 0;
+}
+
+// Stackable items that have image above content
+.ui.items.row .item.stackable {
+  display: grid;
+
+  .image,
+  i.icon {
+    margin: auto;
+  }
+
+  .content {
+    padding-left: @stackableContentPaddingLeft;
+    padding-top: @stackableContentPaddingTop;
+  }
+}
+
+// Flex wrapper for list of items
+.ui.items.flex-items-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  .item {
+    width: @mobileFlexItemWidth;
+  }
+}
+
+
+@media only screen and (max-width: @largestMobileScreen) {
+  .ui.items.row > .item {
+    flex-direction: row;
+  }
+
+  .ui.items.row > .item:not(.stackable) > .image + .content {
+    padding: 0em 0em 0em @mobileContentImageDistance;
+  }
+}
+
+@media only screen and (min-width: @tabletBreakpoint) {
+  .ui.items .item.default {
+    .image {
+      width: @tabletDefaultItemWidth;
+    }
+
+    .content {
+      padding: @tabletDefaultItemContentPadding;
+
+      .extra {
+        margin-top: inherit;
+        margin-bottom: @tabletDefaultItemExtraMarginBottom;
+      }
+
+      .header {
+        margin-bottom: @tabletDefaultItemHeaderMarginBottom;
+        font-size: @tabletDefaultItemHeaderFontSize;
+      }
+    }
+  }
+  .ui.items.row > .item {
+    margin: @tabletRowItemMargin;
+  }
+
+  // Flex wrapper for list of items
+  .ui.items.flex-items-wrapper .item {
+    width: @tabletFlexItemWidth;
+  }
+}
+
+@media only screen and (min-width: @computerBreakpoint) {
+  .ui.items .item.default {
+    .content {
+      padding: @computerDefaultItemContentPadding;
+
+      .extra {
+        margin-bottom: @computerDefaultItemExtraMarginBottom;
+      }
+
+      .header {
+        margin-bottom: @computerDefaultItemHeaderMarginBottom;
+        font-size: @desktopDefaultItemHeaderFontSize;
+      }
+
+      .description {
+        font-size: @desktopDefaultItemDescriptionFontSize;
+      }
+    }
+  }
+  .ui.items.row > .item {
+    margin: @desktopRowItemMargin;
+  }
+
+  // Flex wrapper for list of items
+  .ui.items.flex-items-wrapper .item {
+    width: @desktopFlexItemWidth;
+  }
+}
+
+/*--------------
+     Icons
+---------------*/
+
+.ui.items > .item {
+  &.primary,
+  > .icon.primary
+  {
+    color: @primaryColor;
+  }
+
+  &.secondary,
+  > .icon.secondary {
+    color: @secondaryColor;
+  }
+  &.tertiary,
+  > .icon.tertiary {
+    color: @tertiaryColor;
+  }
+}

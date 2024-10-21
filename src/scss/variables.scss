@@ -1,0 +1,71 @@
+$eeaGreen: #007B6C;
+$eeaBlue: #004B7F;
+$naturaGreen: #009D81;
+$naturaBlue: #0E4096;
+$text: #3D5265;
+$white: #ffffff;
+$grey-1: #F9F9F9;
+$grey-2: #E6E7E8;
+$grey-3: #BCBEC0;
+$grey-4: #747678;
+$grey-5: #323232;
+$boxShadow: 0px 4px 8px 0px #BCBEC0;
+$lightGreen: #e2f1ed;
+$messageError: #B83230;
+$messageWarning: #FF9933;
+$messageSuccess: #007B6C;
+$messageInfo: #004B7F;
+$sitesColor: #007B6C;
+$sitesColorLight: #007B6C1A;
+$habitatsColor: #B78730;
+$habitatsColorLight: #B787301A;
+$speciesColor: #0083E0;
+$speciesColorLight: #0083E01A;
+$sitesColorDark: #00473f;
+$habitatsColorDark: #8d6925;
+$speciesColorDark: #0065ad;
+
+$max: 6;
+$offset: 0.5;
+$unit: 'rem';
+@mixin list-loop($className, $styleName) {
+  $i: 0;
+  @while $i <= $max {
+    @if(str-index($className, 'x')){
+      #{$className + $i} { 
+        #{$styleName + -left}: #{$i*0.5 + $unit + " !important"};
+        #{$styleName + -right}: #{$i*0.5 + $unit + " !important"}
+      }
+    }
+    @else if(str-index($className, 'y')){
+      #{$className + $i} { 
+        #{$styleName + -top}: #{$i*0.5 + $unit + " !important"};
+        #{$styleName + -bottom}: #{$i*0.5 + $unit + " !important"}
+      }
+    }
+    @else {
+      #{$className + $i} { 
+        #{$styleName}: #{$i*0.5 + $unit + " !important"};
+      }
+    }
+    $i: $i + 1;
+  }
+}
+
+// Margins
+@include list-loop('.mt-', 'margin-top');
+@include list-loop('.mr-', 'margin-right');
+@include list-loop('.mb-', 'margin-bottom');
+@include list-loop('.ml-', 'margin-left');
+@include list-loop('.m-', 'margin');
+@include list-loop('.mx-', 'margin');
+@include list-loop('.my-', 'margin');
+
+// Paddings
+@include list-loop('.pt-', 'padding-top');
+@include list-loop('.pr-', 'padding-right');
+@include list-loop('.pb-', 'padding-bottom');
+@include list-loop('.pl-', 'padding-left');
+@include list-loop('.p-', 'padding');
+@include list-loop('.px-', 'padding');
+@include list-loop('.py-', 'padding');

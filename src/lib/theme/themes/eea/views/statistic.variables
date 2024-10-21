@@ -1,0 +1,108 @@
+/*******************************
+           Statistic
+*******************************/
+
+/*-------------------
+         View
+--------------------*/
+
+@mobileStatisticWidth: 100%;
+@tabletStatisticWidth: inherit;
+
+@secondaryValueColor: @secondaryColorCSSVar;
+@primaryLabelColor: @primaryColorCSSVar;
+
+@verticalMargin: 1.5em;
+@margin: @verticalMargin 0em;
+@textAlign: center;
+@maxWidth: auto;
+
+/* Group */
+@horizontalSpacing: 1.5em;
+@rowSpacing: 2em;
+@groupMargin: @verticalMargin 0;
+
+/* Group Element */
+@elementMargin: @rowSpacing @horizontalSpacing @rowSpacing;
+@elementMaxWidth: @maxWidth;
+
+/*-------------------
+       Content
+--------------------*/
+
+@statisticContentMinWidth : @size-11;
+
+/* Value */
+@valueFont: @pageFont;
+@valueFontWeight: @normal;
+@valueLineHeight: 1.5em;
+@valueColor: @secondaryColorCSSVar;
+@valueTextTransform: none;
+
+/* Label */
+@labelSize: @relativeMedium;
+@topLabelDistance: 1rem;
+@bottomLabelDistance: 0rem;
+@labelFont: @headerFont;
+@labelFontWeight: @bold;
+@labelColor: @primaryColorCSSVar;
+@labelLineHeight: @relativeLarge;
+@labelTextTransform: none;
+
+/* Text */
+@textValueLineHeight: 1em;
+@textValueMinHeight: 2em;
+@textValueFontWeight: @bold;
+
+/* Label Image */
+@imageHeight: 3rem;
+@imageVerticalAlign: baseline;
+
+/*-------------------
+      Types
+--------------------*/
+
+@horizontalGroupElementMargin: 1em 0em;
+@horizontalLabelDistance: 0.75em;
+
+/*-------------------
+      Variations
+--------------------*/
+
+/* Floated */
+@leftFloatedMargin: 1em;
+@rightFloatedMargin: 1em;
+
+/* Inverted */
+@invertedValueColor: @white;
+@invertedLabelColor: @invertedTextColor;
+@invertedBackground: transparent;
+
+/* Item Width */
+@itemGroupMargin: 2rem 0;
+@itemMargin: 2rem 0;
+
+/* Size */
+@miniTextValueSize: 1rem;
+@miniValueSize: 1.5rem;
+@miniHorizontalValueSize: 1.5rem;
+
+@tinyTextValueSize: 1rem;
+@tinyValueSize: 2rem;
+@tinyHorizontalValueSize: 2rem;
+
+@smallTextValueSize: 1rem;
+@smallValueSize: 3rem;
+@smallHorizontalValueSize: 2rem;
+
+@textValueSize: 2rem;
+@valueSize: 4rem;
+@horizontalValueSize: 3rem;
+
+@largeTextValueSize: 2.5rem;
+@largeValueSize: 5rem;
+@largeHorizontalValueSize: 4rem;
+
+@hugeTextValueSize: 2.5rem;
+@hugeValueSize: 6rem;
+@hugeHorizontalValueSize: 5rem;

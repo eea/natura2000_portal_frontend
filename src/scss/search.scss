@@ -1,0 +1,47 @@
+.search {
+    &.ui.form {
+        .field > label {
+            font-size: 1rem;
+            font-weight: bold;
+        }
+        .ui.checkbox {
+            margin-bottom: 0;
+        }
+        .ui.grid {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+        .ui.input input {
+            padding-left: 1.125rem;
+        }
+        .ui.dropdown {
+            &.loading {
+                .dropdown.icon {
+                    position: sticky;
+                }
+            }
+        }
+    }
+    &-list {
+        .ui.grid > .column {
+            padding: 0.5rem;
+        }
+    }
+    &-results {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+    }
+    &-counter {
+        font-size: 1.25rem;
+        font-weight: bold;
+        align-self: flex-end;
+    }
+    &-number {
+
+    }
+}
+
+.noresults {
+    margin: 2rem auto;
+}

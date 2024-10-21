@@ -1,0 +1,30 @@
+/*******************************
+        Inpage Navigation
+*******************************/
+
+@navBottom            : @largeGap;
+@navRight             : @largeGap;
+@navBackground        : @darkCerulean;
+@navColor             : @white;
+@navFontWeight        : @bold;
+
+/* Inpage navigation size */
+@tabletNavWidth       : 2.25rem;
+@tabletNavHeight      : 2.25rem;
+@computerNavWidth     : 3.125rem;
+@computerNavHeight    : 3.125rem;
+
+/* Desktop Icon */
+@inpageNavigationIconWidth : 100%;
+@inpageNavigationIconMarginRight : 0;
+@mobileInpageNavigationIconLineHeight : 2.75rem;
+@computerInpageNavigationIconLineHeight : 1.5rem;
+@mobileInpageNavigationIconFontSize : 2rem;
+@computerInpageNavigationIconFontSize : 1.9rem;
+
+/* Text */
+@inpageNavigationTextMarginTop : -22px;
+@inpageNavigationTextFontSize : 1.125rem;
+@inpageNavigationTextFontWeight : 900;
+@inpageNavigationTextAlign : center;
+@inpageNavigationTextFontVariant: small-caps;

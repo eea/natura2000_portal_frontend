@@ -1,0 +1,479 @@
+.ui.button {
+    &.primary {
+        background-color: $naturaGreen;
+        color: $white;
+        &:hover, &:focus, &:active {
+            background-color: $eeaGreen;
+            color: $white;
+        }
+    }
+    &.secondary {
+        background-color: $naturaBlue;
+        color: $white;
+        &:hover, &:focus, &:active {
+            background-color: $eeaBlue;
+            color: $white;
+        }
+    }
+    a {
+        color: white !important;
+    }
+}
+p a {
+    word-break: break-all;
+}
+
+a {
+    color: $naturaGreen;
+    &:hover {
+        color: $eeaGreen;
+    }
+}
+
+ul {
+    li::marker {
+        color: $naturaGreen;
+    }
+}
+
+.green {
+    color: $naturaGreen;
+}
+
+.eea.banner .image .gradient {
+    background: linear-gradient(8deg, $eeaGreen 30%, $naturaGreen 80%);
+    .content {
+        padding: 6rem 0 1.5rem;
+    }
+}
+
+.content-area #page-document {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#page-document {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.modal {
+    .ui.form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        .field {
+            label {
+                font-weight: bold;
+                margin-bottom: 0.25rem;
+            }
+            input[type="text"] {
+                height: auto;
+            }
+        }
+        .input.error {
+            input {
+                background-color: #FFFFFF;
+                border-color: #C65B59;
+                color: #B83230;
+                box-shadow: none;
+            }
+        }
+    }
+    > .close, > .close:hover, > .close:focus  {
+        background: none;
+    }
+}
+
+.links-table {
+    &.ui.table {
+        tr {
+            &:first-child td, &:last-child td {
+                border: none;
+            }
+            td {
+                border-top: 1px solid $grey-3;
+                border-bottom: 1px solid $grey-3;
+                padding: 0.75rem 2rem;
+                text-align: left;
+                &[rowspan] {
+                    width: 1%;
+                }
+            }
+        }
+    }
+}
+
+.about-table {
+    &.ui.table {
+        width: auto;
+        border: none;
+        td {
+            text-align: left;
+            padding: 0.75rem;
+        }
+    }
+}
+
+.ui.checkbox {
+    label {
+        cursor: pointer;
+        &:before {
+            border-color: $eeaBlue;
+            border-radius: 0;
+        }
+        &:hover {
+            &:before {
+                border-color: $eeaBlue;
+            }
+        }
+    }
+    input:checked {
+        ~ label {
+            &:before {
+                background-color: $eeaBlue;
+                border-color: $eeaBlue;
+            }
+            &:after {
+                color: #FFFFFF;
+                content: '\e800';
+            }
+        }
+        &:focus ~ label:after {
+            color: white;
+        }
+    }
+}
+
+.page-description {
+    white-space: break-spaces;
+    margin-bottom: 2rem;
+    overflow: hidden;
+    max-height: 6rem;
+    position: relative;
+    p {
+        margin-bottom: 0;
+    }
+    &.all{
+        &::after {
+            content: none;
+        }
+        .ui.button {
+            display: none;
+        }
+    }
+    &.show {
+        max-height: 100%;
+        &::after {
+            content: none;
+        }
+        .ui.button {
+            position: relative;
+        }
+    }
+    &.hide {
+        &::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(to top, rgba(255, 255, 255, 1) 15%, rgba(255, 255, 255, 0) 85%);
+            pointer-events: none;
+        }
+    }
+    .ui.button {
+        position: absolute;
+        display: block;
+        bottom: 0;
+        right: 0;
+        z-index: 1;
+        padding: 0;
+        margin-left: auto;
+        background: none;
+        &.text:focus {
+            box-shadow: none;
+        }
+    }
+}
+
+.loader-container {
+    height: 20rem;
+    width: 100%;
+    position: relative;
+}
+
+.sites {
+    .title {
+        color: $sitesColor;
+    }
+    .ui.input input:focus {
+        border-color: $sitesColor;
+    }
+    .ui.button {
+        background-color: $sitesColor;
+        color: $white;
+        &:hover, &:focus, &:active {
+            background-color: $sitesColorDark;
+            color: $white;
+        }
+        &.inverted {
+            border: solid 1px $sitesColor;
+            background-color: $white;
+            color: $sitesColor;
+            box-shadow: none !important;
+            &:hover, &:focus, &:active {
+                background-color: $sitesColor;
+                color: $white;
+                box-shadow: none !important;
+            }
+        }
+        &.text {
+            background-color: $white;
+            color: $sitesColor;
+            text-decoration: none;
+            &:hover, &:focus, &:active {
+                background-color: $white;
+                color: $sitesColorDark;
+                box-shadow: none;
+            }
+        }
+    }
+    .eea.banner .image .gradient {
+        background: linear-gradient(8deg, $sitesColorDark 30%, $sitesColor 80%);
+        .title {
+            color: $white;
+        }
+    }
+    &.form {
+        .accordion .content {
+            background: $sitesColorLight;
+        }
+    }
+    .card {
+        &.search {
+            height: 15rem;
+        }
+        &-title, b {
+            color: $sitesColor;
+        }
+    }
+    .ui.checkbox {
+        &:not(.radio) {
+            label:before, label:hover:before {
+                border-color: $sitesColor;
+            }
+            input:checked ~ label:before {
+                background-color: $sitesColor;
+            }
+            input:checked ~ label:after {
+                background-color: $sitesColor;
+            }
+        }
+        &.radio {
+            label:before {
+                border-color: $sitesColor;
+            }
+            input:checked ~ label:before {
+                border-color: $sitesColor;
+            }
+            input:checked ~ label:after {
+                background-color: $sitesColor;
+            }
+        }
+    }
+}
+
+.habitats {
+    .title {
+        color: $habitatsColor;
+    }
+    .ui.input input:focus {
+        border-color: $habitatsColor;
+    }
+    .ui.button {
+        background-color: $habitatsColor;
+        color: $white;
+        &:hover, &:focus, &:active {
+            background-color: $habitatsColorDark;
+            color: $white;
+        }
+        &.inverted {
+            border: solid 1px $habitatsColor;
+            background-color: $white;
+            color: $habitatsColor;
+            box-shadow: none !important;
+            &:hover, &:focus, &:active {
+                background-color: $habitatsColor;
+                color: $white;
+                box-shadow: none !important;
+            }
+        }
+        &.text {
+            background-color: $white;
+            color: $habitatsColor;
+            text-decoration: none;
+            &:hover, &:focus, &:active {
+                background-color: $white;
+                color: $habitatsColorDark;
+                box-shadow: none;
+            }
+        }
+    }
+    .eea.banner .image .gradient {
+        background: linear-gradient(8deg, $habitatsColorDark 30%, $habitatsColor 80%);
+        .title {
+            color: $white;
+        }
+    }
+    &.form {
+        .accordion .content {
+            background: $habitatsColorLight;
+        }
+    }
+    .card {
+        &-title, b {
+            color: $habitatsColor;
+        }
+    }
+    .ui.checkbox {
+        &:not(.radio) {
+            label:before, label:hover:before {
+                border-color: $habitatsColor;
+            }
+            input:checked ~ label:before {
+                background-color: $habitatsColor;
+            }
+            input:checked ~ label:after {
+                background-color: $habitatsColor;
+            }
+        }
+        &.radio {
+            label:before {
+                border-color: $habitatsColor;
+            }
+            input:checked ~ label:before {
+                border-color: $habitatsColor;
+            }
+            input:checked ~ label:after {
+                background-color: $habitatsColor;
+            }
+        }
+    }
+}
+
+.species {
+    .title {
+        color: $speciesColor;
+    }
+    .ui.input input:focus {
+        border-color: $speciesColor;
+    }
+    .ui.button {
+        background-color: $speciesColor;
+        color: $white;
+        &:hover, &:focus, &:active {
+            background-color: $speciesColorDark;
+            color: $white;
+        }
+        &.inverted {
+            border: solid 1px $speciesColor;
+            background-color: $white;
+            color: $speciesColor;
+            box-shadow: none !important;
+            &:hover, &:focus, &:active {
+                background-color: $speciesColor;
+                color: $white;
+                box-shadow: none !important;
+            }
+        }
+        &.text {
+            background-color: $white;
+            color: $speciesColor;
+            text-decoration: none;
+            &:hover, &:focus, &:active {
+                background-color: $white;
+                color: $speciesColorDark;
+                box-shadow: none;
+            }
+        }
+    }
+    .eea.banner .image .gradient {
+        background: linear-gradient(8deg, $speciesColorDark 30%, $speciesColor 80%);
+        .title {
+            color: $white;
+        }
+    }
+    &.form {
+        .accordion .content {
+            background: $speciesColorLight;
+        }
+    }
+    .card {
+        &-title, b {
+            color: $speciesColor;
+        }
+    }
+    .ui.checkbox {
+        &:not(.radio) {
+            label:before, label:hover:before {
+                border-color: $speciesColor;
+            }
+            input:checked ~ label:before {
+                background-color: $speciesColor;
+            }
+            input:checked ~ label:after {
+                background-color: $speciesColor;
+            }
+        }
+        &.radio {
+            label:before {
+                border-color: $speciesColor;
+            }
+            input:checked ~ label:before {
+                border-color: $speciesColor;
+            }
+            input:checked ~ label:after {
+                background-color: $speciesColor;
+            }
+        }
+    }
+}
+
+.ui.message {
+    margin: 1rem 0;
+    box-shadow: none;
+    border: solid 1px $text;
+    &.error {
+        border-color: $messageError;
+        color: $messageError;
+        background-color: rgba($messageError, 0.05);
+        box-shadow: none;
+        .header {
+            color: $messageError;
+        }
+    }
+    &.success {
+        border-color: $messageSuccess;
+        background-color: rgba($messageSuccess, 0.05);
+        color: $messageSuccess;
+        box-shadow: none;
+        .header {
+            color: $messageSuccess;
+        }
+    }
+    .content {
+        background-color: transparent;
+        word-break: break-word;
+    }
+}
+
+.ui.popup {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+}
+
+.sensitive {
+    color: $messageError;
+}

@@ -1,0 +1,15 @@
+{
+  "short_name": "Natura-2000-portal",
+  "name": "Natura 2000 Portal",
+  "icons": [
+    {
+      "src": "favicon.png",
+      "sizes": "100x100",
+      "type": "image/png"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#009D81",
+  "background_color": "#ffffff"
+}

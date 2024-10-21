@@ -1,0 +1,50 @@
+/*******************************
+          Breadcrumb
+*******************************/
+
+/*-------------------
+     Breadcrumb
+--------------------*/
+
+@verticalMargin: 0em;
+@display: flex;
+@verticalAlign: middle;
+
+@mobileBreadcrumbPadding: 0;
+@tabletBreadcrumbPadding: 0 @7px;
+@computerBreadcrumbPadding: 0 @10px;
+
+@breadcrumbItemMaxWidth: 220px;
+@breadcrumbItemMinHeight: @space-4;
+
+/* Icon */
+@breadcrumbImgWidth: @12px;
+@breadcrumbIconFontSize: 1.2rem;
+@breadcrumbIconWidth: 1rem;
+@breadcrumbFirstChildPadding: 0 0.469rem 0 0;
+
+/* Divider */
+@dividerSpacing: @5px;
+@dividerOpacity: 1;
+@dividerColor: @deepBlue;
+
+@dividerSize: @relativeSmall;
+@dividerVerticalAlign: baseline;
+
+@iconDividerSize: 0.75rem;
+@iconDividerVerticalAlign: baseline;
+
+@sectionMargin: 0em;
+@sectionPadding: 0em;
+
+// Pastanaga custom variable
+@breadcrumb-bg: @tealBackground;
+
+/* Coupling */
+@segmentPadding: @relativeMini @relativeMedium;
+
+/*-------------------
+       States
+--------------------*/
+@activeColor: @textColor;
+@activeFontWeight: @normal;
