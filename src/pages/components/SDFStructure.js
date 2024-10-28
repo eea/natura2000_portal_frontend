@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import { useSearchParams } from "react-router-dom";
-import ConfigSDF from '../config/sdf_config.json';
+import ConfigSDF from '../utils/sdf_config.json';
 import MapViewer from './MapViewer'
 
 const SDFVisualization = (props) => {
 
-    const [searchParams, setSearchParams] = useSearchParams();
-    const [data, setData] = useState(props.data);
-    const [siteCode, setSiteCode] = useState(props.siteCode);
-    const [release, setRelease] = useState(props.release);
+    const [, setSearchParams] = useSearchParams();
+    const data = props.data;
+    const siteCode = props.siteCode;
+    const release = props.release;
 
     const scrollTo = (e, item) => {
         e.stopPropagation();
@@ -73,7 +73,7 @@ const formatDate = (date, ddmmyyyy) => {
     var d = date.getDate();
     var m = date.getMonth() + 1;
     var y = date.getFullYear();
-    if (ddmmyyyy) {
+    if(ddmmyyyy) {
         date = (d <= 9 ? '0' + d : d) + '/' + (m <= 9 ? '0' + m : m) + '/' + y;
     }
     else {
@@ -84,6 +84,7 @@ const formatDate = (date, ddmmyyyy) => {
 
 const sectionsContent = (activekey, data) => {
     let fields = [];
+    let filters;
     for (let i in Object.entries(data)) {
         let field = Object.entries(data)[i];
         let index = activekey + "." + (parseInt(i) + 1);
@@ -130,13 +131,15 @@ const sectionsContent = (activekey, data) => {
                         title = "Site indication and designation / classification dates";
                         value = field[1][0];
                         let tableHeader = ConfigSDF.TableHeader.SiteDesignationGroup;
-                        let filter = (obj, keys) => keys.reduce((a, b) => (a[b] = obj[b], a), {});
+                        let filter = (obj, keys) => keys.reduce((a, b) => {a[b] = obj[b]; return a},{});
                         let explanations = filter(value, tableHeader.e);
                         value = [filter(value, tableHeader.a), filter(value, tableHeader.b)];
-                        if (explanations.Explanations) {
+                        if(explanations.Explanations) {
                             value.push(explanations);
                         }
                         type = "multiple";
+                        break;
+                    default:
                         break;
                 }
                 break;
@@ -172,6 +175,8 @@ const sectionsContent = (activekey, data) => {
                         value = field[1];
                         type = "table";
                         break;
+                    default:
+                        break;
                 }
                 break;
             case 3:
@@ -185,18 +190,22 @@ const sectionsContent = (activekey, data) => {
                     case "Species":
                         title = "Species referred to in Article 4 of Directive 2009/147/EC and listed in Annex II of Directive 92/43/EEC and site evaluation for them";
                         value = field[1];
-                        var filters = ["AnnexIV", "AnnexV", "OtherCategoriesA", "OtherCategoriesB", "OtherCategoriesC", "OtherCategoriesD"];
+                        filters = ["AnnexIV", "AnnexV", "OtherCategoriesA", "OtherCategoriesB", "OtherCategoriesC", "OtherCategoriesD"];
                         value.map(a => filters.forEach(b => delete a[b]));
+                        value = value.map(obj => ({ ...obj, "Group": ConfigSDF.SpeciesGroups[obj.Group] }));
                         type = "table";
                         legend = ConfigSDF.Legend.Species;
                         break;
                     case "OtherSpecies":
                         title = "Other important species of flora and fauna (optional)";
                         value = field[1];
-                        var filters = ["Type", "DataQuality", "Population", "Conservation", "Isolation", "Global"];
+                        filters = ["Type", "DataQuality", "Population", "Conservation", "Isolation", "Global"];
                         value.map(a => filters.forEach(b => delete a[b]));
+                        value = value.map(obj => ({ ...obj, "Group": ConfigSDF.SpeciesGroups[obj.Group] }));
                         type = "table";
                         legend = ConfigSDF.Legend.OtherSpecies;
+                        break;
+                    default:
                         break;
                 }
                 break;
@@ -225,16 +234,16 @@ const sectionsContent = (activekey, data) => {
                     case "Ownership":
                         title = "Ownership (optional)";
                         value = field[1];
-                        if (value.length) {
+                        if(value.length) {
                             let tableHeader = ConfigSDF.TableHeader.OwnershipType;
                             let val = [];
                             value.forEach(item => {
                                 let check = Object.entries(tableHeader).find(a => a[1].toLowerCase().includes(item.Type.toLowerCase()));
-                                if (check) {
+                                if(check) {
                                     item.Type = check[0];
                                 }
                                 let found = val.find(a => a.Type === item.Type);
-                                if (found) {
+                                if(found) {
                                     found.Percent += item.Percent;
                                 }
                                 else {
@@ -250,13 +259,15 @@ const sectionsContent = (activekey, data) => {
                     case "Documents":
                         title = "Documentation (optional)";
                         value = field[1];
-                        if (!value.Links?.length) {
+                        if(!value.Links?.length) {
                             delete value.Links;
-                            if (!value.Documents) {
+                            if(!value.Documents) {
                                 value = null;
                             }
                         }
                         type = "single";
+                        break;
+                    default:
                         break;
                 }
                 break;
@@ -277,6 +288,8 @@ const sectionsContent = (activekey, data) => {
                         value = field[1];
                         type = "single";
                         break;
+                    default:
+                        break;
                 }
                 break;
             case 6:
@@ -296,6 +309,8 @@ const sectionsContent = (activekey, data) => {
                         value = field[1];
                         type = "single";
                         break;
+                    default:
+                        break;
                 }
                 break
             case 7:
@@ -310,23 +325,28 @@ const sectionsContent = (activekey, data) => {
                         value = field[1];
                         type = "single";
                         break;
+                    default:
+                        break;
                 }
+                break;
+            default:
+                break;
         }
-        if ((!value || value.length === 0) && value !== 0) {
+        if((!value || value.length === 0) && value !== 0) {
             value = "No information provided";
             type = "single";
         }
         let labels = ConfigSDF[field[0]];
-        if (labels) {
-            if (Array.isArray(value)) {
+        if(labels) {
+            if(Array.isArray(value)) {
                 value = value.map(a => { let b = {}; Object.keys(a).forEach(key => b[labels[key]] = a[key] ? (isNaN(a[key]) && !isNaN(Date.parse(a[key].replaceAll(' ', ""))) ? formatDate(a[key]) : a[key]) : a[key]); return b });
             }
-            else if (type === "double-table") {
+            else if(type === "double-table") {
                 let c = {};
                 Object.keys(value).forEach(i => c[i] = value[i].map(a => { let b = {}; Object.keys(a).forEach(key => b[ConfigSDF[i][key]] = a[key]); return b }))
                 value = c;
             }
-            else if (typeof value === 'object' && type !== "double-table") {
+            else if(typeof value === 'object' && type !== "double-table") {
                 let b = {};
                 Object.keys(value).forEach(key => b[labels[key]] = value[key] ? (isNaN(value[key]) && !isNaN(Date.parse(value[key].replaceAll(' ', ""))) ? formatDate(value[key]) : value[key]) : value[key]);
                 value = b;
@@ -339,9 +359,9 @@ const sectionsContent = (activekey, data) => {
         const parseLinks = (text) => {
             const reg = new RegExp(/(^|\s)(https?:\/\/[^\s]+|www\.[^\s]+|[\w-]+\.com[^\s]*)/g, 'gi');
             let parts = text;
-            if (isNaN(text)) {
+            if(isNaN(text)) {
                 parts = !Array.isArray(text) ? text.split(reg) : text;
-                return parts.map((part, i) => (part.match(reg) ? <a className="sdf-link" href={part} target="_blank" key={i + "_" + part}>{part}</a> : part));
+                return parts.map((part, i) => (part.match(reg) ? <a className="sdf-link" href={part} target="_blank" rel="noreferrer" key={i + "_" + part}>{part}</a> : part));
             }
             else {
                 return parts;
@@ -371,20 +391,20 @@ const sectionsContent = (activekey, data) => {
                         )
                     });
                     let checkCellLink = (cell, value) => {
-                        if (field === "HabitatTypes" && cell === "Code") {
+                        if(field === "HabitatTypes" && cell === "Code") {
                             value = <a href={"https://eunis.eea.europa.eu/habitats_code2000/" + value} target="blank">{value}</a>
                         }
-                        else if ((field === "Species" || field === "OtherSpecies") && cell === "Scientific Name" && value !== "-") {
+                        else if((field === "Species" || field === "OtherSpecies") && cell === "Scientific Name" && value !== "-") {
                             value = <a href={"https://eunis.eea.europa.eu/species/" + value} target="blank">{value}</a>
                         }
-                        else if ((field === "Species" || field === "OtherSpecies") && cell === "Code" && value !== "-") {
+                        else if((field === "Species" || field === "OtherSpecies") && cell === "Code" && value !== "-") {
                             value = <a href={"https://eunis.eea.europa.eu/species_code2000/" + value} target="blank">{value}</a>
                         }
                         return value;
                     }
                     let body = value.map((row, i) => {
                         let color;
-                        if ((field === "Species" || field === "OtherSpecies") && Object.entries(row).find(a => a[0] === "S" && a[1] === "Yes")) {
+                        if((field === "Species" || field === "OtherSpecies") && Object.entries(row).find(a => a[0] === "S" && a[1] === "Yes")) {
                             color = ConfigSDF.Colors.Red;
                         }
                         return (
@@ -440,7 +460,7 @@ const sectionsContent = (activekey, data) => {
                 case "double-table":
                     let tables = [];
                     Object.entries(value).map(a => {
-                        let header = a[1].length > 0 ? Object.keys(a[1][0]).map(b => { return (<td scope="col" key={b}> {b} </td>) }) : null;
+                        let header = a[1].length > 0 ? Object.keys(a[1][0]).map(b => { return (<th scope="col" key={b}> {b} </th>) }) : null;
                         let body = a[1].length > 0 && a[1].map((row, i) => {
                             return (
                                 <tr key={"tr_" + i}>
@@ -450,7 +470,7 @@ const sectionsContent = (activekey, data) => {
                                 </tr>
                             )
                         });
-                        if (!body.length) {
+                        if(!body.length) {
                             body = <tr><td>No data</td></tr>;
                         }
                         let tableHeader = ConfigSDF.TableHeader[a[0]];
@@ -479,6 +499,7 @@ const sectionsContent = (activekey, data) => {
                                 </div>
                             </div>
                         );
+                        return;
                     });
                     return (
                         <div>
@@ -515,6 +536,8 @@ const sectionsContent = (activekey, data) => {
                             {check}
                         </div>
                     )
+                default:
+                    break;
             }
         }
 

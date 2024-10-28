@@ -59,6 +59,15 @@
     "Conservation": "Conservation",
     "Global": "Global"
   },
+  "SpeciesGroups": {
+    "Amphibians": "A",
+    "Birds": "B",
+    "Fish": "F",
+    "Invertebrates": "I",
+    "Mammals": "M",
+    "Plants": "P",
+    "Reptiles": "R"
+  },
   "Species": {
     "Group": "Group",
     "Code": "Code",

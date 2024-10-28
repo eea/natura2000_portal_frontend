@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import ConfigData from "./config/data_config.json";
+import * as Utils from "./components/Utils";
+import ConfigData from "./utils/data_config.json";
 import {
     Accordion,
     AccordionTitle,
@@ -11,25 +12,21 @@ import {
 const Reports = () => {
 
     const [active, setActive] = useState([]);
+    const [showDescription, setShowDescription] = useState(false);
+
+    useEffect(() => {
+        Utils.toggleDescription(showDescription, setShowDescription);
+    }, [showDescription]);
 
     const toggleAccordion = (value) => {
         let values;
-        if (active.includes(value)) {
+        if(active.includes(value)) {
             values = active.filter(e => e !== value);
         } else {
             values = active.concat(value);
         }
         setActive(values);
     }
-
-    const formatDate = (date) => {
-        date = new Date(date);
-        var d = date.getDate();
-        var m = date.getMonth() + 1;
-        var y = date.getFullYear();
-        date = (d <= 9 ? "0" + d : d) + "/" + (m <= 9 ? "0" + m : m) + "/" + y;
-        return date;
-    };
     
     return (
         <div className="main">
@@ -51,6 +48,16 @@ const Reports = () => {
                 <main>
                     <div id="view">
                         <div id="page-document" className="ui container">
+                            <div className={"page-description " + showDescription}>
+                                <p>
+                                   This is a description for the reports.
+                                </p>
+                                {showDescription !== "all" &&
+                                    <button className="ui button text" onClick={() => setShowDescription(prevCheck => prevCheck === "show" ? "hide" : "show")}>
+                                        {showDescription === "show" ? "Hide description" : "Show description"}
+                                    </button>
+                                }
+                            </div>
                             <div className="document-list">
                                 {
                                     ConfigData.Reports.map((item, i) =>
@@ -89,7 +96,7 @@ const Reports = () => {
                                                                                 {country.CountryName + "_" + release.ReleaseName + "_" + release.ReleaseDate}.pdf
                                                                             </div>
                                                                             <div className="document-button">
-                                                                                <a className="ui button primary">Download</a>
+                                                                                <button className="ui button primary">Download</button>
                                                                             </div>
                                                                         </div>
                                                                     )

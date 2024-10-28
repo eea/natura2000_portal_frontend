@@ -23,7 +23,7 @@ const SDF = () => {
 
     useEffect(() => {
         window.addEventListener("scroll", () => {
-            if (window.scrollY === 0) {
+            if(window.scrollY === 0) {
                 setShowScrollBtn(false);
             }
             else {
@@ -33,10 +33,10 @@ const SDF = () => {
     }, []);
 
     useEffect(() => {
-        if (nav && !isLoading && siteCode && siteCode !== "nodata" && data !== "nodata" && !errorLoading) {
+        if(nav && !isLoading && siteCode && siteCode !== "nodata" && data !== "nodata" && !errorLoading) {
             scrollTo(nav);
         }
-    }, [isLoading]);
+    }, [isLoading, nav, siteCode, data, errorLoading]);
 
     const getSiteCode = () => {
         let params = Object.fromEntries([...searchParams]);
@@ -46,10 +46,10 @@ const SDF = () => {
     }
 
     const loadData = () => {
-        if (siteCode !== "" && !isLoading) {
+        if(siteCode !== "" && !isLoading) {
             setIsLoading(true);
             let url = ConfigJson.LoadSDF;
-            if (release) {
+            if(release) {
                 url += "?siteCode=" + siteCode + "&releaseId=" + release;
             }
             else {
@@ -58,15 +58,15 @@ const SDF = () => {
             fetch(url)
                 .then(response => response.json())
                 .then(data => {
-                    if (data?.Success) {
-                        if (!data.Data.SiteInfo.SiteCode) {
+                    if(data?.Success) {
+                        if(!data.Data.SiteInfo.SiteCode) {
                             setData("nodata");
                         }
                         else {
                             let releases = data.Data.SiteInfo.Releases.sort((a, b) => new Date(b.ReleaseDate) - new Date(a.ReleaseDate));
                             setReleases(releases);
                             setData(formatData(data));
-                            if (!release) {
+                            if(!release) {
                                 let release = releases[0].ReleaseId;
                                 setRelease(release);
                                 setSearchParams({"sitecode": siteCode, "release": release});
@@ -101,11 +101,11 @@ const SDF = () => {
         return data.Data;
     }
 
-    if (!siteCode) {
+    if(!siteCode) {
         getSiteCode();
     }
 
-    if (!isLoading && siteCode && siteCode !== "nodata" && Object.keys(data).length === 0 && !errorLoading) {
+    if(!isLoading && siteCode && siteCode !== "nodata" && Object.keys(data).length === 0 && !errorLoading) {
         loadData();
     }
 
@@ -139,7 +139,7 @@ const SDF = () => {
         var d = date.getDate();
         var m = date.getMonth() + 1;
         var y = date.getFullYear();
-        if (ddmmyyyy) {
+        if(ddmmyyyy) {
             date = (d <= 9 ? '0' + d : d) + '/' + (m <= 9 ? '0' + m : m) + '/' + y;
         }
         else {

@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import ConfigData from "../config/data_config.json";
+import ConfigData from "../utils/data_config.json";
 import flag from "../../img/eu_flag.png";
 import logo from "../../img/natura2000_logo.svg";
 import logoWhite from "../../img/natura2000_logo_white.svg";
@@ -39,7 +39,7 @@ const Header = (props) => {
                             <DropdownMenu role="option">
                                 <ItemContent>
                                     <p>All official European Union website addresses are in the <b>europa.eu</b> domain.</p>
-                                    <a href="https://europa.eu/european-union/contact/institutions-bodies_en" target="_blank" rel="noopener">See all EU institutions and bodies</a>
+                                    <a href="https://europa.eu/european-union/contact/institutions-bodies_en" target="_blank" rel="noreferrer">See all EU institutions and bodies</a>
                                 </ItemContent>
                             </DropdownMenu>
                         </Dropdown>
@@ -48,7 +48,7 @@ const Header = (props) => {
                         <Dropdown id="theme-sites" text="Environmental information systems" icon="chevron down" aria-label="Environmental information systems" closeOnBlur={false}>
                             <DropdownMenu role="option">
                                 <div className="wrapper">
-                                    {ConfigData.HomeLinks.map((item, i) => <DropdownItem key={i}><a href={item.Link} className="site" target="_blank" rel="noopener">{item.Name}</a></DropdownItem>)}
+                                    {ConfigData.HomeLinks.map((item, i) => <DropdownItem key={i}><a href={item.Link} className="site" target="_blank" rel="noreferrer">{item.Name}</a></DropdownItem>)}
                                 </div>
                             </DropdownMenu>
                         </Dropdown>
@@ -68,30 +68,27 @@ const Header = (props) => {
                                 <div className={"main-menu" + (props.active === "home" ? " inverted" : "")}>
                                     <nav aria-label="Main">
                                         <ul className="ui text eea-main-menu tablet or lower hidden menu" id="navigation">
-                                            <li aria-expanded="false" className={"item search" + (showMenu || props.active.includes("search") ? " active" : "")} onClick={(e)=>{e.preventDefault(); setShowMenu(prevCheck => !prevCheck); setShowSearch(prevCheck => !prevCheck)}}>
+                                            <li className={"item search" + (showMenu || props.active.includes("search") ? " active" : "")} onClick={(e)=>{e.preventDefault(); setShowMenu(prevCheck => !prevCheck); setShowSearch(prevCheck => !prevCheck)}}>
                                                 <a title="Search" href="/search/sites">Search</a>
                                             </li>
-                                            <li aria-expanded="false" className={"item" + (props.active === "tools" ? " active" : "")}>
+                                            <li className={"item" + (props.active === "tools" ? " active" : "")}>
                                                 <a title="Tools" href="/tools">Tools</a>
                                             </li>
-                                            <li aria-expanded="false" className={"item" + (props.active === "reports" ? " active" : "")}>
+                                            <li className={"item" + (props.active === "reports" ? " active" : "")}>
                                                 <a title="Reports" href="/reports">Reports</a>
                                             </li>
-                                            <li aria-expanded="false" className={"item" + (props.active === "downloads" ? " active" : "")}>
+                                            <li className={"item" + (props.active === "downloads" ? " active" : "")}>
                                                 <a title="Downloads" href="/downloads">Downloads</a>
                                             </li>
-                                            {/* <li aria-expanded="false" className={"item" + (props.active === "links" ? " active" : "")}>
-                                                <a title="Links" href="/links">Links</a>
-                                            </li> */}
-                                            <li aria-expanded="false" className={"item" + (props.active === "about" ? " active" : "")}>
+                                            <li className={"item" + (props.active === "about" ? " active" : "")}>
                                                 <a title="About us" href="/about">About us</a>
                                             </li>
                                         </ul>
                                     </nav>
-                                    <button className="search-action" aria-expanded="false">
+                                    <button className="search-action">
                                         <img src={search} alt="Global search" className="ui image"/>
                                     </button>
-                                    <button className="burger-action mobile " aria-expanded="false" onClick={()=>setShowMenu(prevCheck => !prevCheck)}>
+                                    <button className="burger-action mobile " onClick={()=>setShowMenu(prevCheck => !prevCheck)}>
                                         <img src={showMenu ? close : menu} alt="Menu navigation" className="ui image"/>
                                     </button>
                                 </div>
@@ -117,7 +114,7 @@ const Header = (props) => {
                                             </a>
                                         </div>
                                         <div className="column">
-                                            <a title="EUNIS" className="sub-title" id="publications-sub-title" href="https://eunis.eea.europa.eu/" target="_blank">
+                                            <a title="EUNIS" className="sub-title" id="publications-sub-title" href="https://eunis.eea.europa.eu/" target="_blank" rel="noreferrer">
                                                 <span>EUNIS<i className="icon ri-external-link-line"></i></span>
                                             </a>
                                         </div>
@@ -143,7 +140,7 @@ const Header = (props) => {
                                             <a title="Search by Species" className={"item sub-title" + (props.active.includes("species") ? " active" : "")} id="publications-sub-title" href="/search/species">
                                                 <span>Search by Species</span>
                                             </a>
-                                            <a title="EUNIS" className="item sub-title" id="publications-sub-title" href="https://eunis.eea.europa.eu/" target="_blank">
+                                            <a title="EUNIS" className="item sub-title" id="publications-sub-title" href="https://eunis.eea.europa.eu/" target="_blank" rel="noreferrer">
                                                 <span>EUNIS<i className="icon ri-external-link-line"></i></span>
                                             </a>
                                         </AccordionContent>

@@ -38,7 +38,7 @@ const About = () => {
                                         </li>
                                     </ul>
                                     <p>
-                                        Protection of the biodiversity is one of the main topics in the framework of this programme, but the Natura2000 network also interacts with other Commission policies. Data for building up the network is provided by the different Member states. More information can be found on <a href="https://environment.ec.europa.eu/topics/nature-and-biodiversity/natura-2000_en" target="_blank">https://environment.ec.europa.eu/topics/nature-and-biodiversity/natura-2000_en</a>
+                                        Protection of the biodiversity is one of the main topics in the framework of this programme, but the Natura2000 network also interacts with other Commission policies. Data for building up the network is provided by the different Member states. More information can be found on <a href="https://environment.ec.europa.eu/topics/nature-and-biodiversity/natura-2000_en" target="_blank" rel="noreferrer">https://environment.ec.europa.eu/topics/nature-and-biodiversity/natura-2000_en</a>
                                     </p>
                                 </div>
                                 <h3 className="green">Contents</h3>
@@ -67,7 +67,7 @@ const About = () => {
                                         <a href="#contact">Points of contact</a>
                                     </li>
                                 </ul>
-                                <a name="about"></a>
+                                <a name="about" href="/#" onClick={(e) => e.preventDefault()}> </a>
                                 <h3 className="green">About the GIS for Natura 2000 Intranet web-application</h3>
                                 <p>
                                     The GIS for Natura 2000 Intranet web-application was developed to make Natura2000 data accessible to a large(r) amount of people within the European Commission through an easy-to-use intuitive interface. Currently an ESRI ArcObjects desktop application (developed by JRC/SADL) serves this purpose within the Commission. This desktop application has some limitations : it uses the ESRI Personal Geodatabase which is not a centralized solution (every user has his own version of the data); the application needs to be installed on each individual client computer and requires an ArcGIS license, which makes deployment costly.
@@ -78,7 +78,7 @@ const About = () => {
                                 <p>
                                     The information contained on the Natura 2000-Gis Intranet Web-Application should be available to the Commission services at a first stage.
                                 </p>
-                                <a name="layout"></a>
+                                <a name="layout" href="/#" onClick={(e) => e.preventDefault()}> </a>
                                 <h3 className="green">Layout of the Intranet Application</h3>
                                 <p>The application provides 7 ways of working with Natura2000 data:</p>
                                 <ul>
@@ -121,9 +121,9 @@ const About = () => {
                                 <p>
                                     In Downloads the user will have access to different Natura2000 contents to be downloaded.
                                 </p>
-                                <a name="disclaimer"></a>
+                                <a name="disclaimer" href="/#" onClick={(e) => e.preventDefault()}> </a>
                                 <h3 className="green">Technical Disclaimer</h3>
-                                <a name="data"></a>
+                                <a name="data" href="/#" onClick={(e) => e.preventDefault()}> </a>
                                 <h4 className="green">On the data:</h4>
                                 <p>
                                     The Natura 2000 database contains a generalized polygon layer at a scale of 1/100.000. Although is possible with GIS software to view these data with greater detail (zoom levels that zoom to as much as 1/100 or greater scales), these operations are seldom useful and do not give the user more accurate depictions of reality.
@@ -137,7 +137,7 @@ const About = () => {
                                 <p>
                                     User discretion is advised.
                                 </p>
-                                <a name="application"></a>
+                                <a name="application" href="/#" onClick={(e) => e.preventDefault()}> </a>
                                 <h4 className="green">On the application:</h4>
                                 <p>
                                     The GIS for Natura 2000 Intranet application features several powerful querying possibilities. However it is not equipped to handle every possible query with the Natura 2000 data. For Advanced GIS users, use of the desktop GIS software such as ESRI's ARCGIS is preferable over the Intranet application.
@@ -151,7 +151,7 @@ const About = () => {
                                 <p>
                                     Loading times can be quite long depending on your query. Be patient.
                                 </p>
-                                <a name="database"></a>
+                                <a name="database" href="/#" onClick={(e) => e.preventDefault()}> </a>
                                 <h3 className="green">Database information</h3>
                                 <p>The database is made available in the GCS_WGS_1984 coordinate system.</p>
                                 <p>Projection parameters:</p>
@@ -194,7 +194,7 @@ const About = () => {
                                 <p>
                                     Current version of the database (date of the last update of the database): <b>07/01/2013</b>
                                 </p>
-                                <a name="contact"></a>
+                                <a name="contact" href="/#" onClick={(e) => e.preventDefault()}> </a>
                                 <h3 className="green">Points of contact</h3>
                                 <div className="contact-list">
                                     <div className="contact">

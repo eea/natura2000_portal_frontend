@@ -474,6 +474,24 @@ ul {
     font-size: 0.875rem;
 }
 
+.ui.selection.dropdown {
+    i {
+        background-color: inherit;
+    }
+}
+
 .sensitive {
     color: $messageError;
+}
+
+.error-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+    margin: auto;
+    font-size: 1.25rem;
+    img {
+        height: 10rem;
+    }
 }
