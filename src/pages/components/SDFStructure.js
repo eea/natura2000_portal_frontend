@@ -9,19 +9,10 @@ const SDFVisualization = (props) => {
     const data = props.data;
     const siteCode = props.siteCode;
     const release = props.release;
-    const nav = props.nav;
-
-    useEffect(() => {
-        if(nav) {
-            scrollTo(nav);
-        }
-    }, [nav]);
 
     const scrollTo = (item, e) => {
-        if(e) {
-            e.stopPropagation();
-            e.preventDefault();
-        }
+        e.stopPropagation();
+        e.preventDefault();
         let element = document.getElementById(item);
         const y = element.getBoundingClientRect().top + window.scrollY;
         setSearchParams(searchParams => {
@@ -93,7 +84,6 @@ const formatDate = (date, ddmmyyyy) => {
 
 const sectionsContent = (activekey, data) => {
     let fields = [];
-    let filters = [];
     for (let i in Object.entries(data)) {
         let field = Object.entries(data)[i];
         let index = activekey + "." + (parseInt(i) + 1);
@@ -199,8 +189,7 @@ const sectionsContent = (activekey, data) => {
                     case "Species":
                         title = "Species referred to in Article 4 of Directive 2009/147/EC and listed in Annex II of Directive 92/43/EEC and site evaluation for them";
                         value = field[1];
-                        filters = ["AnnexIV", "AnnexV", "OtherCategoriesA", "OtherCategoriesB", "OtherCategoriesC", "OtherCategoriesD"];
-                        value.map(a => filters.forEach(b => delete a[b]));
+                        value.map(a => ConfigSDF.SpeciesFilters.forEach(b => delete a[b]));
                         value = value.map(obj => ({ ...obj, "Group": ConfigSDF.SpeciesGroups[obj.Group] }));
                         type = "table";
                         legend = ConfigSDF.Legend.Species;
@@ -208,8 +197,7 @@ const sectionsContent = (activekey, data) => {
                     case "OtherSpecies":
                         title = "Other important species of flora and fauna (optional)";
                         value = field[1];
-                        filters = ["Type", "DataQuality", "Population", "Conservation", "Isolation", "Global"];
-                        value.map(a => filters.forEach(b => delete a[b]));
+                        value.map(a => ConfigSDF.OtherSpeciesFilters.forEach(b => delete a[b]));
                         value = value.map(obj => ({ ...obj, "Group": ConfigSDF.SpeciesGroups[obj.Group] }));
                         type = "table";
                         legend = ConfigSDF.Legend.OtherSpecies;
