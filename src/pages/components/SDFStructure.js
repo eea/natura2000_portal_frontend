@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useSearchParams } from "react-router-dom";
 import ConfigSDF from '../utils/sdf_config.json';
 import MapViewer from './MapViewer'

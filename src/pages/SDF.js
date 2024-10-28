@@ -45,7 +45,7 @@ const SDF = () => {
                 behavior: 'instant'
             });
         }
-    }, [isLoading, nav, siteCode, data, errorLoading]);
+    }, [isLoading, nav, siteCode, data, errorLoading, searchParams]);
 
     const getSiteCode = () => {
         let params = Object.fromEntries([...searchParams]);
