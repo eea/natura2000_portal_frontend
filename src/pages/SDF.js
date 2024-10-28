@@ -32,12 +32,6 @@ const SDF = () => {
         });
     }, []);
 
-    useEffect(() => {
-        if(nav && !isLoading && siteCode && siteCode !== "nodata" && data !== "nodata" && !errorLoading) {
-            scrollTo(nav);
-        }
-    }, [isLoading, nav, siteCode, data, errorLoading]);
-
     const getSiteCode = () => {
         let params = Object.fromEntries([...searchParams]);
         setSiteCode(params.sitecode ? params.sitecode : "nodata");
@@ -121,19 +115,6 @@ const SDF = () => {
         setErrorLoading(false);
     }
 
-    const scrollTo = (item) => {
-        let element = document.getElementById(item);
-        const y = element.getBoundingClientRect().top + window.scrollY;
-        setSearchParams(searchParams => {
-            searchParams.set("nav", item);
-            return searchParams;
-        });
-        window.scroll({
-            top: y,
-            behavior: 'instant'
-        });
-    }
-
     const formatDate = (date, ddmmyyyy) => {
         date = new Date(date);
         var d = date.getDate();
@@ -175,18 +156,18 @@ const SDF = () => {
                                                             placeholder="Select a release"
                                                             name="release"
                                                             options=
-                                                            {
-                                                                releases && releases.map((item, i) => (
-                                                                    {
-                                                                        key: item.ReleaseId, value: item.ReleaseId, text: (item.ReleaseName + " (" + formatDate(item.ReleaseDate, true) + ")")
-                                                                    }
-                                                                ))
-                                                            }
+                                                                {
+                                                                    releases && releases.map((item, i) => (
+                                                                        {
+                                                                            key: item.ReleaseId, value: item.ReleaseId, text: (item.ReleaseName + " (" + formatDate(item.ReleaseDate, true) + ")")
+                                                                        }
+                                                                    ))
+                                                                }
                                                             value={releases.find(a => a.ReleaseId === release) ? release : ""}
                                                             onChange={changeRelease}
                                                             selectOnBlur={false}
                                                             loading={isLoading}
-                                                            disabled={isLoading}
+                                                            disabled={isLoading || errorLoading}
                                                         />
                                                     </div>
                                                 </div>
@@ -196,7 +177,10 @@ const SDF = () => {
                                     {(errorLoading && !isLoading) &&
                                         <div className="ui container">
                                             <div className="ui grid py-4">
-                                                <Message color="danger">Error loading data</Message>
+                                                <Message error>
+                                                    <i className="triangle exclamation icon"></i>
+                                                    Error loading data
+                                                </Message>
                                             </div>
                                         </div>
                                     }
@@ -212,6 +196,7 @@ const SDF = () => {
                                                     release={release}
                                                     formatDate={formatDate}
                                                     mapUrl={ConfigJson.MapReleases}
+                                                    nav={nav}
                                                 ></SDFStructure>
                                             </>
                                     }

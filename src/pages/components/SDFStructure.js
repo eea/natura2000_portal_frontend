@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import { useSearchParams } from "react-router-dom";
 import ConfigSDF from '../utils/sdf_config.json';
 import MapViewer from './MapViewer'
@@ -9,10 +9,19 @@ const SDFVisualization = (props) => {
     const data = props.data;
     const siteCode = props.siteCode;
     const release = props.release;
+    const nav = props.nav;
 
-    const scrollTo = (e, item) => {
-        e.stopPropagation();
-        e.preventDefault();
+    useEffect(() => {
+        if(nav) {
+            scrollTo(nav);
+        }
+    }, [nav]);
+
+    const scrollTo = (item, e) => {
+        if(e) {
+            e.stopPropagation();
+            e.preventDefault();
+        }
         let element = document.getElementById(item);
         const y = element.getBoundingClientRect().top + window.scrollY;
         setSearchParams(searchParams => {
@@ -49,7 +58,7 @@ const SDFVisualization = (props) => {
                     <div className="column">
                         <h2>Table of contents</h2>
                         <ol>
-                            {Object.keys(data).filter(a => a !== "SiteInfo").map((a, i) => <a href={"#" + (i + 1)} data-id={i + 1} key={i} onClick={(e) => scrollTo(e, e.currentTarget.dataset.id)}><li>{ConfigSDF.Titles[i]}</li></a>)}
+                            {Object.keys(data).filter(a => a !== "SiteInfo").map((a, i) => <a href={"#" + (i + 1)} data-id={i + 1} key={i} onClick={(e) => scrollTo(e.currentTarget.dataset.id, e)}><li>{ConfigSDF.Titles[i]}</li></a>)}
                         </ol>
                     </div>
                 </div>
@@ -84,7 +93,7 @@ const formatDate = (date, ddmmyyyy) => {
 
 const sectionsContent = (activekey, data) => {
     let fields = [];
-    let filters;
+    let filters = [];
     for (let i in Object.entries(data)) {
         let field = Object.entries(data)[i];
         let index = activekey + "." + (parseInt(i) + 1);
@@ -459,7 +468,7 @@ const sectionsContent = (activekey, data) => {
                     )
                 case "double-table":
                     let tables = [];
-                    Object.entries(value).map(a => {
+                    Object.entries(value).forEach(a => {
                         let header = a[1].length > 0 ? Object.keys(a[1][0]).map(b => { return (<th scope="col" key={b}> {b} </th>) }) : null;
                         let body = a[1].length > 0 && a[1].map((row, i) => {
                             return (
@@ -499,7 +508,6 @@ const sectionsContent = (activekey, data) => {
                                 </div>
                             </div>
                         );
-                        return;
                     });
                     return (
                         <div>

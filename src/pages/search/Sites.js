@@ -41,7 +41,7 @@ const Search = () => {
             let values = active.concat(1);
             setActive(values);
         }
-    }, [searchParams, params.habitat, params.speciesCode]);
+    }, [searchParams, params.habitatCode, params.speciesCode, active]);
 
     useEffect(() => {
         if(!releases.length) {
