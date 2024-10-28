@@ -36,16 +36,12 @@ const SDF = () => {
         if(nav && !isLoading && siteCode && siteCode !== "nodata" && data !== "nodata" && !errorLoading) {
             let element = document.getElementById(nav);
             const y = element.getBoundingClientRect().top + window.scrollY;
-            setSearchParams(searchParams => {
-                searchParams.set("nav", nav);
-                return searchParams;
-            });
             window.scroll({
                 top: y,
                 behavior: 'instant'
             });
         }
-    }, [isLoading, nav, siteCode, data, errorLoading, searchParams]);
+    }, [isLoading, nav, siteCode, data, errorLoading]);
 
     const getSiteCode = () => {
         let params = Object.fromEntries([...searchParams]);
