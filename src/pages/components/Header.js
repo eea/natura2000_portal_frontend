@@ -85,9 +85,9 @@ const Header = (props) => {
                                             </li>
                                         </ul>
                                     </nav>
-                                    <button className="search-action">
+                                    {/* <button className="search-action">
                                         <img src={search} alt="Global search" className="ui image"/>
-                                    </button>
+                                    </button> */}
                                     <button className="burger-action mobile " onClick={()=>setShowMenu(prevCheck => !prevCheck)}>
                                         <img src={showMenu ? close : menu} alt="Menu navigation" className="ui image"/>
                                     </button>

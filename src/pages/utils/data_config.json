@@ -490,8 +490,7 @@
 			"Description": "Computes SCI dates difference and the time difference.",
 			"Link": "",
 			"Fields": [
-				"country",
-				"release",
+				"releaseId",
 				"email"
 			]
 		},

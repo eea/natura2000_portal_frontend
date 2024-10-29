@@ -37,15 +37,12 @@ const Search = () => {
     }, [showDescription]);
 
     useEffect(() => {
-        if(params.habitatCode || params.speciesCode) {
-            let values = active.concat(1);
-            setActive(values);
-        }
-    }, [searchParams, params.habitatCode, params.speciesCode, active]);
-
-    useEffect(() => {
         if(!releases.length) {
             loadReleases();
+            if((params.habitatCode || params.speciesCode) && !active) {
+                let values = active.concat(1);
+                setActive(values);
+            }
         }
         if(Object.keys(params).length > 0 && !data.length) {
             loadData();

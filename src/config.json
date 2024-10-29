@@ -4,6 +4,7 @@
 	"GetSites": "https://n2k-portal-back-fdbycab9hthmc0dv.westeurope-01.azurewebsites.net/api/Info/GetParameteredSites",
 	"GetHabitats": "https://n2k-portal-back-fdbycab9hthmc0dv.westeurope-01.azurewebsites.net/api/Info/GetParameteredHabitats",
 	"GetSpecies": "https://n2k-portal-back-fdbycab9hthmc0dv.westeurope-01.azurewebsites.net/api/Info/GetParameteredSpecies",
+	"DownloadComputationSAC": "https://n2k-portal-back-fdbycab9hthmc0dv.westeurope-01.azurewebsites.net/api/Download/ComputingSAC",
 	"LoadSDF": "https://n2kbackboneback-dev.azurewebsites.net/api/PublicData/GetReleaseData",
 	"MapReleases": "https://bio.discomap.eea.europa.eu/arcgis/rest/services/N2K_Backbone/Releases/MapServer/0"
 }
