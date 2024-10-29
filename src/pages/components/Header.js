@@ -3,7 +3,6 @@ import ConfigData from "../utils/data_config.json";
 import flag from "../../img/eu_flag.png";
 import logo from "../../img/natura2000_logo.svg";
 import logoWhite from "../../img/natura2000_logo_white.svg";
-import search from "../../img/icons/search-icon.svg";
 import menu from "../../img/icons/menu-icon.svg";
 import close from "../../img/icons/close-icon.svg";
 import {
@@ -85,9 +84,6 @@ const Header = (props) => {
                                             </li>
                                         </ul>
                                     </nav>
-                                    {/* <button className="search-action">
-                                        <img src={search} alt="Global search" className="ui image"/>
-                                    </button> */}
                                     <button className="burger-action mobile " onClick={()=>setShowMenu(prevCheck => !prevCheck)}>
                                         <img src={showMenu ? close : menu} alt="Menu navigation" className="ui image"/>
                                     </button>
