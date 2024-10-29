@@ -299,7 +299,7 @@ const Search = () => {
                                         data && data.map((item, i) =>
                                             <div className="four wide computer twelve wide mobile six wide tablet column column-blocks-wrapper" key={i}>
                                                 <div className="card search habitats">
-                                                    <a href={"/search/sites?"+setSitesUrl()+"&habitatCode="+item.HabitatCode}>
+                                                    <a href={"/#/search/sites?"+setSitesUrl()+"&habitatCode="+item.HabitatCode}>
                                                         <div className="card-image">
                                                             <img src={(!item.HabitatImageUrl || item.HabitatImageUrl === "UNAVAILABLE IN DEV") ? noImage : item.HabitatImageUrl} alt="Habitat" />
                                                         </div>

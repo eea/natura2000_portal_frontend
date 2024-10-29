@@ -2,7 +2,7 @@ import './App.css';
 import './lib/semantic/semantic.css';
 import './scss/styles.scss';
 
-import { Route, Routes, BrowserRouter } from 'react-router-dom';
+import { Route, Routes, HashRouter } from 'react-router-dom';
 import Home from "./pages/Home";
 import Sites from "./pages/search/Sites";
 import Habitats from "./pages/search/Habitats";
@@ -16,7 +16,7 @@ import SDF from "./pages/SDF";
 const App = () => {
   return (
     <>
-      <BrowserRouter>
+      <HashRouter>
        <Routes>
          <Route path='/' element={<Home/>} />
          <Route path='/search/sites' element={<Sites/>} />
@@ -28,7 +28,7 @@ const App = () => {
          <Route path='/about' element={<About/>} />
          <Route path='/sdf' element={<SDF/>} />
        </Routes>
-       </BrowserRouter>
+       </HashRouter>
     </>
   );
 }

@@ -73,7 +73,7 @@ const Home = () => {
                                                     <div className="ui input">
                                                         <input type="text" placeholder="Search by site code or site name"/>
                                                     </div>
-                                                    <a className="ui button" href="/search/sites">Search</a>
+                                                    <a className="ui button" href="/#/search/sites">Search</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -89,7 +89,7 @@ const Home = () => {
                                                     <div className="ui input">
                                                         <input type="text" placeholder="Search by habitat code or habitat name"/>
                                                     </div>
-                                                    <a className="ui button" href="/search/habitats">Search</a>
+                                                    <a className="ui button" href="/#/search/habitats">Search</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -105,7 +105,7 @@ const Home = () => {
                                                     <div className="ui input">
                                                         <input type="text" placeholder="Search by species code or species name"/>
                                                     </div>
-                                                    <a className="ui button" href="/search/sites">Search</a>
+                                                    <a className="ui button" href="/#/search/sites">Search</a>
                                                 </div>
                                             </div>
                                         </div>

@@ -69,19 +69,19 @@ const Header = (props) => {
                                     <nav aria-label="Main">
                                         <ul className="ui text eea-main-menu tablet or lower hidden menu" id="navigation">
                                             <li className={"item search" + (showMenu || props.active.includes("search") ? " active" : "")} onClick={(e)=>{e.preventDefault(); setShowMenu(prevCheck => !prevCheck); setShowSearch(prevCheck => !prevCheck)}}>
-                                                <a title="Search" href="/search/sites">Search</a>
+                                                <a title="Search" href="/#/search/sites">Search</a>
                                             </li>
                                             <li className={"item" + (props.active === "tools" ? " active" : "")}>
-                                                <a title="Tools" href="/tools">Tools</a>
+                                                <a title="Tools" href="/#/tools">Tools</a>
                                             </li>
                                             <li className={"item" + (props.active === "reports" ? " active" : "")}>
-                                                <a title="Reports" href="/reports">Reports</a>
+                                                <a title="Reports" href="/#/reports">Reports</a>
                                             </li>
                                             <li className={"item" + (props.active === "downloads" ? " active" : "")}>
-                                                <a title="Downloads" href="/downloads">Downloads</a>
+                                                <a title="Downloads" href="/#/downloads">Downloads</a>
                                             </li>
                                             <li className={"item" + (props.active === "about" ? " active" : "")}>
-                                                <a title="About us" href="/about">About us</a>
+                                                <a title="About us" href="/#/about">About us</a>
                                             </li>
                                         </ul>
                                     </nav>
@@ -99,17 +99,17 @@ const Header = (props) => {
                                 <div className="menu-content tablet hidden mobile hidden">
                                     <div className="ui four column grid">
                                         <div className="column">
-                                            <a title="Search by Natura 2000 sites" className={"sub-title" + (props.active.includes("sites") ? " active" : "")} id="publications-sub-title" href="/search/sites">
+                                            <a title="Search by Natura 2000 sites" className={"sub-title" + (props.active.includes("sites") ? " active" : "")} id="publications-sub-title" href="/#/search/sites">
                                                 <span>Search by Natura 2000 sites</span>
                                             </a>
                                         </div>
                                         <div className="column">
-                                            <a title="Seach by Habitats" className={"sub-title" + (props.active.includes("habitats") ? " active" : "")} id="publications-sub-title" href="/search/habitats">
+                                            <a title="Seach by Habitats" className={"sub-title" + (props.active.includes("habitats") ? " active" : "")} id="publications-sub-title" href="/#/search/habitats">
                                                 <span>Seach by Habitats</span>
                                             </a>
                                         </div>
                                         <div className="column">
-                                            <a title="Search by Species" className={"sub-title" + (props.active.includes("species") ? " active" : "")} id="publications-sub-title" href="/search/species">
+                                            <a title="Search by Species" className={"sub-title" + (props.active.includes("species") ? " active" : "")} id="publications-sub-title" href="/#/search/species">
                                                 <span>Search by Species</span>
                                             </a>
                                         </div>
@@ -131,23 +131,23 @@ const Header = (props) => {
                                             Search<i aria-hidden="true" className="small icon ri-arrow-down-s-line"></i>
                                         </AccordionTitle>
                                         <AccordionContent active={showSearch}>
-                                            <a title="Search by Natura 2000 sites" className={"item sub-title" + (props.active.includes("sites") ? " active" : "")} id="publications-sub-title" href="/search/sites">
+                                            <a title="Search by Natura 2000 sites" className={"item sub-title" + (props.active.includes("sites") ? " active" : "")} id="publications-sub-title" href="/#/search/sites">
                                                 <span>Search by Natura 2000 sites</span>
                                             </a>
-                                            <a title="Seach by Habitats" className={"item sub-title" + (props.active.includes("habitats") ? " active" : "")} id="publications-sub-title" href="/search/habitats">
+                                            <a title="Seach by Habitats" className={"item sub-title" + (props.active.includes("habitats") ? " active" : "")} id="publications-sub-title" href="/#/search/habitats">
                                                 <span>Seach by Habitats</span>
                                             </a>
-                                            <a title="Search by Species" className={"item sub-title" + (props.active.includes("species") ? " active" : "")} id="publications-sub-title" href="/search/species">
+                                            <a title="Search by Species" className={"item sub-title" + (props.active.includes("species") ? " active" : "")} id="publications-sub-title" href="/#/search/species">
                                                 <span>Search by Species</span>
                                             </a>
                                             <a title="EUNIS" className="item sub-title" id="publications-sub-title" href="https://eunis.eea.europa.eu/" target="_blank" rel="noreferrer">
                                                 <span>EUNIS<i className="icon ri-external-link-line"></i></span>
                                             </a>
                                         </AccordionContent>
-                                        <a className={"title" + (props.active === "tools" ? " active" : "")} href="/tools" title="Tools">Tools</a>
-                                        <a className={"title" + (props.active === "reports" ? " active" : "")} href="/reports" title="Reports">Reports</a>
-                                        <a className={"title" + (props.active === "downloads" ? " active" : "")} href="/downloads" title="Downloads">Downloads</a>
-                                        <a className={"title" + (props.active === "about" ? " active" : "")} href="/about" title="About us">About us</a>
+                                        <a className={"title" + (props.active === "tools" ? " active" : "")} href="/#/tools" title="Tools">Tools</a>
+                                        <a className={"title" + (props.active === "reports" ? " active" : "")} href="/#/reports" title="Reports">Reports</a>
+                                        <a className={"title" + (props.active === "downloads" ? " active" : "")} href="/#/downloads" title="Downloads">Downloads</a>
+                                        <a className={"title" + (props.active === "about" ? " active" : "")} href="/#/about" title="About us">About us</a>
                                     </Accordion>
                                 </div>
                             </div>
