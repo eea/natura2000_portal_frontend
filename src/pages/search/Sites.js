@@ -36,19 +36,6 @@ const Search = () => {
         Utils.toggleDescription(showDescription, setShowDescription);
     }, [showDescription]);
 
-    useEffect(() => {
-        if(!releases.length) {
-            loadReleases();
-            if((params.habitatCode || params.speciesCode) && !active) {
-                let values = active.concat(1);
-                setActive(values);
-            }
-        }
-        if(Object.keys(params).length > 0 && !data.length) {
-            loadData();
-        }
-    });
-
     const loadReleases = () => {
         setLoadingReleases(true);
         let promises = [];
@@ -91,6 +78,19 @@ const Search = () => {
             setLoadingData(false);
         })
     }
+
+    useEffect(() => {
+        if(!releases.length) {
+            loadReleases();
+            if((params.habitatCode || params.speciesCode) && !active.includes(1)) {
+                let values = active.concat(1);
+                setActive(values);
+            }
+        }
+        if(Object.keys(params).length > 0 && !data.length) {
+            loadData();
+        }
+    }, [releases.length, params, data.length, loadReleases, active, loadData]);
 
     const toggleAccordion = (value) => {
         let values;
