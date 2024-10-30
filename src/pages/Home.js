@@ -3,10 +3,10 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import * as Utils from "./components/Utils";
 import ConfigJson from "../config.json";
-import background from '../img/home_background.jpg';
-import sites from '../img/sites_image.jpg';
-import habitats from '../img/habitats_image.jpg';
-import species from '../img/species_image.jpg';
+import BackgroundImage from '../img/home_background.jpg';
+import SitesImage from '../img/sites_image.jpg';
+import HabitatsImage from '../img/habitats_image.jpg';
+import SpeciesImage from '../img/species_image.jpg';
 import {
     Loader
 } from "semantic-ui-react"
@@ -51,7 +51,7 @@ const Home = () => {
                             <div className="eea hero-block inverted full-height">
                                 <div className="hero-block-image-wrapper full-width">
                                     <div className="hero-block-image"
-                                        style={{backgroundImage: "url("+background+")"}}>
+                                        style={{backgroundImage: "url("+BackgroundImage+")"}}>
                                     </div>
                                     <div className="dark-overlay"></div>
                                 </div>
@@ -64,7 +64,7 @@ const Home = () => {
                                         <div className="four wide computer twelve wide mobile six wide tablet column column-blocks-wrapper">
                                             <div className="card home sites">
                                                 <div className="card-image">
-                                                    <img src={sites} alt="Natura 2000 sites"/>
+                                                    <img src={SitesImage} alt="Natura 2000 sites"/>
                                                 </div>
                                                 <div className="card-body">
                                                     <div className="card-title title">
@@ -80,7 +80,7 @@ const Home = () => {
                                         <div className="four wide computer twelve wide mobile six wide tablet column column-blocks-wrapper">
                                             <div className="card home habitats">
                                                 <div className="card-image">
-                                                    <img src={habitats} alt="Habitats"/>
+                                                    <img src={HabitatsImage} alt="Habitats"/>
                                                 </div>
                                                 <div className="card-body">
                                                     <div className="card-title title">
@@ -96,7 +96,7 @@ const Home = () => {
                                         <div className="four wide computer twelve wide mobile six wide tablet column column-blocks-wrapper">
                                             <div className="card home species">
                                                 <div className="card-image">
-                                                    <img src={species} alt="Species"/>
+                                                    <img src={SpeciesImage} alt="Species"/>
                                                 </div>
                                                 <div className="card-body">
                                                     <div className="card-title title">

@@ -5,8 +5,8 @@ import Footer from "../components/Footer";
 import * as Utils from "../components/Utils";
 import ConfigJson from "../../config.json";
 import ConfigData from "../utils/data_config.json";
-import errorImage from '../../img/error_image.svg';
-import noresultsImage from '../../img/noresults_image.svg';
+import ErrorImage from '../../img/error_image.svg';
+import NoresultsImage from '../../img/noresults_image.svg';
 import {
     Select,
     Accordion,
@@ -323,8 +323,8 @@ const Search = () => {
                                 <div className="ui grid">
                                     {
                                         loadingData ? <Loader active={loadingData} inline="centered" className="my-6"/> :
-                                        errorLoading ? <div className="error-container"><img src={errorImage} alt="Error" />Something went wrong</div> :
-                                        data.length === 0 ? <div className="error-container"><img src={noresultsImage} alt="No results" />No results found</div> :
+                                        errorLoading ? <div className="error-container"><img src={ErrorImage} alt="Error" />Something went wrong</div> :
+                                        data.length === 0 ? <div className="error-container"><img src={NoresultsImage} alt="No results" />No results found</div> :
                                         data && data.map((item, i) =>
                                             <div className="four wide computer twelve wide mobile six wide tablet column column-blocks-wrapper" key={i}>
                                                 <div className="card search sites">

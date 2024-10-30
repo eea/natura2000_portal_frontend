@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import ConfigJson from "../config.json";
 import SDFStructure from './components/SDFStructure';
-import logo from "../img/natura2000_logo.svg";
+import Logo from "../img/natura2000_logo.svg";
 import {
     Select,
     Message,
@@ -154,7 +154,7 @@ const SDF = () => {
                                                 <div className="sdf-head">
                                                     <div className="logo">
                                                         <a title="Site logo" className="logo" href="/.">
-                                                            <img title="Site" src={logo} alt="Natura 2000" className="ui image eea-logo" />
+                                                            <img title="Site" src={Logo} alt="Natura 2000" className="ui image eea-logo" />
                                                         </a>
                                                     </div>
 

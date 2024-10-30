@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../../img/eea_logo_white.svg";
+import Logo from "../../img/eea_logo_white.svg";
 
 const Footer = () => {
     
@@ -13,7 +13,7 @@ const Footer = () => {
                                 <div className="item">
                                     <div className="site logo mb-2">
                                         <a href="https://www.eea.europa.eu/">
-                                            <img src={logo} alt="EEA Logo" className="ui image"/>
+                                            <img src={Logo} alt="EEA Logo" className="ui image"/>
                                         </a>
                                     </div>
                                 </div>

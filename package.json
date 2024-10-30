@@ -17,9 +17,12 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "build": "bash copy.sh dev & react-scripts build",
+    "build_dev": "bash copy.sh dev & react-scripts build",
+    "build_stg": "bash copy.sh stg & react-scripts build",
+    "build_prod": "bash copy.sh pro & react-scripts build",
+    "start": "bash copy.sh dev & react-scripts start",
+    "test": "bash copy.sh dev & react-scripts test & react-scripts start",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
