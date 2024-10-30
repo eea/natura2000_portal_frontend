@@ -5,6 +5,6 @@
 	"GetHabitats": "https://blackneckedswan:480/n2kportal_back/api/Info/GetParameteredHabitats",
 	"GetSpecies": "https://blackneckedswan:480/n2kportal_back/api/Info/GetParameteredSpecies",
 	"DownloadComputationSAC": "https://blackneckedswan:480/n2kportal_back/api/Download/ComputingSAC",
-	"LoadSDF": "https://n2kbackboneback-dev.azurewebsites.net/api/PublicData/GetReleaseData",
-	"MapReleases": "https://bio.discomap.eea.europa.eu/arcgis/rest/services/N2K_Backbone/Releases/MapServer/0"
+	"LoadSDF": "https://blackneckedswan/n2kbackbone_back/api/PublicData/GetReleaseData",
+	"MapReleases": "https://bio.discomap.eea.europa.eu/arcgis/rest/services/N2K_Backbone/Releases_Spatial_stg/MapServer/0"
 }
