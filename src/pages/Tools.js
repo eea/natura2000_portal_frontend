@@ -3,7 +3,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import * as Utils from "./components/Utils";
 import ConfigData from "./utils/data_config.json";
-import images from "../img/tools/images";
+import ToolsImages from "../img/tools/images";
 
 const Tools = () => {
 
@@ -50,7 +50,7 @@ const Tools = () => {
                                             <div className="four wide computer twelve wide mobile six wide tablet column column-blocks-wrapper" key={i}>
                                                 <div className="card tools">
                                                     <div className="card-image">
-                                                        <img src={images[item.Image]} alt="Tool screenshot"></img>
+                                                        <img src={ToolsImages[item.Image]} alt="Tool screenshot"></img>
                                                     </div>
                                                     <div className="card-body">
                                                         <div className="card-title">

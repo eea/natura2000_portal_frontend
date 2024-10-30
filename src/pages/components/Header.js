@@ -1,10 +1,10 @@
 import React, { useState, useRef } from "react";
 import ConfigData from "../utils/data_config.json";
-import flag from "../../img/eu_flag.png";
-import logo from "../../img/natura2000_logo.svg";
-import logoWhite from "../../img/natura2000_logo_white.svg";
-import menu from "../../img/icons/menu-icon.svg";
-import close from "../../img/icons/close-icon.svg";
+import Flag from "../../img/eu_flag.png";
+import Logo from "../../img/natura2000_logo.svg";
+import LogoWhite from "../../img/natura2000_logo_white.svg";
+import MenuIcon from "../../img/icons/menu-icon.svg";
+import CloseIcon from "../../img/icons/close-icon.svg";
 import {
     AccordionTitle,
     AccordionContent,
@@ -33,7 +33,7 @@ const Header = (props) => {
             <div className="top bar">
                 <div className="ui container">
                     <div className="item header-top-item official-union">
-                        <img src={flag} alt="European Union flag" className="ui image"/>
+                        <img src={Flag} alt="European Union flag" className="ui image"/>
                         <Dropdown text="An official website of the European Union | How do you know?" aria-label="An official website of the European Union | How do you know?" icon="chevron down" closeOnBlur={false}>
                             <DropdownMenu role="option">
                                 <ItemContent>
@@ -61,7 +61,7 @@ const Header = (props) => {
                             <div className="ui grid">
                                 <div className="logo">
                                     <a title="Site logo" className="logo" href="/.">
-                                        <img title="Site" src={props.active === "home" ? logoWhite : logo} alt="Natura 2000" className="ui image eea-logo"/>
+                                        <img title="Site" src={props.active === "home" ? LogoWhite : Logo} alt="Natura 2000" className="ui image eea-logo"/>
                                     </a>
                                 </div>
                                 <div className={"main-menu" + (props.active === "home" ? " inverted" : "")}>
@@ -85,7 +85,7 @@ const Header = (props) => {
                                         </ul>
                                     </nav>
                                     <button className="burger-action mobile " onClick={()=>setShowMenu(prevCheck => !prevCheck)}>
-                                        <img src={showMenu ? close : menu} alt="Menu navigation" className="ui image"/>
+                                        <img src={showMenu ? CloseIcon : MenuIcon} alt="Menu navigation" className="ui image"/>
                                     </button>
                                 </div>
                             </div>
