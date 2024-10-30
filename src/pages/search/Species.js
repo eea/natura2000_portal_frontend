@@ -40,7 +40,7 @@ const Search = () => {
         if(!releases.length) {
             loadReleases();
         }
-        if(Object.keys(params).length > 0 && !data.length) {
+        if(Object.keys(params).length > 0 && !data.length && !loadingData) {
             loadData();
         }
     });
@@ -58,7 +58,7 @@ const Search = () => {
                     releases = releases.map(a => ({...a, "ReleaseDate": Utils.formatDate(a.ReleaseDate)}));
                     setReleases(releases);
                     if(!filters.releaseId) {
-                        setFilters({"releaseId": releases[0].ReleaseId.toString()});
+                        setFilters({...filters, "releaseId": releases[0].ReleaseId.toString()});
                     }
                 }
                 else {

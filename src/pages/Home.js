@@ -8,6 +8,7 @@ import SitesImage from '../img/sites_image.jpg';
 import HabitatsImage from '../img/habitats_image.jpg';
 import SpeciesImage from '../img/species_image.jpg';
 import {
+    Input,
     Loader
 } from "semantic-ui-react"
 
@@ -15,6 +16,9 @@ const Home = () => {
 
     const [loadingData, setLoadingData] = useState(false);
     const [data, setData] = useState({});
+    const [siteCode, setSiteCode] = useState();
+    const [habitatCode, setHabitatCode] = useState();
+    const [speciesCode, setSpeciesCode] = useState();
 
     const formatNumber = (value) => {
         return value?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
@@ -36,7 +40,6 @@ const Home = () => {
     if(!loadingData && Object.keys(data).length === 0) {
         loadData();
     }
-
 
     return (
         <div className="main">
@@ -71,9 +74,16 @@ const Home = () => {
                                                         Natura 2000 sites
                                                     </div>
                                                     <div className="ui input">
-                                                        <input type="text" placeholder="Search by site code or site name"/>
+                                                        <Input
+                                                            type="text"
+                                                            placeholder="Search by site code or site name"
+                                                            name="siteCode"
+                                                            value={siteCode}
+                                                            onChange={(e) => setSiteCode(e.currentTarget.value)}
+                                                            autoComplete="off"
+                                                        />
                                                     </div>
-                                                    <a className="ui button" href="/#/search/sites">Search</a>
+                                                    <a className={"ui button" + (!siteCode ? " disabled" : "")} href={"/#/search/sites?siteCode=" + siteCode}>Search</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -87,9 +97,16 @@ const Home = () => {
                                                         Habitats
                                                     </div>
                                                     <div className="ui input">
-                                                        <input type="text" placeholder="Search by habitat code or habitat name"/>
+                                                        <Input
+                                                            type="text"
+                                                            placeholder="Search by habitat code or habitat name"
+                                                            name="habitatCode"
+                                                            value={habitatCode}
+                                                            onChange={(e) => setHabitatCode(e.currentTarget.value)}
+                                                            autoComplete="off"
+                                                        />
                                                     </div>
-                                                    <a className="ui button" href="/#/search/habitats">Search</a>
+                                                    <a className={"ui button" + (!habitatCode ? " disabled" : "")} href={"/#/search/habitats?habitatCode=" + habitatCode}>Search</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -103,9 +120,16 @@ const Home = () => {
                                                         Species
                                                     </div>
                                                     <div className="ui input">
-                                                        <input type="text" placeholder="Search by species code or species name"/>
+                                                        <Input
+                                                            type="text"
+                                                            placeholder="Search by species code or species name"
+                                                            name="speciesCode"
+                                                            value={speciesCode}
+                                                            onChange={(e) => setSpeciesCode(e.currentTarget.value)}
+                                                            autoComplete="off"
+                                                        />
                                                     </div>
-                                                    <a className="ui button" href="/#/search/sites">Search</a>
+                                                    <a className={"ui button" + (!speciesCode ? " disabled" : "")} href={"/#/search/species?speciesCode=" + speciesCode}>Search</a>
                                                 </div>
                                             </div>
                                         </div>
