@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import * as Utils from "./components/Utils";
 import ConfigJson from "../config.json";
-import ConfigData from "./config/data_config.json";
+import ConfigData from "./utils/data_config.json";
 import {
     Select,
     Input,
@@ -15,52 +16,40 @@ import {
 
 const Downloads = () => {
 
-  const [showModal, setShowModal] = useState(false);
-  const [downloadType, setDownloadType] = useState("");
-  const [fields, setFields] = useState({});
-  const [errors, setErrors] = useState({});
-  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  const [data, setData] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [errorLoading, setErrorLoading] = useState(false);
-  const [showDescription, setShowDescription] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+    const [downloadType, setDownloadType] = useState("");
+    const [fields, setFields] = useState({});
+    const [errors, setErrors] = useState({});
+    const [data, setData] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [errorLoading, setErrorLoading] = useState(false);
+    const [downloading, setDownloading] = useState(false);
+    const [errorDownloading, setErrorDownloading] = useState(false);
+    const [successDownloading, setSuccessDownloading] = useState(false);
+    const [showDescription, setShowDescription] = useState(false);
 
     useEffect(() => {
-        if(!showDescription) {
-            if(document.querySelector(".page-description")?.scrollHeight < 6*16) {
-                setShowDescription("all");
-            }
-            else {
-                setShowDescription("hide");
-            }
-        }
-    });
-
-    const formatDate = (date) => {
-        date = new Date(date);
-        var d = date.getDate();
-        var m = date.getMonth() + 1;
-        var y = date.getFullYear();
-        date = (d <= 9 ? "0" + d : d) + "/" + (m <= 9 ? "0" + m : m) + "/" + y;
-        return date;
-    };
+        Utils.toggleDescription(showDescription, setShowDescription);
+    }, [showDescription]);
 
     useEffect(() => {
         if(showModal && !data) {
             loadData();
         }
-    }, [showModal]);
+    }, [showModal, data]);
 
     const loadData = () => {
         setLoading(true);
         let promises = [];
-        let url = ConfigJson.LoadReleases;
+        let url = ConfigJson.GetReleases;
         promises.push(
             fetch(url)
             .then(response =>response.json())
             .then(data => {
                 if(data?.Success) {
-                    setData(ConfigData.Releases);
+                    let releases = data.Data.sort((a, b) => new Date(b.ReleaseDate) - new Date(a.ReleaseDate));
+                    releases = releases.map(a => ({...a, "ReleaseDate": Utils.formatDate(a.ReleaseDate)}));
+                    setData(releases);
                 }
                 else {
                     setErrorLoading(true);
@@ -97,6 +86,9 @@ const Downloads = () => {
         setFields({});
         setErrors({});
         setData(false);
+        setDownloading(false);
+        setSuccessDownloading(false);
+        setErrorDownloading(false);
     }
 
     const renderModal = () => {
@@ -122,18 +114,18 @@ const Downloads = () => {
                             )
                         }
                     </div>
-                    <Message success hidden={!showSuccessMessage} onDismiss={()=>setShowSuccessMessage(false)}>
+                    <Message success hidden={!successDownloading} onDismiss={()=>setSuccessDownloading(false)}>
                         <i className="check circle icon"></i>
                         You will receive your download by email
                     </Message>
-                    <Message error hidden={loading || !errorLoading}>
+                    <Message error hidden={loading || !errorDownloading} onDismiss={()=>setErrorDownloading(false)}>
                         <i className="triangle exclamation icon"></i>
                         Something went wrong
                     </Message>
                 </ModalContent>
                 <ModalActions>
-                    <button className="ui button cancel" onClick={()=>closeModal()}>Cancel</button>
-                    <button className="ui button primary ok submit" disabled={loading ||errorLoading} onClick={(e)=>downloadProduct(e, modal.Product)}>Download</button>
+                    <button className="ui button cancel" disabled={loading || errorLoading || downloading} onClick={()=>closeModal()}>Cancel</button>
+                    <button className="ui button primary ok submit" disabled={loading || errorLoading || downloading} onClick={(e)=>downloadProduct(e, modal.Product)}>Download</button>
                 </ModalActions>
             </>
         )
@@ -161,18 +153,17 @@ const Downloads = () => {
                             selectOnBlur={false}
                             error={errors[field]}
                             loading={loading}
-                            disabled={loading ||errorLoading}
+                            disabled={loading || errorLoading || downloading}
                         />
                     </div>
-                )
-                break;
-            case "release":
+                );
+            case "releaseId":
                 return (
                     <div className="field">
                         <label>Release</label>
                         <Select
                             placeholder="Select a release"
-                            name="release"
+                            name="releaseId"
                             options=
                                 {
                                     data && data.map((item, i) => (
@@ -186,11 +177,10 @@ const Downloads = () => {
                             selectOnBlur={false}
                             error={errors[field]}
                             loading={loading}
-                            disabled={loading ||errorLoading}
+                            disabled={loading || errorLoading || downloading}
                         />
                     </div>
-                )
-                break;
+                );
             case "delivery":
                 return (
                     <div className="field">
@@ -212,8 +202,7 @@ const Downloads = () => {
                             error={errors[field]}
                         />
                     </div>
-                    )
-                break;
+                );
             case "releasefrom":
                 return (
                     <div className="field">
@@ -235,8 +224,7 @@ const Downloads = () => {
                             error={errors[field]}
                         />
                     </div>
-                )
-                break;
+                );
             case "releaseto":
                 return (
                     <div className="field">
@@ -258,8 +246,7 @@ const Downloads = () => {
                             error={errors[field]}
                         />
                     </div>
-                )
-                break;
+                );
             case "consecutive":
                 return (
                     <div className="field">
@@ -281,8 +268,7 @@ const Downloads = () => {
                             error={errors[field]}
                         />
                     </div>
-                )
-                break;
+                );
             case "email":
                 return (
                     <div className="field">
@@ -295,11 +281,12 @@ const Downloads = () => {
                             onChange={onChangeFields}
                             autoComplete="off"
                             error={errors.email}
-                            disabled={loading ||errorLoading}
+                            disabled={loading || errorLoading || downloading}
                         />
                     </div>
-                )
-                break
+                );
+            default:
+                return;
         }
     }
 
@@ -307,8 +294,7 @@ const Downloads = () => {
         e.preventDefault();
         e.stopPropagation();
         if(validateFields(product)) {
-            // send request
-            setShowSuccessMessage(true);
+            downloadRequest();
         }
     }
 
@@ -322,6 +308,22 @@ const Downloads = () => {
         }
         setErrors(productErrors);
         return Object.values(productErrors).every(a=>a===false);
+    }
+
+    const downloadRequest = () => {
+        setDownloading(true);
+        let url = ConfigJson.DownloadComputationSAC + "?" + new URLSearchParams(fields);
+        fetch(url)
+        .then(response =>response.json())
+        .then(data => {
+            if(data?.Success) {
+                setSuccessDownloading(true);
+            }
+            else {
+                setErrorDownloading(true);
+            }
+            setDownloading(false);
+        })
     }
 
     return (
@@ -347,6 +349,7 @@ const Downloads = () => {
                             <div className={"page-description " + showDescription}>
                                 <p>
                                     Data processing functions that generate ready-to-download results.
+
                                 </p>
                                 {showDescription !== "all" &&
                                     <button className="ui button text" onClick={() => setShowDescription(prevCheck => prevCheck === "show" ? "hide" : "show")}>
@@ -362,8 +365,8 @@ const Downloads = () => {
                                                 <i className="ri-inbox-archive-fill"></i>
                                             </div>
                                             <div className="download-text">
-                                                <div className="download-title">{item.Name}</div>
-                                                <div className="download-description">{item.Description}</div>
+                                                <div className="download-title">{Utils.highlightSensitiveText(item.Name)}</div>
+                                                <div className="download-description">{Utils.highlightSensitiveText(item.Description)}</div>
                                             </div>
                                             <div className="download-button">
                                                 <button className="ui button primary" onClick={() => openModal(item.Product)}>Download</button>

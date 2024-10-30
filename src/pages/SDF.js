@@ -23,7 +23,7 @@ const SDF = () => {
 
     useEffect(() => {
         window.addEventListener("scroll", () => {
-            if (window.scrollY === 0) {
+            if(window.scrollY === 0) {
                 setShowScrollBtn(false);
             }
             else {
@@ -33,10 +33,15 @@ const SDF = () => {
     }, []);
 
     useEffect(() => {
-        if (nav && !isLoading && siteCode && siteCode !== "nodata" && data !== "nodata" && !errorLoading) {
-            scrollTo(nav);
+        if(nav && !isLoading && siteCode && siteCode !== "nodata" && data !== "nodata" && !errorLoading) {
+            let element = document.getElementById(nav);
+            const y = element.getBoundingClientRect().top + window.scrollY;
+            window.scroll({
+                top: y,
+                behavior: 'instant'
+            });
         }
-    }, [isLoading]);
+    }, [isLoading, nav, siteCode, data, errorLoading]);
 
     const getSiteCode = () => {
         let params = Object.fromEntries([...searchParams]);
@@ -46,10 +51,10 @@ const SDF = () => {
     }
 
     const loadData = () => {
-        if (siteCode !== "" && !isLoading) {
+        if(siteCode !== "" && !isLoading) {
             setIsLoading(true);
             let url = ConfigJson.LoadSDF;
-            if (release) {
+            if(release) {
                 url += "?siteCode=" + siteCode + "&releaseId=" + release;
             }
             else {
@@ -58,15 +63,15 @@ const SDF = () => {
             fetch(url)
                 .then(response => response.json())
                 .then(data => {
-                    if (data?.Success) {
-                        if (!data.Data.SiteInfo.SiteCode) {
+                    if(data?.Success) {
+                        if(!data.Data.SiteInfo.SiteCode) {
                             setData("nodata");
                         }
                         else {
                             let releases = data.Data.SiteInfo.Releases.sort((a, b) => new Date(b.ReleaseDate) - new Date(a.ReleaseDate));
                             setReleases(releases);
                             setData(formatData(data));
-                            if (!release) {
+                            if(!release) {
                                 let release = releases[0].ReleaseId;
                                 setRelease(release);
                                 setSearchParams({"sitecode": siteCode, "release": release});
@@ -101,11 +106,11 @@ const SDF = () => {
         return data.Data;
     }
 
-    if (!siteCode) {
+    if(!siteCode) {
         getSiteCode();
     }
 
-    if (!isLoading && siteCode && siteCode !== "nodata" && Object.keys(data).length === 0 && !errorLoading) {
+    if(!isLoading && siteCode && siteCode !== "nodata" && Object.keys(data).length === 0 && !errorLoading) {
         loadData();
     }
 
@@ -121,25 +126,12 @@ const SDF = () => {
         setErrorLoading(false);
     }
 
-    const scrollTo = (item) => {
-        let element = document.getElementById(item);
-        const y = element.getBoundingClientRect().top + window.scrollY;
-        setSearchParams(searchParams => {
-            searchParams.set("nav", item);
-            return searchParams;
-        });
-        window.scroll({
-            top: y,
-            behavior: 'instant'
-        });
-    }
-
     const formatDate = (date, ddmmyyyy) => {
         date = new Date(date);
         var d = date.getDate();
         var m = date.getMonth() + 1;
         var y = date.getFullYear();
-        if (ddmmyyyy) {
+        if(ddmmyyyy) {
             date = (d <= 9 ? '0' + d : d) + '/' + (m <= 9 ? '0' + m : m) + '/' + y;
         }
         else {
@@ -175,18 +167,18 @@ const SDF = () => {
                                                             placeholder="Select a release"
                                                             name="release"
                                                             options=
-                                                            {
-                                                                releases && releases.map((item, i) => (
-                                                                    {
-                                                                        key: item.ReleaseId, value: item.ReleaseId, text: (item.ReleaseName + " (" + formatDate(item.ReleaseDate, true) + ")")
-                                                                    }
-                                                                ))
-                                                            }
+                                                                {
+                                                                    releases && releases.map((item, i) => (
+                                                                        {
+                                                                            key: item.ReleaseId, value: item.ReleaseId, text: (item.ReleaseName + " (" + formatDate(item.ReleaseDate, true) + ")")
+                                                                        }
+                                                                    ))
+                                                                }
                                                             value={releases.find(a => a.ReleaseId === release) ? release : ""}
                                                             onChange={changeRelease}
                                                             selectOnBlur={false}
                                                             loading={isLoading}
-                                                            disabled={isLoading}
+                                                            disabled={isLoading || errorLoading}
                                                         />
                                                     </div>
                                                 </div>
@@ -196,7 +188,10 @@ const SDF = () => {
                                     {(errorLoading && !isLoading) &&
                                         <div className="ui container">
                                             <div className="ui grid py-4">
-                                                <Message color="danger">Error loading data</Message>
+                                                <Message error>
+                                                    <i className="triangle exclamation icon"></i>
+                                                    Error loading data
+                                                </Message>
                                             </div>
                                         </div>
                                     }

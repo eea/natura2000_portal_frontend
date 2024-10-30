@@ -5,6 +5,9 @@
     h1 {
         font-size: 2rem;
     }
+    .message {
+        width: 100%;
+    }
 }
 
 .sdf-download {
@@ -89,6 +92,7 @@
             }
             th, td {
                 border-color: $grey-2;
+                font-size: 1rem;
             }
         }
         .sdf-link {

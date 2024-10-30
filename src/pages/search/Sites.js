@@ -2,8 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import * as Utils from "../components/Utils";
 import ConfigJson from "../../config.json";
-import ConfigData from "../config/data_config.json";
+import ConfigData from "../utils/data_config.json";
+import errorImage from '../../img/error_image.svg';
+import noresultsImage from '../../img/noresults_image.svg';
 import {
     Select,
     Accordion,
@@ -30,25 +33,8 @@ const Search = () => {
     const [showDescription, setShowDescription] = useState(false);
 
     useEffect(() => {
-        if(!showDescription) {
-            if(document.querySelector(".page-description")?.scrollHeight < 6*16) {
-                setShowDescription("all");
-            }
-            else {
-                setShowDescription("hide");
-            }
-        }
-    });
-
-    useEffect(() => {
-        if(!params.release) {
-            setFilters({ ...filters, "release": ConfigData.Releases[0].ReleaseId.toString()});
-        }
-        if(params.habitat || params.species) {
-            let values = active.concat(1);
-            setActive(values);
-        }
-    }, [searchParams]);
+        Utils.toggleDescription(showDescription, setShowDescription);
+    }, [showDescription]);
 
     useEffect(() => {
         if(!releases.length) {
@@ -57,18 +43,27 @@ const Search = () => {
         if(Object.keys(params).length > 0 && !data.length) {
             loadData();
         }
-    }, []);
+    });
 
     const loadReleases = () => {
         setLoadingReleases(true);
+        if((params.habitatCode || params.speciesCode) && !active.includes(1)) {
+            let values = active.concat(1);
+            setActive(values);
+        }
         let promises = [];
-        let url = ConfigJson.LoadReleases;
+        let url = ConfigJson.GetReleases;
         promises.push(
             fetch(url)
             .then(response =>response.json())
             .then(data => {
                 if(data?.Success) {
-                    setReleases(ConfigData.Releases);
+                    let releases = data.Data.sort((a, b) => new Date(b.ReleaseDate) - new Date(a.ReleaseDate));
+                    releases = releases.map(a => ({...a, "ReleaseDate": Utils.formatDate(a.ReleaseDate)}));
+                    setReleases(releases);
+                    if(!filters.releaseId) {
+                        setFilters({"releaseId": releases[0].ReleaseId.toString()});
+                    }
                 }
                 else {
                     setErrorLoading(true);
@@ -83,12 +78,12 @@ const Search = () => {
 
     const loadData = () => {
         setLoadingData(true);
-        let url = ConfigJson.LoadReleases;
+        let url = ConfigJson.GetSites + "?" + new URLSearchParams(filters);
         fetch(url)
         .then(response =>response.json())
         .then(data => {
             if(data?.Success) {
-                setData(ConfigData.Sites);
+                setData(data.Data);
             }
             else {
                 setErrorLoading(true);
@@ -97,18 +92,9 @@ const Search = () => {
         })
     }
 
-    const formatDate = (date) => {
-        date = new Date(date);
-        var d = date.getDate();
-        var m = date.getMonth() + 1;
-        var y = date.getFullYear();
-        date = (d <= 9 ? "0" + d : d) + "/" + (m <= 9 ? "0" + m : m) + "/" + y;
-        return date;
-    };
-
     const toggleAccordion = (value) => {
         let values;
-        if (active.includes(value)) {
+        if(active.includes(value)) {
             values = active.filter(e => e !== value);
         } else {
             values = active.concat(value);
@@ -145,7 +131,8 @@ const Search = () => {
     }
 
     const removeParameters = () => {
-        setFilters({"release": ConfigData.Releases[2].ReleaseId.toString()});
+        setFilters({"releaseId": releases[0].ReleaseId.toString()});
+        setSearchParams({});
     }
 
     return (
@@ -202,7 +189,7 @@ const Search = () => {
                                             <label htmlFor="field_releases">Releases</label>
                                             <Select
                                                 placeholder="Select a release"
-                                                name="release"
+                                                name="releaseId"
                                                 options=
                                                     {
                                                         releases && releases.map((item, i) => (
@@ -211,7 +198,7 @@ const Search = () => {
                                                             }
                                                         ))
                                                     }
-                                                value={filters.release}
+                                                value={filters.releaseId}
                                                 onChange={onChangeFilters}
                                                 selectOnBlur={false}
                                                 loading={loadingReleases}
@@ -226,9 +213,9 @@ const Search = () => {
                                                         <div className="three wide computer twelve wide mobile six wide tablet column column-blocks-wrapper py-1" key={i}>
                                                             <Radio
                                                                 label={item.SiteTypeName}
-                                                                name="type"
+                                                                name="siteType"
                                                                 value={item.SiteTypeCode}
-                                                                checked={item.SiteTypeCode === filters.type}
+                                                                checked={item.SiteTypeCode === filters.siteType}
                                                                 onChange={onChangeFilters}
                                                             />
                                                         </div>
@@ -241,8 +228,8 @@ const Search = () => {
                                             <Input
                                                 type="text"
                                                 placeholder="Search by site code or site name"
-                                                name="site"
-                                                value={filters.site ? filters.site : ""}
+                                                name="siteCode"
+                                                value={filters.siteCode ? filters.siteCode : ""}
                                                 onChange={onChangeFilters}
                                                 autoComplete="off"
                                             />
@@ -290,7 +277,7 @@ const Search = () => {
                                         onClick={() => toggleAccordion(1)}
                                     >
                                         <i aria-hidden="true" className="small icon ri-arrow-down-s-line"></i>
-                                        Advacen filters
+                                        Advanced filters
                                     </AccordionTitle>
                                     <AccordionContent active={active.includes(1)}>
                                         <div className="field">
@@ -298,8 +285,8 @@ const Search = () => {
                                             <Input
                                                 type="text"
                                                 placeholder="Search by habitat code or habitat name"
-                                                name="habitat"
-                                                value={filters.habitat ? ConfigData.Habitats[0].HabitatName + " - " + filters.habitat : ""}
+                                                name="habitatCode"
+                                                value={filters.habitatCode ? filters.habitatCode : ""}
                                                 onChange={onChangeFilters}
                                                 autoComplete="off"
                                             />
@@ -309,8 +296,8 @@ const Search = () => {
                                             <Input
                                                 type="text"
                                                 placeholder="Search by species code or species name"
-                                                name="species"
-                                                value={filters.species ? ConfigData.Species[0].SpeciesScientificName + " - " + filters.species : ""}
+                                                name="speciesCode"
+                                                value={filters.speciesCode ? filters.speciesCode : ""}
                                                 onChange={onChangeFilters}
                                                 autoComplete="off"
                                             />
@@ -318,14 +305,14 @@ const Search = () => {
                                     </AccordionContent>
                                 </Accordion>
                                 <div className="search-buttons mt-3">
-                                    <button className="ui button" onClick={()=>addParameters()}>Search</button>
-                                    <button className="ui button text" onClick={()=>removeParameters()}>Clear filters</button>
+                                    <button className="ui button" disabled={loadingData} onClick={()=>addParameters()}>Search</button>
+                                    <button className="ui button text" disabled={loadingData} onClick={()=>removeParameters()}>Clear filters</button>
                                 </div>
                             </div>
                             <hr className="my-3" />
                             <div className="search-list sites">
                                 {
-                                    !loadingData &&
+                                    !loadingData && !errorLoading &&
                                     <div className="search-results">
                                         <div className="search-counter">
                                             <span className="search-number">{data.length}</span> results
@@ -336,7 +323,8 @@ const Search = () => {
                                 <div className="ui grid">
                                     {
                                         loadingData ? <Loader active={loadingData} inline="centered" className="my-6"/> :
-                                        data.length === 0 ? <div className="noresults">No results found</div> :
+                                        errorLoading ? <div className="error-container"><img src={errorImage} alt="Error" />Something went wrong</div> :
+                                        data.length === 0 ? <div className="error-container"><img src={noresultsImage} alt="No results" />No results found</div> :
                                         data && data.map((item, i) =>
                                             <div className="four wide computer twelve wide mobile six wide tablet column column-blocks-wrapper" key={i}>
                                                 <div className="card search sites">
@@ -362,8 +350,8 @@ const Search = () => {
                                                             </div>
                                                         </div>
                                                         <div className="card-links">
-                                                            <a href={"/sdf?sitecode=" + item.SiteCode} target="_blank">SDF<i className="icon ri-external-link-line"></i></a>
-                                                            <a href={"https://natura2000.eea.europa.eu/?sitecode=" + item.SiteCode} target="_blank">Natura 2000 viewer<i className="icon ri-external-link-line"></i></a>
+                                                            <a href={"/sdf?sitecode=" + item.SiteCode} target="_blank" rel="noreferrer">SDF<i className="icon ri-external-link-line"></i></a>
+                                                            <a href={"https://natura2000.eea.europa.eu/?sitecode=" + item.SiteCode} target="_blank" rel="noreferrer">Natura 2000 viewer<i className="icon ri-external-link-line"></i></a>
                                                             {item.IsSensitive &&
                                                                 <div className="card-popup">
                                                                     <Popup content="Contains sensitive species" inverted position="top center" trigger={<i className="ri-alert-line"></i>} />

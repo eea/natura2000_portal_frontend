@@ -78,7 +78,7 @@ class MapViewer extends React.Component {
                         target: feat?.geometry
                     })
                     .catch((error) => {
-                        if (error.name != "AbortError") {
+                        if(error.name !== "AbortError") {
                             console.error(error);
                         }
                     });
