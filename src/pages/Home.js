@@ -140,15 +140,12 @@ const Home = () => {
                             <div className="statistics-container content-box">
                                 <div className="content-box-inner pb-0">
                                     <h2 id="eea-in-numbers" className="mt-3">Natura 2000 in numbers</h2>
-                                    <div>
-                                        Search in the last release
-                                        {
-                                            (!loadingData || Object.keys(data).length < 0) &&
-                                            <>
-                                                Search in the last release ({Utils.formatDate(data.ReleaseDate)}) by:
-                                            </>
-                                        }
-                                    </div>
+                                    {
+                                        (!loadingData || Object.keys(data).length < 0) &&
+                                        <div>
+                                            Search in the last release ({Utils.formatDate(data.ReleaseDate)}) by:
+                                        </div>
+                                    }
                                 </div>
                                 <div className="ui grid">
                                     <div className="four wide computer twelve wide mobile six wide tablet column column-blocks-wrapper">
@@ -156,7 +153,7 @@ const Home = () => {
                                             <span className="ui statistic">
                                                 {
                                                     (loadingData || Object.keys(data).length === 0) ?
-                                                    <Loader active={loadingData} inline="centered" />
+                                                    <Loader active={loadingData} inline="centered" className="my-5" />
                                                     :
                                                     <div className="value slate text-center secondary">
                                                         <p>{formatNumber(data.SitesNumber)}</p>
@@ -173,7 +170,7 @@ const Home = () => {
                                             <span className="ui statistic">
                                                 {
                                                     (loadingData || Object.keys(data).length === 0) ?
-                                                    <Loader active={loadingData} inline="centered" />
+                                                    <Loader active={loadingData} inline="centered" className="my-5" />
                                                     :
                                                     <div className="value slate text-center secondary">
                                                         <p>{formatNumber(data.HabitatsNumber)}</p>
@@ -190,7 +187,7 @@ const Home = () => {
                                             <span className="ui statistic">
                                                 {
                                                     (loadingData || Object.keys(data).length === 0) ?
-                                                    <Loader active={loadingData} inline="centered" />
+                                                    <Loader active={loadingData} inline="centered" className="my-5" />
                                                     :
                                                     <div className="value slate text-center secondary">
                                                         <p>{formatNumber(data.SpeciesNumber)}</p>
