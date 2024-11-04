@@ -37,36 +37,33 @@ const Search = () => {
     }, [showDescription]);
 
     useEffect(() => {
-        if(!releases.length) {
+        if(!releases.length && !errorLoading) {
             loadReleases();
         }
-        if(Object.keys(params).length > 0 && !data.length && !loadingData) {
+        if(Object.keys(params).length > 0 && !data.length && !loadingData && !errorLoading) {
             loadData();
         }
     });
 
     const loadReleases = () => {
         setLoadingReleases(true);
-        let promises = [];
         let url = ConfigJson.GetReleases;
-        promises.push(
-            fetch(url)
-            .then(response =>response.json())
-            .then(data => {
-                if(data?.Success) {
-                    let releases = data.Data.sort((a, b) => new Date(b.ReleaseDate) - new Date(a.ReleaseDate));
-                    releases = releases.map(a => ({...a, "ReleaseDate": Utils.formatDate(a.ReleaseDate)}));
-                    setReleases(releases);
-                    if(!filters.releaseId) {
-                        setFilters({...filters, "releaseId": releases[0].ReleaseId.toString()});
-                    }
+        fetch(url)
+        .then(response =>response.json())
+        .then(data => {
+            if(data?.Success) {
+                let releases = data.Data.sort((a, b) => new Date(b.ReleaseDate) - new Date(a.ReleaseDate));
+                releases = releases.map(a => ({...a, "ReleaseDate": Utils.formatDate(a.ReleaseDate)}));
+                setReleases(releases);
+                if(!filters.releaseId) {
+                    setFilters({...filters, "releaseId": releases[0].ReleaseId.toString()});
                 }
-            })
-        );
-        Promise.all(promises)
-        .then(results => {
+            }
+            else {
+                setErrorLoading(true);
+            }
             setLoadingReleases(false);
-        });
+        })
     }
 
     const loadData = () => {
