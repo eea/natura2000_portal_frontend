@@ -55,7 +55,6 @@ const Search = () => {
         fetch(url)
         .then(response =>response.json())
         .then(data => {
-            data.Success=false
             if(data?.Success) {
                 let releases = data.Data.sort((a, b) => new Date(b.ReleaseDate) - new Date(a.ReleaseDate));
                 releases = releases.map(a => ({...a, "ReleaseDate": Utils.formatDate(a.ReleaseDate)}));
