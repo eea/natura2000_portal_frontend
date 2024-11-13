@@ -1,7 +1,7 @@
-import React from 'react'
+import React from "react";
 import { useSearchParams } from "react-router-dom";
-import ConfigSDF from '../utils/sdf_config.json';
-import MapViewer from './MapViewer'
+import ConfigSDF from "../utils/sdf_config.json";
+import MapViewer from "./MapViewer";
 
 const SDFVisualization = (props) => {
 
@@ -21,7 +21,7 @@ const SDFVisualization = (props) => {
         });
         window.scroll({
             top: y,
-            behavior: 'instant'
+            behavior: "instant"
         });
     }
 
@@ -74,10 +74,10 @@ const formatDate = (date, ddmmyyyy) => {
     var m = date.getMonth() + 1;
     var y = date.getFullYear();
     if(ddmmyyyy) {
-        date = (d <= 9 ? '0' + d : d) + '/' + (m <= 9 ? '0' + m : m) + '/' + y;
+        date = (d <= 9 ? "0" + d : d) + "/" + (m <= 9 ? "0" + m : m) + "/" + y;
     }
     else {
-        date = (y + '-' + (m <= 9 ? '0' + m : m));
+        date = (y + "-" + (m <= 9 ? "0" + m : m));
     }
     return date;
 };
@@ -343,14 +343,14 @@ const sectionsContent = (activekey, data) => {
                 Object.keys(value).forEach(i => c[i] = value[i].map(a => { let b = {}; Object.keys(a).forEach(key => b[ConfigSDF[i][key]] = a[key]); return b }))
                 value = c;
             }
-            else if(typeof value === 'object' && type !== "double-table") {
+            else if(typeof value === "object" && type !== "double-table") {
                 let b = {};
                 Object.keys(value).forEach(key => b[labels[key]] = value[key] ? (isNaN(value[key]) && !isNaN(Date.parse(value[key].replaceAll(' ', ""))) ? formatDate(value[key]) : value[key]) : value[key]);
                 value = b;
             }
         }
         else {
-            value = typeof value !== 'object' && isNaN(value) && !isNaN(Date.parse(value.replaceAll(' ', ""))) ? formatDate(value) : value;
+            value = typeof value !== "object" && isNaN(value) && !isNaN(Date.parse(value.replaceAll(' ', ""))) ? formatDate(value) : value;
         }
 
         const parseLinks = (text) => {
@@ -370,14 +370,14 @@ const sectionsContent = (activekey, data) => {
                 case "single":
                     return (
                         <div className="sdf-row-field">
-                            {typeof data === 'object' ? Object.entries(data).map(a => <p key={"v_" + a}><b>{a[0]}</b>: {a[1] ? parseLinks(a[1]) : "No information provided"}</p>) : parseLinks(data)}
+                            {typeof data === "object" ? Object.entries(data).map(a => <p key={"v_" + a}><b>{a[0]}</b>: {a[1] ? parseLinks(a[1]) : "No information provided"}</p>) : parseLinks(data)}
                         </div>
                     )
                 case "multiple":
                     return (
                         Array.isArray(data) && data.map((a, i) =>
                             <div className="sdf-row-field" key={"a_" + i}>
-                                {typeof a === 'object' ? Object.entries(a).map(b => <p key={"b_" + b}><b>{b[0]}</b>: {b[1] ? parseLinks(b[1]) : "No information provided"}</p>) : parseLinks(a[1])}
+                                {typeof a === "object" ? Object.entries(a).map(b => <p key={"b_" + b}><b>{b[0]}</b>: {b[1] ? parseLinks(b[1]) : "No information provided"}</p>) : parseLinks(a[1])}
                             </div>
                         )
                     )
@@ -443,7 +443,7 @@ const sectionsContent = (activekey, data) => {
                                             <b>Other Site Characteristics</b>
                                         </div>
                                         <div className="sdf-row-field">
-                                            {typeof legend === 'object' ? Object.entries(legend).map(a => <p key={"v_" + a}><b>{a[0]}</b>: {a[1] ? parseLinks(a[1]) : "No information provided"}</p>) : parseLinks(legend)}
+                                            {typeof legend === "object" ? Object.entries(legend).map(a => <p key={"v_" + a}><b>{a[0]}</b>: {a[1] ? parseLinks(a[1]) : "No information provided"}</p>) : parseLinks(legend)}
                                         </div>
                                     </>
                                     :
@@ -520,7 +520,7 @@ const sectionsContent = (activekey, data) => {
                                 {checked === "Y" && checked === a.value &&
                                     Array.isArray(data) && data.map((a, i) =>
                                         <div className="mb-3" key={"a_" + i}>
-                                            {typeof a === 'object' ? Object.entries(a).map(b => b[0] !== "Exists" && <p className="mb-1" key={"b_" + b}><b>{b[0]}</b>: {b[1] ? parseLinks(b[1]) : "No information provided"}</p>) : parseLinks(a[1])}
+                                            {typeof a === "object" ? Object.entries(a).map(b => b[0] !== "Exists" && <p className="mb-1" key={"b_" + b}><b>{b[0]}</b>: {b[1] ? parseLinks(b[1]) : "No information provided"}</p>) : parseLinks(a[1])}
                                         </div>
                                     )
                                 }
@@ -540,7 +540,7 @@ const sectionsContent = (activekey, data) => {
         fields.push(
             <div className={"sdf-row" + (layout === 2 ? " col-md-6 col-12" : "")} key={index}>
                 <div className="column">
-                    <div className='sdf-row-title'>{index + ' ' + title}</div>
+                    <div className="sdf-row-title">{index + " " + title}</div>
                     {dataType(field[0], type, value)}
                 </div>
             </div>

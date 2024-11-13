@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { loadModules } from "esri-loader";
 
 class MapViewer extends React.Component {

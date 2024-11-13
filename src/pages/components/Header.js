@@ -34,7 +34,7 @@ const Header = (props) => {
                 <div className="ui container">
                     <div className="item header-top-item official-union">
                         <img src={Flag} alt="European Union flag" className="ui image"/>
-                        <Dropdown text="An official website of the European Union | How do you know?" aria-label="An official website of the European Union | How do you know?" icon="chevron down" closeOnBlur={false}>
+                        <Dropdown className="mobile-sr-only" text="An official website of the European Union | How do you know?" aria-label="An official website of the European Union | How do you know?" icon="chevron down" closeOnBlur={false}>
                             <DropdownMenu role="option">
                                 <ItemContent>
                                     <p>All official European Union website addresses are in the <b>europa.eu</b> domain.</p>

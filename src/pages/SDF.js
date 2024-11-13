@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import ConfigJson from "../config.json";
-import SDFStructure from './components/SDFStructure';
+import SDFStructure from "./components/SDFStructure";
 import Logo from "../img/natura2000_logo.svg";
 import {
     Select,
@@ -38,7 +38,7 @@ const SDF = () => {
             const y = element.getBoundingClientRect().top + window.scrollY;
             window.scroll({
                 top: y,
-                behavior: 'instant'
+                behavior: "instant"
             });
         }
     }, [isLoading, nav, siteCode, data, errorLoading]);
@@ -132,10 +132,10 @@ const SDF = () => {
         var m = date.getMonth() + 1;
         var y = date.getFullYear();
         if(ddmmyyyy) {
-            date = (d <= 9 ? '0' + d : d) + '/' + (m <= 9 ? '0' + m : m) + '/' + y;
+            date = (d <= 9 ? "0" + d : d) + "/" + (m <= 9 ? "0" + m : m) + "/" + y;
         }
         else {
-            date = (y + '-' + (m <= 9 ? '0' + m : m));
+            date = (y + "-" + (m <= 9 ? "0" + m : m));
         }
         return date;
     };
@@ -212,7 +212,7 @@ const SDF = () => {
                                     }
                                     {showScrollBtn &&
                                         <div className="sdf-scroll">
-                                            <button className="ui button secondary" onClick={() => window.scroll({ top: 0, behavior: 'instant' })}>
+                                            <button className="ui button secondary" onClick={() => window.scroll({ top: 0, behavior: "instant" })}>
                                                 <i aria-hidden="true" className="ri-arrow-up-s-line"></i>
                                             </button>
                                         </div>
