@@ -40,7 +40,7 @@ const SDFVisualization = (props) => {
     const showMainData = () => {
         return (
             <div className="ui container">
-                <div className="sdf-download px-4">
+                <div className="sdf-download">
                     <button className="ui button secondary" onClick={() => { window.print() }}>
                         <i className="icon ri-download-line"></i> Download PDF
                     </button>
