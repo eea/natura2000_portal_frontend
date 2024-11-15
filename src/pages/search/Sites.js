@@ -75,7 +75,7 @@ const Search = () => {
         })
     }
 
-    const loadData = (page) => {
+    const loadData = () => {
         setLoadingData(true);
         let url = ConfigJson.GetSites + "?" + new URLSearchParams(filters);
         fetch(url)
@@ -127,6 +127,7 @@ const Search = () => {
     const addParameters = () => {
         setSearchParams(filters);
         setLoadingData(true);
+        setActivePage(1);
         setData([]);
         loadData();
     }
@@ -139,8 +140,6 @@ const Search = () => {
     const onChangePage = (event, data) => {
         let page = data.activePage;
         setActivePage(page);
-        setData([]);
-        loadData(page);
     }
 
     return (
@@ -333,7 +332,7 @@ const Search = () => {
                                         loadingData ? <Loader active={loadingData} inline="centered" className="my-6"/> :
                                         errorLoading ? <div className="error-container"><img src={ErrorImage} alt="Error" />Something went wrong</div> :
                                         data.length === 0 || !data ? <div className="error-container"><img src={NoresultsImage} alt="No results" />No results found</div> :
-                                        data && data.map((item, i) =>
+                                        data && data.slice((activePage-1)*pageSize, activePage*pageSize).map((item, i) =>
                                             <div className="four wide computer twelve wide mobile six wide tablet column column-blocks-wrapper" key={i}>
                                                 <div className="card search sites">
                                                     <div className="card-body">
