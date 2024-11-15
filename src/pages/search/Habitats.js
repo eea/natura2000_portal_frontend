@@ -5,9 +5,9 @@ import Footer from "../components/Footer";
 import * as Utils from "../components/Utils";
 import ConfigJson from "../../config.json";
 import ConfigData from "../utils/data_config.json";
-import NoImage from '../../img/no_image_habitats.jpg';
-import ErrorImage from '../../img/error_image.svg';
-import NoresultsImage from '../../img/noresults_image.svg';
+import NoImage from "../../img/no_image_habitats.jpg";
+import ErrorImage from "../../img/error_image.svg";
+import NoresultsImage from "../../img/noresults_image.svg";
 import {
     Select,
     Accordion,
@@ -16,7 +16,8 @@ import {
     Radio,
     Checkbox,
     Input,
-    Loader
+    Loader,
+    Pagination
 } from "semantic-ui-react"
 
 const Search = () => {
@@ -25,48 +26,49 @@ const Search = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const params = Object.fromEntries([...searchParams]);
     const [filters, setFilters] = useState(params);
-    const [data, setData] = useState([]);
+    const [data, setData] = useState(false);
+    const [results, setResults] = useState(0);
     const [releases, setReleases] = useState([]);
     const [loadingReleases, setLoadingReleases] = useState(false);
     const [loadingData, setLoadingData] = useState(false);
     const [errorLoading, setErrorLoading] = useState(false);
     const [showDescription, setShowDescription] = useState(false);
+    const [pageNumber, setPageNumber] = useState(10);
+    const [activePage, setActivePage] = useState(1);
+    const pageSize = 30;
 
     useEffect(() => {
         Utils.toggleDescription(showDescription, setShowDescription);
     }, [showDescription]);
 
     useEffect(() => {
-        if(!releases.length) {
+        if(!releases.length && !errorLoading) {
             loadReleases();
         }
-        if(Object.keys(params).length > 0 && !data.length && !loadingData) {
+        if(Object.keys(params).length > 0 && !data && !loadingData && !errorLoading) {
             loadData();
         }
     });
 
     const loadReleases = () => {
         setLoadingReleases(true);
-        let promises = [];
         let url = ConfigJson.GetReleases;
-        promises.push(
-            fetch(url)
-            .then(response =>response.json())
-            .then(data => {
-                if(data?.Success) {
-                    let releases = data.Data.sort((a, b) => new Date(b.ReleaseDate) - new Date(a.ReleaseDate));
-                    releases = releases.map(a => ({...a, "ReleaseDate": Utils.formatDate(a.ReleaseDate)}));
-                    setReleases(releases);
-                    if(!filters.releaseId) {
-                        setFilters({...filters, "releaseId": releases[0].ReleaseId.toString()});
-                    }
+        fetch(url)
+        .then(response =>response.json())
+        .then(data => {
+            if(data?.Success) {
+                let releases = data.Data.sort((a, b) => new Date(b.ReleaseDate) - new Date(a.ReleaseDate));
+                releases = releases.map(a => ({...a, "ReleaseDate": Utils.formatDate(a.ReleaseDate)}));
+                setReleases(releases);
+                if(!filters.releaseId) {
+                    setFilters({...filters, "releaseId": releases[0].ReleaseId.toString()});
                 }
-            })
-        );
-        Promise.all(promises)
-        .then(results => {
+            }
+            else {
+                setErrorLoading(true);
+            }
             setLoadingReleases(false);
-        });
+        })
     }
 
     const loadData = () => {
@@ -77,6 +79,8 @@ const Search = () => {
         .then(data => {
             if(data?.Success) {
                 setData(data.Data);
+                setPageNumber(Math.ceil(data.Data.length/pageSize));
+                setResults(data.Count);
             }
             else {
                 setErrorLoading(true);
@@ -119,6 +123,7 @@ const Search = () => {
     const addParameters = () => {
         setSearchParams(filters);
         setLoadingData(true);
+        setActivePage(1);
         setData([]);
         loadData();
     }
@@ -128,12 +133,17 @@ const Search = () => {
         setSearchParams({});
     }
 
+    const onChangePage = (event, data) => {
+        let page = data.activePage;
+        setActivePage(page);
+    }
+
     const setSitesUrl = () => {
         let params = new URLSearchParams(searchParams);
         if(!params.has("releaseId")) {
             params.set("releaseId", releases[0].ReleaseId);
         }
-        params.delete("habitatCode");
+        params.delete("habitat");
         params.delete("habitatGroup");
         return params.toString();
     } 
@@ -231,8 +241,8 @@ const Search = () => {
                                             <Input
                                                 type="text"
                                                 placeholder="Search by habitat code or habitat name"
-                                                name="habitatCode"
-                                                value={filters.habitatCode ? filters.habitatCode : ""}
+                                                name="habitat"
+                                                value={filters.habitat ? filters.habitat : ""}
                                                 onChange={onChangeFilters}
                                                 autoComplete="off"
                                             />
@@ -286,20 +296,20 @@ const Search = () => {
                                     !loadingData && !errorLoading &&
                                     <div className="search-results">
                                         <div className="search-counter">
-                                            <span className="search-number">{data.length}</span> results
+                                            <span className="search-number">{results}</span> results
                                         </div>
-                                        <button className="ui button inverted" disabled={data.length === 0}><i className="icon ri-download-line"></i>Download results</button>
+                                        <button className="ui button inverted" disabled={data.length === 0 || !data}><i className="icon ri-download-line"></i>Download results</button>
                                     </div>
                                 }
                                 <div className="ui grid">
                                     {
                                         loadingData ? <Loader active={loadingData} inline="centered" className="my-6"/> :
                                         errorLoading ? <div className="error-container"><img src={ErrorImage} alt="Error" />Something went wrong</div> :
-                                        data.length === 0 ? <div className="error-container"><img src={NoresultsImage} alt="No results" />No results found</div> :
-                                        data && data.map((item, i) =>
+                                        data.length === 0 || !data ? <div className="error-container"><img src={NoresultsImage} alt="No results" />No results found</div> :
+                                        data && data.slice((activePage-1)*pageSize, activePage*pageSize).map((item, i) =>
                                             <div className="four wide computer twelve wide mobile six wide tablet column column-blocks-wrapper" key={i}>
                                                 <div className="card search habitats">
-                                                    <a href={"/#/search/sites?"+setSitesUrl()+"&habitatCode="+item.HabitatCode}>
+                                                    <a href={"/#/search/sites?"+setSitesUrl()+"&habitat="+item.HabitatCode}>
                                                         <div className="card-image">
                                                             <img src={(!item.HabitatImageUrl || item.HabitatImageUrl === "UNAVAILABLE IN DEV") ? NoImage : item.HabitatImageUrl} alt="Habitat" />
                                                         </div>
@@ -326,6 +336,43 @@ const Search = () => {
                                         )
                                     }
                                 </div>
+                                {
+                                    !loadingData && !errorLoading && data.length > 0 &&
+                                    <div className="ui grid">
+                                        <Pagination
+                                            className="habitats"
+                                            totalPages={pageNumber}
+                                            defaultActivePage={activePage}
+                                            firstItem={
+                                                pageNumber > 5 &&
+                                                {
+                                                    disabled: pageNumber <= 1 || activePage === 1,
+                                                    content: <div className="double-arrow"><i className="ri-arrow-left-s-line" /><i className="ri-arrow-left-s-line" /></div>
+                                                }
+                                            }
+                                            lastItem={
+                                                pageNumber > 5 &&
+                                                {
+                                                    disabled: pageNumber <= 1 || activePage === pageNumber,
+                                                    content: <div className="double-arrow"><i className="ri-arrow-right-s-line" /><i className="ri-arrow-right-s-line" /></div>
+                                                }
+                                            }
+                                            prevItem={
+                                                {
+                                                    disabled: pageNumber <= 1 || activePage === 1,
+                                                    content: <i className="ri-arrow-left-s-line" />
+                                                }
+                                            }
+                                            nextItem={
+                                                {
+                                                    disabled: pageNumber <= 1 || activePage === pageNumber,
+                                                    content: <i className="ri-arrow-right-s-line" />
+                                                }
+                                            }
+                                            onPageChange={onChangePage}
+                                        ></Pagination>
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>

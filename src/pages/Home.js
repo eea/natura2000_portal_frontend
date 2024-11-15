@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import * as Utils from "./components/Utils";
 import ConfigJson from "../config.json";
-import BackgroundImage from '../img/home_background.jpg';
-import SitesImage from '../img/sites_image.jpg';
-import HabitatsImage from '../img/habitats_image.jpg';
-import SpeciesImage from '../img/species_image.jpg';
+import BackgroundImage from "../img/home_background.jpg";
+import SitesImage from "../img/sites_image.jpg";
+import HabitatsImage from "../img/habitats_image.jpg";
+import SpeciesImage from "../img/species_image.jpg";
 import {
     Input,
     Loader
@@ -16,9 +16,9 @@ const Home = () => {
 
     const [loadingData, setLoadingData] = useState(false);
     const [data, setData] = useState({});
-    const [siteCode, setSiteCode] = useState();
-    const [habitatCode, setHabitatCode] = useState();
-    const [speciesCode, setSpeciesCode] = useState();
+    const [site, setSite] = useState();
+    const [habitat, setHabitat] = useState();
+    const [species, setSpecies] = useState();
 
     const formatNumber = (value) => {
         return value?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
@@ -77,13 +77,13 @@ const Home = () => {
                                                         <Input
                                                             type="text"
                                                             placeholder="Search by site code or site name"
-                                                            name="siteCode"
-                                                            value={siteCode}
-                                                            onChange={(e) => setSiteCode(e.currentTarget.value)}
+                                                            name="site"
+                                                            value={site}
+                                                            onChange={(e) => setSite(e.currentTarget.value)}
                                                             autoComplete="off"
                                                         />
                                                     </div>
-                                                    <a className={"ui button" + (!siteCode ? " disabled" : "")} href={"/#/search/sites?siteCode=" + siteCode}>Search</a>
+                                                    <a className={"ui button" + (!site ? " disabled" : "")} href={"/#/search/sites?site=" + site}>Search</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -100,13 +100,13 @@ const Home = () => {
                                                         <Input
                                                             type="text"
                                                             placeholder="Search by habitat code or habitat name"
-                                                            name="habitatCode"
-                                                            value={habitatCode}
-                                                            onChange={(e) => setHabitatCode(e.currentTarget.value)}
+                                                            name="habitat"
+                                                            value={habitat}
+                                                            onChange={(e) => setHabitat(e.currentTarget.value)}
                                                             autoComplete="off"
                                                         />
                                                     </div>
-                                                    <a className={"ui button" + (!habitatCode ? " disabled" : "")} href={"/#/search/habitats?habitatCode=" + habitatCode}>Search</a>
+                                                    <a className={"ui button" + (!habitat ? " disabled" : "")} href={"/#/search/habitats?habitat=" + habitat}>Search</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -123,13 +123,13 @@ const Home = () => {
                                                         <Input
                                                             type="text"
                                                             placeholder="Search by species code or species name"
-                                                            name="speciesCode"
-                                                            value={speciesCode}
-                                                            onChange={(e) => setSpeciesCode(e.currentTarget.value)}
+                                                            name="species"
+                                                            value={species}
+                                                            onChange={(e) => setSpecies(e.currentTarget.value)}
                                                             autoComplete="off"
                                                         />
                                                     </div>
-                                                    <a className={"ui button" + (!speciesCode ? " disabled" : "")} href={"/#/search/species?speciesCode=" + speciesCode}>Search</a>
+                                                    <a className={"ui button" + (!species ? " disabled" : "")} href={"/#/search/species?species=" + species}>Search</a>
                                                 </div>
                                             </div>
                                         </div>

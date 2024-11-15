@@ -12,3 +12,9 @@
 .content-box {
     background-color: $lightGreen;
 }
+
+@media only screen and (max-width: 768px) {
+    .statistics-container .ui.statistic {
+        margin: 0 !important;
+    }
+}

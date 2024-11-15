@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import ConfigJson from "../config.json";
-import SDFStructure from './components/SDFStructure';
+import SDFStructure from "./components/SDFStructure";
 import Logo from "../img/natura2000_logo.svg";
 import {
     Select,
@@ -18,6 +18,7 @@ const SDF = () => {
     const [siteCode, setSiteCode] = useState("");
     const [release, setRelease] = useState("");
     const [releases, setReleases] = useState([]);
+    const [sensitive, setSensitive] = useState(false);
     const [nav, setNav] = useState("");
     const [showScrollBtn, setShowScrollBtn] = useState(false);
 
@@ -38,7 +39,7 @@ const SDF = () => {
             const y = element.getBoundingClientRect().top + window.scrollY;
             window.scroll({
                 top: y,
-                behavior: 'instant'
+                behavior: "instant"
             });
         }
     }, [isLoading, nav, siteCode, data, errorLoading]);
@@ -47,13 +48,14 @@ const SDF = () => {
         let params = Object.fromEntries([...searchParams]);
         setSiteCode(params.sitecode ? params.sitecode : "nodata");
         setRelease(params.release ? parseInt(params.release) : "");
+        setSensitive(params.sensitive && JSON.parse(params.sensitive));
         setNav(params.nav);
     }
 
     const loadData = () => {
         if(siteCode !== "" && !isLoading) {
             setIsLoading(true);
-            let url = ConfigJson.LoadSDF;
+            let url = sensitive ? ConfigJson.SensitiveSDF : ConfigJson.PublicSDF;
             if(release) {
                 url += "?siteCode=" + siteCode + "&releaseId=" + release;
             }
@@ -132,10 +134,10 @@ const SDF = () => {
         var m = date.getMonth() + 1;
         var y = date.getFullYear();
         if(ddmmyyyy) {
-            date = (d <= 9 ? '0' + d : d) + '/' + (m <= 9 ? '0' + m : m) + '/' + y;
+            date = (d <= 9 ? "0" + d : d) + "/" + (m <= 9 ? "0" + m : m) + "/" + y;
         }
         else {
-            date = (y + '-' + (m <= 9 ? '0' + m : m));
+            date = (y + "-" + (m <= 9 ? "0" + m : m));
         }
         return date;
     };
@@ -159,8 +161,8 @@ const SDF = () => {
                                                     </div>
 
                                                     <div>
-                                                        <h1>NATURA 2000 - STANDARD DATA FORM</h1>
-                                                        <b>RELEASE {release && releases.length > 0 && (releases.find(a => a.ReleaseId === release)?.ReleaseName + " (" + formatDate(releases.find(a => a.ReleaseId === release)?.ReleaseDate, true) + ")")}</b>
+                                                        <h1>NATURA 2000 - STANDARD DATA FORM {sensitive && <span className="sensitive">SENSITIVE</span>}</h1>
+                                                        {release && releases.length > 0 && <b>RELEASE {releases.find(a => a.ReleaseId === release)?.ReleaseName} ({formatDate(releases.find(a => a.ReleaseId === release)?.ReleaseDate, true)})</b>}
                                                     </div>
                                                     <div className="select--right">
                                                         <Select
@@ -212,7 +214,7 @@ const SDF = () => {
                                     }
                                     {showScrollBtn &&
                                         <div className="sdf-scroll">
-                                            <button className="ui button secondary" onClick={() => window.scroll({ top: 0, behavior: 'instant' })}>
+                                            <button className="ui button secondary" onClick={() => window.scroll({ top: 0, behavior: "instant" })}>
                                                 <i aria-hidden="true" className="ri-arrow-up-s-line"></i>
                                             </button>
                                         </div>
