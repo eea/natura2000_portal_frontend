@@ -140,6 +140,7 @@ const Search = () => {
     const onChangePage = (event, data) => {
         let page = data.activePage;
         setActivePage(page);
+        document.querySelector(".search-list").scrollIntoView({behavior: 'smooth'});
     }
 
     return (
