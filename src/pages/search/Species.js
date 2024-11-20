@@ -17,6 +17,7 @@ import {
     Checkbox,
     Input,
     Loader,
+    Popup,
     Pagination
 } from "semantic-ui-react"
 
@@ -136,7 +137,7 @@ const Search = () => {
     const onChangePage = (event, data) => {
         let page = data.activePage;
         setActivePage(page);
-        document.querySelector(".search-list").scrollIntoView({behavior: 'smooth'});
+        document.querySelector(".search-list").scrollIntoView({behavior: "smooth"});
     }
 
     const setSitesUrl = () => {
@@ -329,6 +330,11 @@ const Search = () => {
                                                             </div>
                                                             <div className="card-links">
                                                                 Found in <b>{item.SitesNumber} sites</b>
+                                                                {item.IsSensitive &&
+                                                                    <div className="card-popup">
+                                                                        <Popup content="Sensitive species" inverted position="top center" trigger={<i className="ri-alert-line"></i>} />
+                                                                    </div>
+                                                                }
                                                             </div>
                                                         </div>
                                                     </a>
