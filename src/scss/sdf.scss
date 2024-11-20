@@ -182,3 +182,15 @@
         }
     }
 }
+
+@media only screen and (max-width: 768px) {
+    .sdf-head {
+        flex-direction: column;
+        .select--right {
+            margin-left: 0;
+        }
+    }
+    .sdf-download .ui.button {
+        margin-left: 0;
+    }
+}
