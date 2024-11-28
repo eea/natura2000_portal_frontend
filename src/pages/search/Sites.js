@@ -58,7 +58,7 @@ const Search = () => {
         }
         let url = ConfigJson.GetReleases;
         fetch(url)
-        .then(response =>response.json())
+        .then(response => response.json())
         .then(data => {
             if(data?.Success) {
                 let releases = data.Data.sort((a, b) => new Date(b.ReleaseDate) - new Date(a.ReleaseDate));
@@ -79,7 +79,7 @@ const Search = () => {
         setLoadingData(true);
         let url = ConfigJson.GetSites + "?" + new URLSearchParams(filters);
         fetch(url)
-        .then(response =>response.json())
+        .then(response => response.json())
         .then(data => {
             if(data?.Success) {
                 setData(data.Data);

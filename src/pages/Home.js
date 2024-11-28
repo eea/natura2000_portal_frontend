@@ -28,7 +28,7 @@ const Home = () => {
         setLoadingData(true);
         let url = ConfigJson.GetLastReleaseData;
         fetch(url)
-        .then(response =>response.json())
+        .then(response => response.json())
         .then(data => {
             if(data?.Success) {
                 setData(data.Data);

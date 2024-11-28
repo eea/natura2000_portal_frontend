@@ -70,6 +70,13 @@ ul {
             input[type="text"] {
                 height: auto;
             }
+            .ui.loading.dropdown {
+                i.icon {
+                    &:before, &:after {
+                        left: auto;
+                    }
+                }
+            }
         }
         .input.error {
             input {
