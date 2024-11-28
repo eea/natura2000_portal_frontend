@@ -4,7 +4,11 @@
 	"GetSites": "https://blackneckedswan:480/N2kPortal_back/api/Info/GetParameteredSites",
 	"GetHabitats": "https://blackneckedswan:480/N2kPortal_back/api/Info/GetParameteredHabitats",
 	"GetSpecies": "https://blackneckedswan:480/N2kPortal_back/api/Info/GetParameteredSpecies",
-	"DownloadComputationSAC": "https://blackneckedswan:480/N2kPortal_back/api/Download/ComputingSAC",
+	"DownloadComputingSAC": "https://blackneckedswan:480/N2kPortal_back/api/Download/ComputingSAC",
+	"DownloadChangeCriteria": "https://blackneckedswan:480/N2kPortal_back/api/Download/ChangeCriteria",
+	"DownloadDescriptiveDataSensitive": "https://blackneckedswan:480/N2kPortal_back/api/Download/DescriptiveDataSensitive",
+	"DownloadDescriptiveData": "https://blackneckedswan:480/N2kPortal_back/api/Download/DescriptiveData",
+	"DownloadSpatialData": "https://blackneckedswan:480/N2kPortal_back/api/Download/SpatialData",
 	"PublicSDF": "https://blackneckedswan/n2kbackbone_back/api/PublicData/GetReleaseData",
 	"SensitiveSDF": "https://blackneckedswan/n2kbackbone_back/api/PublicData/GetReleaseData",
 	"MapReleases": "https://bio.discomap.eea.europa.eu/arcgis/rest/services/N2K_Backbone/Releases_Spatial_stg/MapServer/0"

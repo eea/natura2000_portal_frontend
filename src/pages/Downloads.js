@@ -44,7 +44,7 @@ const Downloads = () => {
         let url = ConfigJson.GetReleases;
         promises.push(
             fetch(url)
-            .then(response =>response.json())
+            .then(response => response.json())
             .then(data => {
                 if(data?.Success) {
                     let releases = data.Data.sort((a, b) => new Date(b.ReleaseDate) - new Date(a.ReleaseDate));
@@ -181,38 +181,16 @@ const Downloads = () => {
                         />
                     </div>
                 );
-            case "delivery":
-                return (
-                    <div className="field">
-                        <label>Delivery date</label>
-                        <Select
-                            placeholder="Select a release"
-                            name="delivery"
-                            options=
-                                {
-                                    ConfigData.Releases.map((item, i) => (
-                                        {
-                                            key: item.ReleaseId, value: item.ReleaseId.toString(), text: (item.ReleaseName + " (" + item.ReleaseDate + ")"), selected: fields[field] === item.ReleaseId
-                                        }
-                                    ))
-                                }
-                            value={fields[field]}
-                            onChange={onChangeFields}
-                            selectOnBlur={false}
-                            error={errors[field]}
-                        />
-                    </div>
-                );
-            case "releasefrom":
+            case "releaseFrom":
                 return (
                     <div className="field">
                         <label>Release from</label>
                         <Select
                             placeholder="Select a release"
-                            name="to"
+                            name="releaseFrom"
                             options=
                                 {
-                                    ConfigData.Releases.map((item, i) => (
+                                    data && data.map((item, i) => (
                                         {
                                             key: item.ReleaseId, value: item.ReleaseId.toString(), text: (item.ReleaseName + " (" + item.ReleaseDate + ")"), selected: fields[field] === item.ReleaseId
                                         }
@@ -222,19 +200,21 @@ const Downloads = () => {
                             onChange={onChangeFields}
                             selectOnBlur={false}
                             error={errors[field]}
+                            loading={loading}
+                            disabled={loading || errorLoading || downloading}
                         />
                     </div>
                 );
-            case "releaseto":
+            case "releaseTo":
                 return (
                     <div className="field">
                         <label>Release to</label>
                         <Select
                             placeholder="Select a release"
-                            name="to"
+                            name="releaseTo"
                             options=
                                 {
-                                    ConfigData.Releases.map((item, i) => (
+                                    data && data.filter(a => a.ReleaseId > parseInt(fields.releaseFrom)).map((item, i) => (
                                         {
                                             key: item.ReleaseId, value: item.ReleaseId.toString(), text: (item.ReleaseName + " (" + item.ReleaseDate + ")"), selected: fields[field] === item.ReleaseId
                                         }
@@ -244,28 +224,8 @@ const Downloads = () => {
                             onChange={onChangeFields}
                             selectOnBlur={false}
                             error={errors[field]}
-                        />
-                    </div>
-                );
-            case "consecutive":
-                return (
-                    <div className="field">
-                        <label>Releases</label>
-                        <Select
-                            placeholder="Select a release"
-                            name="consecutive"
-                            options=
-                                {
-                                    ConfigData.Releases.map((item, i) => (
-                                        {
-                                            key: item.ReleaseId, value: item.ReleaseId.toString(), text: (item.ReleaseName + " (" + item.ReleaseDate + ")"), selected: fields[field] === item.ReleaseId
-                                        }
-                                    ))
-                                }
-                            value={fields[field]}
-                            onChange={onChangeFields}
-                            selectOnBlur={false}
-                            error={errors[field]}
+                            loading={loading}
+                            disabled={loading || errorLoading || downloading || !fields.releaseFrom || data.filter(a => a.ReleaseId > parseInt(fields.releaseFrom)).length === 0}
                         />
                     </div>
                 );
@@ -277,10 +237,10 @@ const Downloads = () => {
                             type="text"
                             placeholder="Enter your email adress"
                             name="email"
-                            value={fields.email}
+                            value={fields[field]}
                             onChange={onChangeFields}
                             autoComplete="off"
-                            error={errors.email}
+                            error={errors[field]}
                             disabled={loading || errorLoading || downloading}
                         />
                     </div>
@@ -294,7 +254,7 @@ const Downloads = () => {
         e.preventDefault();
         e.stopPropagation();
         if(validateFields(product)) {
-            downloadRequest();
+            downloadRequest(product);
         }
     }
 
@@ -304,17 +264,25 @@ const Downloads = () => {
         for (let item in productFields) {
             let field = productFields[item];
             let value = fields[field];
-            productErrors[field] = !value ? true : false;
+            if(field === "email") {
+                const validateEmail = (email) => {
+                    return email.toLowerCase().match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+                };
+                productErrors[field] = value && (value.trim() === "" || validateEmail(value)) ? false : true;
+            }
+            else {
+                productErrors[field] = !value ? true : false;
+            }
         }
         setErrors(productErrors);
-        return Object.values(productErrors).every(a=>a===false);
+        return Object.values(productErrors).every(a=>a === false);
     }
 
-    const downloadRequest = () => {
+    const downloadRequest = (product) => {
         setDownloading(true);
-        let url = ConfigJson.DownloadComputationSAC + "?" + new URLSearchParams(fields);
+        let url = ConfigJson["Download" + product] + "?" + new URLSearchParams(fields);
         fetch(url)
-        .then(response =>response.json())
+        .then(response => response.json())
         .then(data => {
             if(data?.Success) {
                 setSuccessDownloading(true);

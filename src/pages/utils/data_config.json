@@ -485,7 +485,7 @@
 	],
 	"Downloads": [
 		{
-			"Product": "SAC",
+			"Product": "ComputingSAC",
 			"Name": "SCI adoption and designation dates differences",
 			"Description": "Computes SCI dates difference and the time difference.",
 			"Link": "",
@@ -495,38 +495,39 @@
 			]
 		},
 		{
-			"Product": "ExportDescriptiveSensitive",
+			"Product": "ChangeCriteria",
 			"Name": "Natura 2000 change criteria data",
 			"Description": "Export Natura 2000 change criteria data by historical release - Access database format.",
 			"Fields": [
-				"release",
+				"releaseFrom",
+				"releaseTo",
 				"email"
 			]
 		},
 		{
-			"Product": "ExportDescriptiveNotSensitive",
+			"Product": "DescriptiveDataSensitive",
 			"Name": "Natura 2000 sites SDF data (descriptive data) with sensitive species, for a given release",
 			"Description": "Export descriptive data, including sensitive species - Access database format. DO NOT SHARE PUBLICLY - Commission/EEA use only",
 			"Fields": [
-				"release",
+				"releaseId",
 				"email"
 			]
 		},
 		{
-			"Product": "ExportHistorical",
+			"Product": "DescriptiveData",
 			"Name": "Natura 2000 sites SDF data (descriptive data) without sensitive species, for a given release",
 			"Description": "Export descriptive data, without sensitive species - Access database format.",
 			"Fields": [
-				"release",
+				"releaseId",
 				"email"
 			]
 		},
 		{
-			"Product": "ExportHistoricalPublic",
+			"Product": "SpatialData",
 			"Name": "Natura 2000 spatial data for a given release",
 			"Description": "Choose a release version from which to extract the sites boundaries - Shapefile format.",
 			"Fields": [
-				"release",
+				"releaseId",
 				"email"
 			]
 		}

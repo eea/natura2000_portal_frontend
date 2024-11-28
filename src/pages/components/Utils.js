@@ -1,15 +1,16 @@
+import React from "react";
 export const highlightSensitiveText = (text) => {
     return text.split(" ").map((word, i, array) => {
         if(text.includes("DO NOT SHARE PUBLICLY")) {
             if(word.includes("DO") || word.includes("NOT") || word.includes("SHARE") || word.includes("PUBLICLY")) {
-                return <span className="sensitive"> {word}</span>
+                return <span className="sensitive" key={i}> {word}</span>
             }
         }
         if(word.includes("sensitive") && !array[i-1].includes("without")) {
-            return <span className="sensitive"> {word}</span>
+            return <span className="sensitive" key={i}> {word}</span>
         }
         else {
-            return <> {word}</>
+            return <React.Fragment key={i}> {word}</React.Fragment>
         }
     })
 }

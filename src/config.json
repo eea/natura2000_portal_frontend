@@ -4,7 +4,11 @@
 	"GetSites": "https://n2k-portal-back-fdbycab9hthmc0dv.westeurope-01.azurewebsites.net/api/Info/GetParameteredSites",
 	"GetHabitats": "https://n2k-portal-back-fdbycab9hthmc0dv.westeurope-01.azurewebsites.net/api/Info/GetParameteredHabitats",
 	"GetSpecies": "https://n2k-portal-back-fdbycab9hthmc0dv.westeurope-01.azurewebsites.net/api/Info/GetParameteredSpecies",
-	"DownloadComputationSAC": "https://n2k-portal-back-fdbycab9hthmc0dv.westeurope-01.azurewebsites.net/api/Download/ComputingSAC",
+	"DownloadComputingSAC": "https://n2k-portal-back-fdbycab9hthmc0dv.westeurope-01.azurewebsites.net/api/Download/ComputingSAC",
+	"DownloadChangeCriteria": "https://n2k-portal-back-fdbycab9hthmc0dv.westeurope-01.azurewebsites.net/api/Download/ChangeCriteria",
+	"DownloadDescriptiveDataSensitive": "https://n2k-portal-back-fdbycab9hthmc0dv.westeurope-01.azurewebsites.net/api/Download/DescriptiveDataSensitive",
+	"DownloadDescriptiveData": "https://n2k-portal-back-fdbycab9hthmc0dv.westeurope-01.azurewebsites.net/api/Download/DescriptiveData",
+	"DownloadSpatialData": "https://n2k-portal-back-fdbycab9hthmc0dv.westeurope-01.azurewebsites.net/api/Download/SpatialData",
 	"PublicSDF": "https://n2kbackboneback-dev.azurewebsites.net/api/PublicData/GetReleaseData",
 	"SensitiveSDF": "https://n2kbackboneback-dev.azurewebsites.net/api/PublicData/GetReleaseData",
 	"MapReleases": "https://bio.discomap.eea.europa.eu/arcgis/rest/services/N2K_Backbone/Releases/MapServer/0"
