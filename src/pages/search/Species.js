@@ -103,7 +103,7 @@ const Search = () => {
     const onChangeFilters = (event, data) => {
         let field = data.name;
         let value = data.value;
-        if(field === "country" || field === "bioregion") {
+        if(field === "country" || field === "bioregion" || field === "sensitive") {
             if(data.checked) {
                 let values = filters[field] ? filters[field].split(",").filter(Boolean) : [];
                 values.push(value);
@@ -249,6 +249,20 @@ const Search = () => {
                                                 autoComplete="off"
                                             />
                                         </div>
+                                        <div className="field" id="field_sensitive">
+                                            <label htmlFor="field_sensitive">Sensitive species</label>
+                                            <div className="ui grid">
+                                                <div className="twelve wide column column-blocks-wrapper py-1">
+                                                    <Checkbox
+                                                        label="Sensitive species"
+                                                        name="sensitive"
+                                                        value="true"
+                                                        checked={filters.sensitive === "true"}
+                                                        onChange={onChangeFilters}
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div className="field" id="field_countries">
                                             <label htmlFor="field_countries">Member States</label>
                                             <div className="ui grid">
@@ -331,8 +345,10 @@ const Search = () => {
                                                             <div className="card-links">
                                                                 Found in <b>{item.SitesNumber} sites</b>
                                                                 {item.IsSensitive &&
-                                                                    <div className="card-popup">
-                                                                        <Popup content="Sensitive species" inverted position="top center" trigger={<i className="ri-alert-line"></i>} />
+                                                                    <div className="card-popup sensitive">
+                                                                        <a href={"/#/search/sites?"+setSitesUrl()+"&species="+item.SpeciesCode+"&sensitive=true"}>
+                                                                            <Popup content={"The species is sensitive in "+item.SitesNumberSensitive+" sites"} inverted position="top center" trigger={<i className="ri-alert-line"></i>} />
+                                                                        </a>
                                                                     </div>
                                                                 }
                                                             </div>
