@@ -122,9 +122,13 @@
             }
             &-popup {
                 margin-left: auto;
-                color: $messageError;
                 font-size: 1.5rem;
                 line-height: 1.25rem;
+                &.sensitive {
+                    a {
+                        color: $messageError;
+                    }
+                }
             }
         }
     }

@@ -64,9 +64,14 @@ const Search = () => {
                 let releases = data.Data.sort((a, b) => new Date(b.ReleaseDate) - new Date(a.ReleaseDate));
                 releases = releases.map(a => ({...a, "ReleaseDate": Utils.formatDate(a.ReleaseDate)}));
                 setReleases(releases);
+                let predefinedFilters = {...filters};
                 if(!filters.releaseId) {
-                    setFilters({...filters, "releaseId": releases[0].ReleaseId.toString()});
+                    predefinedFilters.releaseId = releases[0].ReleaseId.toString();
                 }
+                if(!filters.siteType) {
+                    predefinedFilters.siteType = "C";
+                }
+                setFilters(predefinedFilters);
             }
             else {
                 setErrorLoading(true);
@@ -106,7 +111,7 @@ const Search = () => {
     const onChangeFilters = (event, data) => {
         let field = data.name;
         let value = data.value;
-        if(field === "country" || field === "bioregion") {
+        if(field === "country" || field === "bioregion" || field === "sensitive") {
             if(data.checked) {
                 let values = filters[field] ? filters[field].split(",").filter(Boolean) : [];
                 values.push(value);
@@ -133,7 +138,7 @@ const Search = () => {
     }
 
     const removeParameters = () => {
-        setFilters({"releaseId": releases[0].ReleaseId.toString()});
+        setFilters({"releaseId": releases[0].ReleaseId.toString(), siteType: "C"});
         setSearchParams({});
     }
 
@@ -241,6 +246,20 @@ const Search = () => {
                                                 onChange={onChangeFilters}
                                                 autoComplete="off"
                                             />
+                                        </div>
+                                        <div className="field" id="field_sensitive">
+                                            <label htmlFor="field_sensitive">Sensitive species</label>
+                                            <div className="ui grid">
+                                                <div className="twelve wide column column-blocks-wrapper py-1">
+                                                    <Checkbox
+                                                        label="Sites containing sensitive species"
+                                                        name="sensitive"
+                                                        value="true"
+                                                        checked={filters.sensitive === "true"}
+                                                        onChange={onChangeFilters}
+                                                    />
+                                                </div>
+                                            </div>
                                         </div>
                                         <div className="field" id="field_countries">
                                             <label htmlFor="field_countries">Member States</label>
@@ -361,7 +380,7 @@ const Search = () => {
                                                             <a href={"#/sdf?sitecode=" + item.SiteCode + "&release=" + filters.releaseId} target="_blank" rel="noreferrer">SDF<i className="icon ri-external-link-line"></i></a>
                                                             <a href={"https://natura2000.eea.europa.eu/?sitecode=" + item.SiteCode} target="_blank" rel="noreferrer">Natura 2000 viewer<i className="icon ri-external-link-line"></i></a>
                                                             {item.IsSensitive &&
-                                                                <div className="card-popup">
+                                                                <div className="card-popup sensitive">
                                                                     <Popup content="Contains sensitive species" inverted position="top center" trigger={<i className="ri-alert-line"></i>} />
                                                                 </div>
                                                             }
