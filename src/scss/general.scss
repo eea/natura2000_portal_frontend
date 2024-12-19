@@ -18,6 +18,12 @@
     a {
         color: white !important;
     }
+    .ui.loader.mini {
+        position: relative;
+        width: 1rem;
+        display: inline-block;
+        left: 0;
+    }
 }
 p a {
     word-break: break-all;
