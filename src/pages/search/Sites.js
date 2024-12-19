@@ -373,7 +373,9 @@ const Search = () => {
                                         <div className="search-counter">
                                             <span className="search-number">{results}</span> results
                                         </div>
-                                        <button className="ui button inverted" disabled={data.length === 0 || !data || downloading} onClick={()=>downloadResults()}><i className="icon ri-download-line"></i>Download results</button>
+                                        <button className="ui button inverted" disabled={data.length === 0 || !data || downloading} onClick={()=>downloadResults()}>
+                                            {downloading ? <Loader active={true} size='mini'></Loader> : <i className="icon ri-download-line"></i>}Download results
+                                        </button>
                                     </div>
                                 }
                                 <Message error hidden={!errorDownloading} onDismiss={()=>setErrorDownloading(false)}>
