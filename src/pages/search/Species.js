@@ -18,6 +18,7 @@ import {
     Input,
     Loader,
     Popup,
+    Message,
     Pagination
 } from "semantic-ui-react"
 
@@ -32,6 +33,8 @@ const Search = () => {
     const [releases, setReleases] = useState([]);
     const [loadingReleases, setLoadingReleases] = useState(false);
     const [loadingData, setLoadingData] = useState(false);
+    const [downloading, setDownloading] = useState(false);
+    const [errorDownloading, setErrorDownloading] = useState(false);
     const [errorLoading, setErrorLoading] = useState(false);
     const [showDescription, setShowDescription] = useState(false);
     const [pageNumber, setPageNumber] = useState(10);
@@ -148,7 +151,33 @@ const Search = () => {
         params.delete("species");
         params.delete("speciesGroup");
         return params.toString();
-    } 
+    }
+
+    const downloadResults = () => {
+        setDownloading(true);
+        let url = ConfigJson.DownloadResultsSpecies + "?" + new URLSearchParams(filters);
+        fetch(url)
+        .then(data => {
+            if(data?.ok) {
+                const regExp = /filename="(?<filename>.*)"/;
+                const filename = regExp.exec(data.headers.get('Content-Disposition'))?.groups?.filename ?? null;
+                data.blob()
+                  .then(blobresp => {
+                    var blob = new Blob([blobresp], { type: "octet/stream" });
+                    var url = window.URL.createObjectURL(blob);
+                    let link = document.createElement("a");
+                    link.download = filename;
+                    link.href = url;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                  })
+            } else {
+                setErrorDownloading(true);
+            }
+            setDownloading(false);
+        });
+    }
 
     return (
         <div className="main">
@@ -314,9 +343,13 @@ const Search = () => {
                                         <div className="search-counter">
                                             <span className="search-number">{results}</span> results
                                         </div>
-                                        <button className="ui button inverted" disabled={data.length === 0 || !data}><i className="icon ri-download-line"></i>Download results</button>
+                                        <button className="ui button inverted" disabled={data.length === 0 || !data || downloading} onClick={()=>downloadResults()}><i className="icon ri-download-line"></i>Download results</button>
                                     </div>
                                 }
+                                <Message error hidden={!errorDownloading} onDismiss={()=>setErrorDownloading(false)}>
+                                    <i className="triangle exclamation icon"></i>
+                                    Something went wrong with the results download
+                                </Message>
                                 <div className="ui grid">
                                     {
                                         loadingData ? <Loader active={loadingData} inline="centered" className="my-6"/> :
