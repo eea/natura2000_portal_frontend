@@ -157,7 +157,7 @@ const Search = () => {
         fetch(url)
         .then(data => {
             if(data?.ok) {
-                const regExp = /filename="(?<filename>.*)"/;
+                const regExp = /filename=(?<filename>.*);/;
                 const filename = regExp.exec(data.headers.get('Content-Disposition'))?.groups?.filename ?? null;
                 data.blob()
                   .then(blobresp => {
