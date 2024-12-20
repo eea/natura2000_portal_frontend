@@ -32,6 +32,7 @@ const Search = () => {
     const [releases, setReleases] = useState([]);
     const [loadingReleases, setLoadingReleases] = useState(false);
     const [loadingData, setLoadingData] = useState(false);
+    const [downloadParams, setDownloadParams] = useState({});
     const [downloading, setDownloading] = useState(false);
     const [errorDownloading, setErrorDownloading] = useState(false);
     const [errorLoading, setErrorLoading] = useState(false);
@@ -85,6 +86,7 @@ const Search = () => {
 
     const loadData = () => {
         setLoadingData(true);
+        setDownloadParams(filters);
         let url = ConfigJson.GetSites + "?" + new URLSearchParams(filters);
         fetch(url)
         .then(response => response.json())
@@ -153,7 +155,7 @@ const Search = () => {
 
     const downloadResults = () => {
         setDownloading(true);
-        let url = ConfigJson.DownloadResultsSites + "?" + new URLSearchParams(filters);
+        let url = ConfigJson.DownloadResultsSites + "?" + new URLSearchParams(downloadParams);
         fetch(url)
         .then(data => {
             if(data?.ok) {
