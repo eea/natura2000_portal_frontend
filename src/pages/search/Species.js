@@ -33,6 +33,7 @@ const Search = () => {
     const [releases, setReleases] = useState([]);
     const [loadingReleases, setLoadingReleases] = useState(false);
     const [loadingData, setLoadingData] = useState(false);
+    const [downloadParams, setDownloadParams] = useState({});
     const [downloading, setDownloading] = useState(false);
     const [errorDownloading, setErrorDownloading] = useState(false);
     const [errorLoading, setErrorLoading] = useState(false);
@@ -77,7 +78,8 @@ const Search = () => {
 
     const loadData = () => {
         setLoadingData(true);
-        let url = ConfigJson.GetSpecies + "?" + new URLSearchParams(filters);
+        setDownloadParams(filters);
+        let url = ConfigJson.GetSpecies + "?" + new URLSearchParams(downloadParams);
         fetch(url)
         .then(response => response.json())
         .then(data => {
