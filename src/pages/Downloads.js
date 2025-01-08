@@ -102,10 +102,10 @@ const Downloads = () => {
         }
         return (
             <>
-                <ModalHeader>{modal.Name}</ModalHeader>
+                <ModalHeader>{Utils.highlightSensitiveText(modal.Name)}</ModalHeader>
                 <ModalContent>
                     <div className="description mb-2">
-                        {modal.Description}
+                        {Utils.highlightSensitiveText(modal.Description)}
                     </div>
                     <div className="ui form">
                         {
