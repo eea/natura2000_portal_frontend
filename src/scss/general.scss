@@ -63,7 +63,10 @@ ul {
     margin-bottom: 2rem;
 }
 
-.modal {
+.ui.modal {
+    .header {
+        padding-right: 3.5rem;
+    }
     .ui.form {
         display: flex;
         flex-direction: column;
