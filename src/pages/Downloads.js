@@ -181,54 +181,6 @@ const Downloads = () => {
                         />
                     </div>
                 );
-            case "releaseFrom":
-                return (
-                    <div className="field">
-                        <label>Release from</label>
-                        <Select
-                            placeholder="Select a release"
-                            name="releaseFrom"
-                            options=
-                                {
-                                    data && data.map((item, i) => (
-                                        {
-                                            key: item.ReleaseId, value: item.ReleaseId.toString(), text: (item.ReleaseName + " (" + item.ReleaseDate + ")"), selected: fields[field] === item.ReleaseId
-                                        }
-                                    ))
-                                }
-                            value={fields[field]}
-                            onChange={onChangeFields}
-                            selectOnBlur={false}
-                            error={errors[field]}
-                            loading={loading}
-                            disabled={loading || errorLoading || downloading}
-                        />
-                    </div>
-                );
-            case "releaseTo":
-                return (
-                    <div className="field">
-                        <label>Release to</label>
-                        <Select
-                            placeholder="Select a release"
-                            name="releaseTo"
-                            options=
-                                {
-                                    data && data.filter(a => a.ReleaseId > parseInt(fields.releaseFrom)).map((item, i) => (
-                                        {
-                                            key: item.ReleaseId, value: item.ReleaseId.toString(), text: (item.ReleaseName + " (" + item.ReleaseDate + ")"), selected: fields[field] === item.ReleaseId
-                                        }
-                                    ))
-                                }
-                            value={fields[field]}
-                            onChange={onChangeFields}
-                            selectOnBlur={false}
-                            error={errors[field]}
-                            loading={loading}
-                            disabled={loading || errorLoading || downloading || !fields.releaseFrom || data.filter(a => a.ReleaseId > parseInt(fields.releaseFrom)).length === 0}
-                        />
-                    </div>
-                );
             case "email":
                 return (
                     <div className="field">
