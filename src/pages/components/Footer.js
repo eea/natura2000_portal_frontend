@@ -22,10 +22,10 @@ const Footer = () => {
                                 <div className="item">
                                     <div className="contact-block">
                                         <div className="contact">
-                                            <a className="bold" href="/about">About us</a>
+                                            <a className="bold" href="/#/about">About us</a>
                                         </div>
                                         <div className="contact">
-                                            <a className="bold" href="/about#contact">Contact us</a>
+                                            <a className="bold" href="/#/about#contact">Contact us</a>
                                         </div>
                                         <div className="contact">
                                             <p>

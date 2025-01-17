@@ -83,7 +83,7 @@ const Reports = () => {
                                                                 onClick={() => toggleAccordion(i+"."+j)}
                                                             >
                                                                 <i aria-hidden="true" className="small icon ri-arrow-down-s-line"></i>
-                                                                {release.ReleaseName + " - " + release.ReleaseDate}
+                                                                {release.ReleaseName + " (" + release.ReleaseDate + ")"}
                                                             </AccordionTitle>
                                                             <AccordionContent active={active.includes(i+"."+j)}>
                                                                 {

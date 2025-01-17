@@ -386,55 +386,31 @@
 			"Product": "DescriptiveDataChangeDeliveryReport",
 			"Name": "Descriptive Data Change Delivery Report",
 			"Description": "This is a text description for the report.This is a text description for the report. This is a text description for the report. This is a text description for the report. This is a text description for the report. ",
-			"Link": "",
-			"Fields": [
-				"country",
-				"releasefrom",
-				"releaseto"
-			]
+			"Link": ""
 		},
 		{
 			"Product": "DescriptiveDataDeliveryChangeSubmission",
 			"Name": "Descriptive Data Delivery Change by Submission",
 			"Description": "This is a text description for the report.This is a text description for the report. This is a text description for the report. This is a text description for the report. This is a text description for the report. ",
-			"Link": "",
-			"Fields": [
-				"country",
-				"releasefrom",
-				"releaseto"
-			]
+			"Link": ""
 		},
 		{
 			"Product": "SpatialDataDeliveryChangeReport",
 			"Name": "Spatial Data Delivery Change Report",
 			"Description": "This is a text description for the report.This is a text description for the report. This is a text description for the report. This is a text description for the report. This is a text description for the report. ",
-			"Link": "",
-			"Fields": [
-				"country",
-				"releasefrom",
-				"releaseto"
-			]
+			"Link": ""
 		},
 		{
 			"Product": "UnionListsChangesReport",
 			"Name": "UnionLists Changes Report",
 			"Description": "This is a text description for the report.This is a text description for the report. This is a text description for the report. This is a text description for the report. This is a text description for the report. ",
-			"Link": "",
-			"Fields": [
-				"country",
-				"consecutive"
-			]
+			"Link": ""
 		},
 		{
 			"Product": "SensitiveSpeciesReport",
 			"Name": "Sensitive Species Report",
 			"Description": "This is a text description for the report.This is a text description for the report. This is a text description for the report. This is a text description for the report. This is a text description for the report. ",
-			"Link": "",
-			"Fields": [
-				"country",
-				"releasefrom",
-				"releaseto"
-			]
+			"Link": ""
 		}
 	],
 	"ReportReleases": [
@@ -495,22 +471,11 @@
 			]
 		},
 		{
-			"Product": "ChangeCriteria",
-			"Name": "Natura 2000 change criteria data",
-			"Description": "Export Natura 2000 change criteria data by historical release - Access database format.",
-			"Fields": [
-				"releaseFrom",
-				"releaseTo",
-				"email"
-			]
-		},
-		{
 			"Product": "DescriptiveDataSensitive",
 			"Name": "Natura 2000 sites SDF data (descriptive data) with sensitive species, for a given release",
 			"Description": "Export descriptive data, including sensitive species - Access database format. DO NOT SHARE PUBLICLY - Commission/EEA use only",
 			"Fields": [
-				"releaseId",
-				"email"
+				"releaseId"
 			]
 		},
 		{
@@ -518,8 +483,7 @@
 			"Name": "Natura 2000 sites SDF data (descriptive data) without sensitive species, for a given release",
 			"Description": "Export descriptive data, without sensitive species - Access database format.",
 			"Fields": [
-				"releaseId",
-				"email"
+				"releaseId"
 			]
 		},
 		{
@@ -527,8 +491,7 @@
 			"Name": "Natura 2000 spatial data for a given release",
 			"Description": "Choose a release version from which to extract the sites boundaries - Shapefile format.",
 			"Fields": [
-				"releaseId",
-				"email"
+				"releaseId"
 			]
 		}
 	],
