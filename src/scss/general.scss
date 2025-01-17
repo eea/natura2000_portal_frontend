@@ -120,15 +120,24 @@ ul {
     }
 }
 
-.about-table {
-    &.ui.table {
-        width: auto;
-        border: none;
-        td {
-            text-align: left;
-            padding: 0.75rem;
+.about {
+    &-menu {
+        li {
+            cursor: pointer;
+            color: $naturaGreen;
         }
     }
+    &-table {
+        &.ui.table {
+            width: auto;
+            border: none;
+            td {
+                text-align: left;
+                padding: 0.75rem;
+            }
+        }
+    }
+
 }
 
 .ui.checkbox {
