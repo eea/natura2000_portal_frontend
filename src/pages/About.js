@@ -23,7 +23,7 @@ const About = () => {
 
     useEffect(() => {
         let item = window.location.href.split('#').pop();
-        if(item) {
+        if(!item.includes("/")) {
             scrollTo(item);
         }
     },[]);
