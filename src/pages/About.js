@@ -13,15 +13,15 @@ const About = () => {
         });
     }
 
-    document.querySelectorAll(".about-menu li").forEach(item => {
-        item.addEventListener("click", (e) => {
-            let item = e.currentTarget.dataset.content;
-            window.history.replaceState(null, "New Page Title", "#/about" + "#" + item);
-            scrollTo(item);
-        })
-    });
-
     useEffect(() => {
+        document.querySelectorAll(".about-menu li").forEach(item => {
+            item.addEventListener("click", (e) => {
+                let item = e.currentTarget.dataset.content;
+                window.history.pushState(null, null, "#/about" + "#" + item);
+                scrollTo(item);
+            })
+        });
+
         let item = window.location.href.split('#').pop();
         if(!item.includes("/")) {
             scrollTo(item);
