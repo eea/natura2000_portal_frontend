@@ -246,15 +246,18 @@
 	"SiteTypes": [
 		{
 			"SiteTypeName": "Birds Directive",
-			"SiteTypeCode": "A"
+			"SiteTypeCode": "AC",
+			"SiteType": "A"
 		},
 		{
 			"SiteTypeName": "Habitats Directive",
-			"SiteTypeCode": "B"
+			"SiteTypeCode": "BC",
+			"SiteType": "B"
 		},
 		{
 			"SiteTypeName": "Birds and Habitats Directive",
-			"SiteTypeCode": "C"
+			"SiteTypeCode": "ABC",
+			"SiteType": "C"
 		}
 	],
 	"HabitatGroups": [

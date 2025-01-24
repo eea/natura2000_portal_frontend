@@ -73,7 +73,7 @@ const Search = () => {
                     predefinedFilters.releaseId = releases[0].ReleaseId.toString();
                 }
                 if(!filters.siteType) {
-                    predefinedFilters.siteType = "C";
+                    predefinedFilters.siteType = "ABC";
                 }
                 setFilters(predefinedFilters);
             }
@@ -143,7 +143,7 @@ const Search = () => {
     }
 
     const removeParameters = () => {
-        setFilters({"releaseId": releases[0].ReleaseId.toString(), siteType: "C"});
+        setFilters({"releaseId": releases[0].ReleaseId.toString(), siteType: "ABC"});
         setSearchParams({});
     }
 
@@ -397,7 +397,7 @@ const Search = () => {
                                                             {item.SiteName} - {item.SiteCode}
                                                         </div>
                                                         <div className="card-text">
-                                                            {ConfigData.SiteTypes.find(a => a.SiteTypeCode === item.SiteTypeCode).SiteTypeName}
+                                                            {ConfigData.SiteTypes.find(a => a.SiteType.includes(item.SiteTypeCode)).SiteTypeName}
                                                         </div>
                                                         <div className="card-counters">
                                                             <div className="card-counter">
