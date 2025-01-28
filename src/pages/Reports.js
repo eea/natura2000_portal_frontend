@@ -17,7 +17,7 @@ const Reports = () => {
     const [active, setActive] = useState([]);
     const [activeCountry, setActiveCountry] = useState([]);
     const [showDescription, setShowDescription] = useState(false);
-    const [reportData, setReportData] = useState({});
+    const [data, setData] = useState({});
     const [loadingData, setLoadingData] = useState(false);
     const [downloading, setDownloading] = useState([]);
     const [errorDownloading, setErrorDownloading] = useState(false);
@@ -27,7 +27,7 @@ const Reports = () => {
     }, [showDescription]);
 
     useEffect(() => {
-        if(Object.keys(reportData).length === 0 && !loadingData) {
+        if(Object.keys(data).length === 0 && !loadingData) {
             loadData();
         }
     });
@@ -41,18 +41,18 @@ const Reports = () => {
             .then(response => response.json())
             .then(data => {
                 if(data?.Success) {
-                    let report = {};
+                    let reportData = {};
                     data.Data.forEach(item => {
                         let country = item.split("\\")[0];
-                        let file = item.split("\\")[1];
-                        if(country in report) {
-                            report[country].push(file);
+                        let files = item.split("\\")[1];
+                        if(country in reportData) {
+                            reportData[country].push(files);
                         }
                         else {
-                            report[country] = [file];
+                            reportData[country] = [files];
                         }
                     });
-                    setReportData(prev => { return {...prev, [report] : report}});
+                    setData(prev => { return {...prev, [report] : reportData}});
                 }
                 setLoadingData(false);
             })
@@ -154,7 +154,7 @@ const Reports = () => {
                             <div className="document-list">
                                 {
                                     ConfigData.Reports.map((report, i) =>
-                                        <Accordion key={report}>
+                                        <Accordion key={report.Product}>
                                             <AccordionTitle
                                                 active={active.includes(report.Product)}
                                                 index={i}
@@ -168,7 +168,8 @@ const Reports = () => {
                                             </AccordionTitle>
                                             <AccordionContent active={active.includes(report.Product)}>
                                                 {
-                                                    Object.keys(reportData).length === 5 && Object.entries(reportData[report.Product]).map(([country, files]) =>
+                                                    !(report.Product in data) ? <Loader active={loadingData} inline="centered" className="mt-2 mb-6"/> :
+                                                    Object.entries(data[report.Product]).map(([country, files]) =>
                                                         <div className="document-country" key={country}>
                                                             <AccordionTitle
                                                                 active={activeCountry.includes(report.Product+country)}
