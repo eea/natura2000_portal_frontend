@@ -2,8 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import * as Utils from "../components/Utils";
 import ConfigJson from "../../config.json";
-import ConfigData from "../config/data_config.json";
+import ConfigData from "../utils/data_config.json";
+import NoImage from "../../img/no_image_species.jpg";
+import ErrorImage from "../../img/error_image.svg";
+import NoresultsImage from "../../img/noresults_image.svg";
 import {
     Select,
     Accordion,
@@ -12,7 +16,10 @@ import {
     Radio,
     Checkbox,
     Input,
-    Loader
+    Loader,
+    Popup,
+    Message,
+    Pagination
 } from "semantic-ui-react"
 
 const Search = () => {
@@ -21,69 +28,65 @@ const Search = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const params = Object.fromEntries([...searchParams]);
     const [filters, setFilters] = useState(params);
-    const [data, setData] = useState([]);
+    const [data, setData] = useState(false);
+    const [results, setResults] = useState(0);
     const [releases, setReleases] = useState([]);
     const [loadingReleases, setLoadingReleases] = useState(false);
     const [loadingData, setLoadingData] = useState(false);
+    const [downloadParams, setDownloadParams] = useState({});
+    const [downloading, setDownloading] = useState(false);
+    const [errorDownloading, setErrorDownloading] = useState(false);
     const [errorLoading, setErrorLoading] = useState(false);
     const [showDescription, setShowDescription] = useState(false);
+    const [pageNumber, setPageNumber] = useState(10);
+    const [activePage, setActivePage] = useState(1);
+    const pageSize = 30;
 
     useEffect(() => {
-        if(!showDescription) {
-            if(document.querySelector(".page-description")?.scrollHeight < 6*16) {
-                setShowDescription("all");
-            }
-            else {
-                setShowDescription("hide");
-            }
+        Utils.toggleDescription(showDescription, setShowDescription);
+    }, [showDescription]);
+
+    useEffect(() => {
+        if(!releases.length && !errorLoading) {
+            loadReleases();
+        }
+        if(Object.keys(params).length > 0 && !data && !loadingData && !errorLoading) {
+            loadData();
         }
     });
 
-    useEffect(() => {
-        if(!params.release) {
-            setFilters({ ...filters, "release": ConfigData.Releases[0].ReleaseId.toString()});
-        }
-    }, [searchParams]);
-
-    useEffect(() => {
-        if(!releases.length) {
-            loadReleases();
-        }
-        if(Object.keys(params).length > 0 && !data.length) {
-            loadData();
-        }
-    }, []);
-
     const loadReleases = () => {
         setLoadingReleases(true);
-        let promises = [];
-        let url = ConfigJson.LoadReleases;
-        promises.push(
-            fetch(url)
-            .then(response =>response.json())
-            .then(data => {
-                if(data?.Success) {
-                    setReleases(ConfigData.Releases);
+        let url = ConfigJson.GetReleases;
+        fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            if(data?.Success) {
+                let releases = data.Data.sort((a, b) => new Date(b.ReleaseDate) - new Date(a.ReleaseDate));
+                releases = releases.map(a => ({...a, "ReleaseDate": Utils.formatDate(a.ReleaseDate)}));
+                setReleases(releases);
+                if(!filters.releaseId) {
+                    setFilters({...filters, "releaseId": releases[0].ReleaseId.toString()});
                 }
-                else {
-                    setErrorLoading(true);
-                }
-            })
-        );
-        Promise.all(promises)
-        .then(results => {
+            }
+            else {
+                setErrorLoading(true);
+            }
             setLoadingReleases(false);
-        });
+        })
     }
 
     const loadData = () => {
         setLoadingData(true);
-        let url = ConfigJson.LoadReleases;
+        setDownloadParams(filters);
+        let url = ConfigJson.GetSpecies + "?" + new URLSearchParams(downloadParams);
         fetch(url)
-        .then(response =>response.json())
+        .then(response => response.json())
         .then(data => {
             if(data?.Success) {
-                setData(ConfigData.Species);
+                setData(data.Data);
+                setPageNumber(Math.ceil(data.Data.length/pageSize));
+                setResults(data.Count);
             }
             else {
                 setErrorLoading(true);
@@ -92,18 +95,9 @@ const Search = () => {
         })
     }
 
-    const formatDate = (date) => {
-        date = new Date(date);
-        var d = date.getDate();
-        var m = date.getMonth() + 1;
-        var y = date.getFullYear();
-        date = (d <= 9 ? "0" + d : d) + "/" + (m <= 9 ? "0" + m : m) + "/" + y;
-        return date;
-    };
-
     const toggleAccordion = (value) => {
         let values;
-        if (active.includes(value)) {
+        if(active.includes(value)) {
             values = active.filter(e => e !== value);
         } else {
             values = active.concat(value);
@@ -114,7 +108,7 @@ const Search = () => {
     const onChangeFilters = (event, data) => {
         let field = data.name;
         let value = data.value;
-        if(field === "country" || field === "bioregion") {
+        if(field === "country" || field === "bioregion" || field === "sensitive") {
             if(data.checked) {
                 let values = filters[field] ? filters[field].split(",").filter(Boolean) : [];
                 values.push(value);
@@ -135,24 +129,57 @@ const Search = () => {
     const addParameters = () => {
         setSearchParams(filters);
         setLoadingData(true);
+        setActivePage(1);
         setData([]);
         loadData();
     }
 
     const removeParameters = () => {
-        setFilters({"release": ConfigData.Releases[0].ReleaseId.toString()});
-        setSearchParams({"release": ConfigData.Releases[0].ReleaseId.toString()});
+        setFilters({"releaseId": releases[0].ReleaseId.toString()});
+        setSearchParams({});
+    }
+
+    const onChangePage = (event, data) => {
+        let page = data.activePage;
+        setActivePage(page);
+        document.querySelector(".search-list").scrollIntoView({behavior: "smooth"});
     }
 
     const setSitesUrl = () => {
         let params = new URLSearchParams(searchParams);
-        if(!params.has("release")) {
-            params.set("release", ConfigData.Releases[0].ReleaseId);
+        if(!params.has("releaseId")) {
+            params.set("releaseId", releases[0].ReleaseId);
         }
         params.delete("species");
-        params.delete("type");
+        params.delete("speciesGroup");
         return params.toString();
-    } 
+    }
+
+    const downloadResults = () => {
+        setDownloading(true);
+        let url = ConfigJson.DownloadResultsSpecies + "?" + new URLSearchParams(filters);
+        fetch(url)
+        .then(data => {
+            if(data?.ok) {
+                const regExp = /filename=(?<filename>.*);/;
+                const filename = regExp.exec(data.headers.get('Content-Disposition'))?.groups?.filename ?? null;
+                data.blob()
+                  .then(blobresp => {
+                    var blob = new Blob([blobresp], { type: "octet/stream" });
+                    var url = window.URL.createObjectURL(blob);
+                    let link = document.createElement("a");
+                    link.download = filename;
+                    link.href = url;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                  })
+            } else {
+                setErrorDownloading(true);
+            }
+            setDownloading(false);
+        });
+    }
 
     return (
         <div className="main">
@@ -208,7 +235,7 @@ const Search = () => {
                                             <label htmlFor="field_releases">Releases</label>
                                             <Select
                                                 placeholder="Select a release"
-                                                name="release"
+                                                name="releaseId"
                                                 options=
                                                     {
                                                         releases && releases.map((item, i) => (
@@ -217,7 +244,7 @@ const Search = () => {
                                                             }
                                                         ))
                                                     }
-                                                value={filters.release}
+                                                value={filters.releaseId}
                                                 onChange={onChangeFilters}
                                                 selectOnBlur={false}
                                                 loading={loadingReleases}
@@ -232,9 +259,9 @@ const Search = () => {
                                                         <div className="three wide computer twelve wide mobile six wide tablet column column-blocks-wrapper py-1" key={i}>
                                                             <Radio
                                                                 label={item.SpeciesGroupName}
-                                                                name="type"
-                                                                value={item.SpeciesGroupCode}
-                                                                checked={item.SpeciesGroupCode === filters.type}
+                                                                name="speciesGroup"
+                                                                value={item.SpeciesGroupName}
+                                                                checked={item.SpeciesGroupName === filters.speciesGroup}
                                                                 onChange={onChangeFilters}
                                                             />
                                                         </div>
@@ -252,6 +279,20 @@ const Search = () => {
                                                 onChange={onChangeFilters}
                                                 autoComplete="off"
                                             />
+                                        </div>
+                                        <div className="field" id="field_sensitive">
+                                            <label htmlFor="field_sensitive">Sensitive species</label>
+                                            <div className="ui grid">
+                                                <div className="twelve wide column column-blocks-wrapper py-1">
+                                                    <Checkbox
+                                                        label="Sensitive species"
+                                                        name="sensitive"
+                                                        value="true"
+                                                        checked={filters.sensitive === "true"}
+                                                        onChange={onChangeFilters}
+                                                    />
+                                                </div>
+                                            </div>
                                         </div>
                                         <div className="field" id="field_countries">
                                             <label htmlFor="field_countries">Member States</label>
@@ -292,38 +333,45 @@ const Search = () => {
                                     </AccordionContent>
                                 </Accordion>
                                 <div className="search-buttons mt-3">
-                                    <button className="ui button" onClick={()=>addParameters()}>Search</button>
-                                    <button className="ui button text" onClick={()=>removeParameters()}>Clear filters</button>
+                                    <button className="ui button" disabled={loadingData} onClick={()=>addParameters()}>Search</button>
+                                    <button className="ui button text" disabled={loadingData} onClick={()=>removeParameters()}>Clear filters</button>
                                 </div>
                             </div>
                             <hr className="my-3" />
                             <div className="search-list species">
                                 {
-                                    !loadingData &&
+                                    !loadingData && !errorLoading &&
                                     <div className="search-results">
                                         <div className="search-counter">
-                                            <span className="search-number">{data.length}</span> results
+                                            <span className="search-number">{results}</span> results
                                         </div>
-                                        <button className="ui button inverted" disabled={data.length === 0}><i className="icon ri-download-line"></i>Download results</button>
+                                        <button className="ui button inverted" disabled={data.length === 0 || !data || downloading} onClick={()=>downloadResults()}>
+                                            {downloading ? <Loader active={true} size='mini'></Loader> : <i className="icon ri-download-line"></i>}Download results
+                                        </button>
                                     </div>
                                 }
+                                <Message error hidden={!errorDownloading} onDismiss={()=>setErrorDownloading(false)}>
+                                    <i className="triangle exclamation icon"></i>
+                                    Something went wrong with the results download
+                                </Message>
                                 <div className="ui grid">
                                     {
-                                         loadingData ? <Loader active={loadingData} inline="centered" className="my-6"/> :
-                                         data.length === 0 ? <div className="noresults">No results found</div> :
-                                         data && data.map((item, i) =>
+                                        loadingData ? <Loader active={loadingData} inline="centered" className="my-6"/> :
+                                        errorLoading ? <div className="error-container"><img src={ErrorImage} alt="Error" />Something went wrong</div> :
+                                        data.length === 0 || !data ? <div className="error-container"><img src={NoresultsImage} alt="No results" />No results found</div> :
+                                        data && data.slice((activePage-1)*pageSize, activePage*pageSize).map((item, i) =>
                                             <div className="four wide computer twelve wide mobile six wide tablet column column-blocks-wrapper" key={i}>
                                                 <div className="card search species">
-                                                    <a href={"/search/sites?"+setSitesUrl()+"&species="+item.SpeciesCode}>
+                                                    <a href={"/#/search/sites?"+setSitesUrl()+"&species="+item.SpeciesCode}>
                                                         <div className="card-image">
-                                                            <img src={item.SpeciesImageUrl} alt="Species image" />
+                                                            <img src={(!item.SpeciesImageUrl || item.SpeciesImageUrl === "UNAVAILABLE IN DEV") ? NoImage : item.SpeciesImageUrl} alt="Species" />
                                                         </div>
                                                         <div className="card-body">
                                                             <div className="card-title">
-                                                                {item.SpeciesName} - <i>{item.SpeciesScientificName}</i>
+                                                                {item.SpeciesName}{item.SpeciesName && item.SpeciesScientificName && " - "}<i>{item.SpeciesScientificName}</i>
                                                             </div>
                                                             <div className="card-text">
-                                                                {ConfigData.SpeciesGroups.find(a=>a.SpeciesGroupCode === item.SpeciesGroupCode).SpeciesGroupName}
+                                                                {item.SpeciesGroupCode}
                                                             </div>
                                                             <div className="card-counters">
                                                                 <div className="card-counter">
@@ -333,6 +381,13 @@ const Search = () => {
                                                             </div>
                                                             <div className="card-links">
                                                                 Found in <b>{item.SitesNumber} sites</b>
+                                                                {item.IsSensitive &&
+                                                                    <div className="card-popup sensitive">
+                                                                        <a href={"/#/search/sites?"+setSitesUrl()+"&species="+item.SpeciesCode+"&sensitive=true"}>
+                                                                            <Popup content={"The species is sensitive in "+item.SitesNumberSensitive+" sites"} inverted position="top center" trigger={<i className="ri-alert-line"></i>} />
+                                                                        </a>
+                                                                    </div>
+                                                                }
                                                             </div>
                                                         </div>
                                                     </a>
@@ -341,6 +396,43 @@ const Search = () => {
                                         )
                                     }
                                 </div>
+                                {
+                                    !loadingData && !errorLoading && data.length > 0 &&
+                                    <div className="ui grid">
+                                        <Pagination
+                                            className="species"
+                                            totalPages={pageNumber}
+                                            defaultActivePage={activePage}
+                                            firstItem={
+                                                pageNumber > 5 &&
+                                                {
+                                                    disabled: pageNumber <= 1 || activePage === 1,
+                                                    content: <div className="double-arrow"><i className="ri-arrow-left-s-line" /><i className="ri-arrow-left-s-line" /></div>
+                                                }
+                                            }
+                                            lastItem={
+                                                pageNumber > 5 &&
+                                                {
+                                                    disabled: pageNumber <= 1 || activePage === pageNumber,
+                                                    content: <div className="double-arrow"><i className="ri-arrow-right-s-line" /><i className="ri-arrow-right-s-line" /></div>
+                                                }
+                                            }
+                                            prevItem={
+                                                {
+                                                    disabled: pageNumber <= 1 || activePage === 1,
+                                                    content: <i className="ri-arrow-left-s-line" />
+                                                }
+                                            }
+                                            nextItem={
+                                                {
+                                                    disabled: pageNumber <= 1 || activePage === pageNumber,
+                                                    content: <i className="ri-arrow-right-s-line" />
+                                                }
+                                            }
+                                            onPageChange={onChangePage}
+                                        ></Pagination>
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>

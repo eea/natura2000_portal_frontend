@@ -1,0 +1,548 @@
+{
+	"Countries": [
+		{
+			"CountryCode": "AT",
+			"CountryName": "Austria"
+		},
+		{
+			"CountryCode": "BE",
+			"CountryName": "Belgium"
+		},
+		{
+			"CountryCode": "BG",
+			"CountryName": "Bulgaria"
+		},
+		{
+			"CountryCode": "HR",
+			"CountryName": "Croatia"
+		},
+		{
+			"CountryCode": "CY",
+			"CountryName": "Cyprus"
+		},
+		{
+			"CountryCode": "CZ",
+			"CountryName": "Czechia"
+		},
+		{
+			"CountryCode": "DK",
+			"CountryName": "Denmark"
+		},
+		{
+			"CountryCode": "EE",
+			"CountryName": "Estonia"
+		},
+		{
+			"CountryCode": "FI",
+			"CountryName": "Finland"
+		},
+		{
+			"CountryCode": "FR",
+			"CountryName": "France"
+		},
+		{
+			"CountryCode": "DE",
+			"CountryName": "Germany"
+		},
+		{
+			"CountryCode": "GR",
+			"CountryName": "Greece"
+		},
+		{
+			"CountryCode": "HU",
+			"CountryName": "Hungary"
+		},
+		{
+			"CountryCode": "IE",
+			"CountryName": "Ireland"
+		},
+		{
+			"CountryCode": "IT",
+			"CountryName": "Italy"
+		},
+		{
+			"CountryCode": "LV",
+			"CountryName": "Latvia"
+		},
+		{
+			"CountryCode": "LT",
+			"CountryName": "Lithuania"
+		},
+		{
+			"CountryCode": "LU",
+			"CountryName": "Luxembourg"
+		},
+		{
+			"CountryCode": "MT",
+			"CountryName": "Malta"
+		},
+		{
+			"CountryCode": "NL",
+			"CountryName": "Netherlands"
+		},
+		{
+			"CountryCode": "PL",
+			"CountryName": "Poland"
+		},
+		{
+			"CountryCode": "PT",
+			"CountryName": "Portugal"
+		},
+		{
+			"CountryCode": "RO",
+			"CountryName": "Romania"
+		},
+		{
+			"CountryCode": "SK",
+			"CountryName": "Slovakia"
+		},
+		{
+			"CountryCode": "SI",
+			"CountryName": "Slovenia"
+		},
+		{
+			"CountryCode": "ES",
+			"CountryName": "Spain"
+		},
+		{
+			"CountryCode": "SE",
+			"CountryName": "Sweden"
+		}
+	],
+	"ReportsCountries": [
+		{
+			"CountryCode": "AT",
+			"CountryName": "Austria"
+		},
+		{
+			"CountryCode": "BE",
+			"CountryName": "Belgium"
+		},
+		{
+			"CountryCode": "BG",
+			"CountryName": "Bulgaria"
+		},
+		{
+			"CountryCode": "HR",
+			"CountryName": "Croatia"
+		},
+		{
+			"CountryCode": "CY",
+			"CountryName": "Cyprus"
+		},
+		{
+			"CountryCode": "CZ",
+			"CountryName": "Czechia"
+		},
+		{
+			"CountryCode": "DK",
+			"CountryName": "Denmark"
+		},
+		{
+			"CountryCode": "EE",
+			"CountryName": "Estonia"
+		},
+		{
+			"CountryCode": "FI",
+			"CountryName": "Finland"
+		},
+		{
+			"CountryCode": "FR",
+			"CountryName": "France"
+		},
+		{
+			"CountryCode": "DE",
+			"CountryName": "Germany"
+		},
+		{
+			"CountryCode": "GR",
+			"CountryName": "Greece"
+		},
+		{
+			"CountryCode": "HU",
+			"CountryName": "Hungary"
+		},
+		{
+			"CountryCode": "IE",
+			"CountryName": "Ireland"
+		},
+		{
+			"CountryCode": "IT",
+			"CountryName": "Italy"
+		},
+		{
+			"CountryCode": "LV",
+			"CountryName": "Latvia"
+		},
+		{
+			"CountryCode": "LT",
+			"CountryName": "Lithuania"
+		},
+		{
+			"CountryCode": "LU",
+			"CountryName": "Luxembourg"
+		},
+		{
+			"CountryCode": "MT",
+			"CountryName": "Malta"
+		},
+		{
+			"CountryCode": "NL",
+			"CountryName": "Netherlands"
+		},
+		{
+			"CountryCode": "PL",
+			"CountryName": "Poland"
+		},
+		{
+			"CountryCode": "PT",
+			"CountryName": "Portugal"
+		},
+		{
+			"CountryCode": "RO",
+			"CountryName": "Romania"
+		},
+		{
+			"CountryCode": "SK",
+			"CountryName": "Slovakia"
+		},
+		{
+			"CountryCode": "SI",
+			"CountryName": "Slovenia"
+		},
+		{
+			"CountryCode": "ES",
+			"CountryName": "Spain"
+		},
+		{
+			"CountryCode": "SE",
+			"CountryName": "Sweden"
+		},
+		{
+			"CountryCode": "UK",
+			"CountryName": "United Kingdom"
+		}
+	],
+	"Bioregions": [
+		{
+			"BioregionName": "Alpine",
+			"BioregionCode": "ALP",
+			"IsMarine": false
+		},
+		{
+			"BioregionName": "Atlantic",
+			"BioregionCode": "ATL",
+			"IsMarine": false
+		},
+		{
+			"BioregionName": "Mediterranean",
+			"BioregionCode": "MED",
+			"IsMarine": false
+		},
+		{
+			"BioregionName": "Black Sea",
+			"BioregionCode": "BLA",
+			"IsMarine": false
+		},
+		{
+			"BioregionName": "Boreal",
+			"BioregionCode": "BOR",
+			"IsMarine": false
+		},
+		{
+			"BioregionName": "Continental",
+			"BioregionCode": "CON",
+			"IsMarine": false
+		},
+		{
+			"BioregionName": "Macaronesian",
+			"BioregionCode": "MAC",
+			"IsMarine": false
+		},
+		{
+			"BioregionName": "Pannonian",
+			"BioregionCode": "PAN",
+			"IsMarine": false
+		},
+		{
+			"BioregionName": "Steppic",
+			"BioregionCode": "STP",
+			"IsMarine": false
+		},
+		{
+			"BioregionName": "Marine Atlantic",
+			"BioregionCode": "MAT",
+			"IsMarine": true
+		},
+		{
+			"BioregionName": "Marine Baltic",
+			"BioregionCode": "MBA",
+			"IsMarine": true
+		},
+		{
+			"BioregionName": "Marine Black Sea",
+			"BioregionCode": "MBL",
+			"IsMarine": true
+		},
+		{
+			"BioregionName": "Marine Macaronesian",
+			"BioregionCode": "MMA",
+			"IsMarine": true
+		},
+		{
+			"BioregionName": "Marine Mediterranean",
+			"BioregionCode": "MME",
+			"IsMarine": true
+		}
+	],
+	"SiteTypes": [
+		{
+			"SiteTypeName": "Birds Directive",
+			"SiteTypeCode": "AC",
+			"SiteType": "A"
+		},
+		{
+			"SiteTypeName": "Habitats Directive",
+			"SiteTypeCode": "BC",
+			"SiteType": "B"
+		},
+		{
+			"SiteTypeName": "Birds and Habitats Directive",
+			"SiteTypeCode": "ABC",
+			"SiteType": "C"
+		}
+	],
+	"HabitatGroups": [
+		{
+			"HabitatGroupName": "Coastal and halophytic habitats",
+			"HabitatGroupCode": "1"
+		},
+		{
+			"HabitatGroupName": "Coastal sand dunes and inland dunes",
+			"HabitatGroupCode": "2"
+		},
+		{
+			"HabitatGroupName": "Freshwater habitats",
+			"HabitatGroupCode": "3"
+		},
+		{
+			"HabitatGroupName": "Temperate heath and scrub",
+			"HabitatGroupCode": "4"
+		},
+		{
+			"HabitatGroupName": "Sclerophyllous scrub (matorral)",
+			"HabitatGroupCode": "5"
+		},
+		{
+			"HabitatGroupName": "Natural and semi-natural grassland formations",
+			"HabitatGroupCode": "6"
+		},
+		{
+			"HabitatGroupName": "Raised bogs and mires and fens",
+			"HabitatGroupCode": "7"
+		},
+		{
+			"HabitatGroupName": "Rocky habitats and caves",
+			"HabitatGroupCode": "8"
+		},
+		{
+			"HabitatGroupName": "Forests",
+			"HabitatGroupCode": "9"
+		}
+	],
+	"SpeciesGroups": [
+		{
+			"SpeciesGroupName": "Amphibians",
+			"SpeciesGroupCode": "A"
+		},
+		{
+			"SpeciesGroupName": "Birds",
+			"SpeciesGroupCode": "B"
+		},
+		{
+			"SpeciesGroupName": "Fish",
+			"SpeciesGroupCode": "F"
+		},
+		{
+			"SpeciesGroupName": "Invertebrates",
+			"SpeciesGroupCode": "I"
+		},
+		{
+			"SpeciesGroupName": "Mammals",
+			"SpeciesGroupCode": "M"
+		},
+		{
+			"SpeciesGroupName": "Plants",
+			"SpeciesGroupCode": "P"
+		},
+		{
+			"SpeciesGroupName": "Reptiles",
+			"SpeciesGroupCode": "R"
+		}
+	],
+	"Tools": [
+		{
+			"Name": "Natura 2000 viewer",
+			"Description": "Explore the new Natura 2000 viewer",
+			"Image": "natura2000viewer",
+			"Link": "https://natura2000.eea.europa.eu/"
+		},
+		{
+			"Name": "Ferret",
+			"Description": "Manage Natura 2000 sites changes",
+			"Image": "ferret",
+			"Link": "https://n2kbackbone.eea.europa.eu/"
+		},
+		{
+			"Name": "Natura 2000 Barometer",
+			"Description": "An overview of the Natura 2000 network of sites",
+			"Image": "natura2000barometer",
+			"Link": "https://www.eea.europa.eu/data-and-maps/dashboards/natura-2000-barometer"
+		},
+		{
+			"Name": "Natura online list",
+			"Description": "Explore the Natura 2000 sites for each release",
+			"Image": "naturaonlinelist",
+			"Link": "https://tableau-public.discomap.eea.europa.eu/views/Natura2000_Online_List_stg/AllNatura2000sites"
+		},
+		{
+			"Name": "Natura 2000 expert view",
+			"Description": "Explore the Natura 2000 expert viewer",
+			"Image": "natura2000expertviewer",
+			"Link": "https://natura2000.eea.europa.eu/expertviewer/"
+		},
+		{
+			"Name": "Natura 2000 intranet viewer",
+			"Description": "Natura 2000 data with sensitive species.",
+			"Image": "natura2000sensitivespeciesviewer",
+			"Link": "https://natura2000.eea.europa.eu/Natura2000Viewer/"
+		},
+		{
+			"Name": "Natura 2000 historical viewer",
+			"Description": "Explore the Natura 2000 sites historical viewer",
+			"Image": "natura2000historicalviewer",
+			"Link": "https://natura2000.eea.europa.eu/Natura2000Historical/"
+		},
+		{
+			"Name": "Geometry changes dashboard",
+			"Description": "Natura 2000 spatial differences and SDF differences",
+			"Image": "geometrychangesdashboard",
+			"Link": "https://mytableau.discomap.eea.europa.eu/views/Geographical_differences/Home"
+		},
+		{
+			"Name": "CDR submission dashboard",
+			"Description": "Explore the submission status",
+			"Image": "cdrsubmissiondashboard",
+			"Link": "https://mytableau.discomap.eea.europa.eu/#/views/Natura2000DataWorkflowMonitoring/"
+		}
+	],
+	"Reports": [
+		{
+			"Product": "DescriptiveReport",
+			"Name": "Descriptive Data Change Delivery Report",
+			"Description": "This is a text description for the report.This is a text description for the report. This is a text description for the report. This is a text description for the report. This is a text description for the report. "
+		},
+		{
+			"Product": "DescriptiveBySubmission",
+			"Name": "Descriptive Data Delivery Change by Submission",
+			"Description": "This is a text description for the report.This is a text description for the report. This is a text description for the report. This is a text description for the report. This is a text description for the report. "
+		},
+		{
+			"Product": "SpatialReports",
+			"Name": "Spatial Data Delivery Change Report",
+			"Description": "This is a text description for the report.This is a text description for the report. This is a text description for the report. This is a text description for the report. This is a text description for the report. "
+		},
+		{
+			"Product": "UnionListReports",
+			"Name": "UnionLists Changes Report",
+			"Description": "This is a text description for the report.This is a text description for the report. This is a text description for the report. This is a text description for the report. This is a text description for the report. "
+		},
+		{
+			"Product": "SensitiveReports",
+			"Name": "Sensitive Species Report",
+			"Description": "This is a text description for the report.This is a text description for the report. This is a text description for the report. This is a text description for the report. This is a text description for the report. "
+		}
+	],
+	"Downloads": [
+		{
+			"Product": "ComputingSAC",
+			"Name": "SCI adoption and designation dates differences",
+			"Description": "Computes SCI dates difference and the time difference.",
+			"Link": "",
+			"Fields": [
+				"releaseId",
+				"email"
+			]
+		},
+		{
+			"Product": "DescriptiveDataSensitive",
+			"Name": "Natura 2000 sites SDF data (descriptive data) with sensitive species, for a given release",
+			"Description": "Export descriptive data, including sensitive species - Access database format. DO NOT SHARE PUBLICLY - Commission/EEA use only",
+			"Fields": [
+				"releaseId"
+			]
+		},
+		{
+			"Product": "DescriptiveData",
+			"Name": "Natura 2000 sites SDF data (descriptive data) without sensitive species, for a given release",
+			"Description": "Export descriptive data, without sensitive species - Access database format.",
+			"Fields": [
+				"releaseId"
+			]
+		},
+		{
+			"Product": "SpatialData",
+			"Name": "Natura 2000 spatial data for a given release",
+			"Description": "Choose a release version from which to extract the sites boundaries - Shapefile format.",
+			"Fields": [
+				"releaseId"
+			]
+		}
+	],
+	"HomeLinks": [
+		{
+			"Name": "European Environment Agency website",
+			"Link": "https://www.eea.europa.eu"
+		},
+		{
+			"Name": "WISE marine - Marine information system for Europe",
+			"Link": "https://water.europa.eu/marine"
+		},
+		{
+			"Name": "WISE freshwater - Freshwater information system for Europe",
+			"Link": "https://water.europa.eu/freshwater"
+		},
+		{
+			"Name": "BISE - Biodiversity information system for Europe",
+			"Link": "https://biodiversity.europa.eu"
+		},
+		{
+			"Name": "FISE - Forest information system for Europe",
+			"Link": "https://forest.eea.europa.eu/"
+		},
+		{
+			"Name": "European Climate and health observatory",
+			"Link": "https://climate-adapt.eea.europa.eu/en/observatory"
+		},
+		{
+			"Name": "ClimateADAPT",
+			"Link": "https://climate-adapt.eea.europa.eu/"
+		},
+		{
+			"Name": "European Industrial Emissions Portal",
+			"Link": "https://industry.eea.europa.eu"
+		},
+		{
+			"Name": "Climate and energy in the EU",
+			"Link": "https://climate-energy.eea.europa.eu"
+		},
+		{
+			"Name": "Copernicus Land Monitoring Servic",
+			"Link": "https://land.copernicus.eu/en"
+		},
+		{
+			"Name": "Copernicus InSitu",
+			"Link": "https://insitu.copernicus.eu"
+		}
+	]
+}

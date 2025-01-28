@@ -40,7 +40,7 @@
         }
         .card-number {
             b {
-                color: $eeaGreen;
+                color: $naturaGreen;
                 font-size: 1.5rem;
             }
         }
@@ -122,9 +122,13 @@
             }
             &-popup {
                 margin-left: auto;
-                color: $messageError;
                 font-size: 1.5rem;
                 line-height: 1.25rem;
+                &.sensitive {
+                    a {
+                        color: $messageError;
+                    }
+                }
             }
         }
     }
@@ -146,9 +150,9 @@
                 }
             }
             > .content {
-                padding: 0.5rem 1rem !important;
-                background-color: $lightGreen;
+                padding: 0 !important;
                 margin-bottom: 1rem !important;
+                background: none;
             }
             &:last-of-type {
                 border-bottom: none;
@@ -177,13 +181,32 @@
     &-button {
         button {
             margin: 0 !important;
+            .ui.mini.loader {
+                &:before, &:after {
+                    margin-top: 0.5rem;
+                }
+                &:before {
+                    border-color: #ffffff80;
+                }
+                &:after {
+                    border-color: #ffffff transparent transparent;
+                }
+            }
         }
     }
     &:last-of-type {
         border-bottom: none;
     }
-    &-release {
-        margin-bottom: 0.5rem;
+    &-country {
+        margin-bottom: 0.25rem;
+        padding: 0.5rem 1rem;
+        background-color: $lightGreen;
+        .document-text {
+            flex: 1;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
         .title {
             font-weight: bold;
             padding: 0.5rem 0.25rem !important;

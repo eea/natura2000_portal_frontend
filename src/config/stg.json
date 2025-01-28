@@ -1,0 +1,19 @@
+{
+	"GetReleases": "https://blackneckedswan:480/N2kPortal_back/api/Info/GetOfficialReleases",
+	"GetLastReleaseData": "https://blackneckedswan:480/N2kPortal_back/api/Info/GetLatestReleaseCounters",
+	"GetSites": "https://blackneckedswan:480/N2kPortal_back/api/Info/GetParameteredSites",
+	"GetHabitats": "https://blackneckedswan:480/N2kPortal_back/api/Info/GetParameteredHabitats",
+	"GetSpecies": "https://blackneckedswan:480/N2kPortal_back/api/Info/GetParameteredSpecies",
+	"DownloadResultsSites": "https://blackneckedswan:480/N2kPortal_back/api/Download/SitesSearchResults",
+	"DownloadResultsHabitats": "https://blackneckedswan:480/N2kPortal_back/api/Download/HabitatsSearchResults",
+	"DownloadResultsSpecies": "https://blackneckedswan:480/N2kPortal_back/api/Download/SpeciesSearchResults",
+	"GetReports": "https://blackneckedswan:480/N2kPortal_back/api/Download/FileFinder",
+	"DownloadReports": "https://blackneckedswan:480/N2kPortal_back/api/Download/FileDownloader",
+	"DownloadComputingSAC": "https://blackneckedswan:480/N2kPortal_back/api/Download/ComputingSAC",
+	"DownloadDescriptiveDataSensitive": "https://blackneckedswan:480/N2kPortal_back/api/Download/DescriptiveDataSensitive",
+	"DownloadDescriptiveData": "https://blackneckedswan:480/N2kPortal_back/api/Download/DescriptiveData",
+	"DownloadSpatialData": "https://blackneckedswan:480/N2kPortal_back/api/Download/SpatialData",
+	"PublicSDF": "https://blackneckedswan/n2kbackbone_back/api/PublicData/GetReleaseData",
+	"SensitiveSDF": "https://blackneckedswan:480/N2kPortal_back/api/SDF/GetReleaseData",
+	"MapReleases": "https://bio.discomap.eea.europa.eu/arcgis/rest/services/N2K_Backbone/Releases_Spatial_stg/MapServer/0"
+}

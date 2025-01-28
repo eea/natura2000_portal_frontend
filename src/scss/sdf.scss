@@ -1,148 +1,155 @@
 .sdf {
-    h1, h2, a {
-        color: $naturaGreen;
+    h1 {
+        color: $naturaBlue;
+        font-size: 2rem;
     }
     h1 {
         font-size: 2rem;
     }
-}
-
-.sdf-download {
-    .ui.button {
-        display: block;
-        margin-left: auto;
+    h2 {
+        font-size: 1.5rem;
     }
-}
-
-.sdf-general {
-    width: 100%;
-    display: flex;
-    color: $text;
-    .sdf-head {
-        display: flex;
-        gap: 2rem;
-        align-items: start;
-        h1 {
-            margin-bottom: 0;
-            .sensitive {
-                color: $messageError;
-            }
-        }
-        b {
-            color: $naturaBlue;
-            font-size: 1.5rem;
-            margin-top: 0.25rem;
-        }
-        .logo {
-            width: 8rem;
-            min-width: 8rem;
-        }
+    .message {
+        width: 100%;
     }
-    .select--right {
-        width: auto;
-        margin-left: auto;
-        .ui.dropdown {
-            &.loading {
-                .dropdown.icon {
-                    position: sticky !important;
-                }
-            }
-            .text {
-                line-height: normal;
-            }
-        }
-    }
-}
-
-.sdf-index {
-    ol {
-        width: fit-content;
-        padding-inline-start: 1rem;
-        display: flex;
-        flex-wrap: wrap;
-        column-gap: 2rem;
+    a {
         color: $naturaBlue;
+        text-decoration: underline;
     }
-}
-
-.sdf-row {
-    margin-bottom: 1rem;
-    &-title {
-        font-weight: bold;
-        margin-bottom: 0.5rem;
+    &-download {
+        .ui.button {
+            display: block;
+            margin-left: auto;
+        }
     }
-    &-field {
-        border: solid 1px $grey-2;
-        padding: 0.5rem 0.75rem;
-        border-radius: 0.25rem;
-        ~.sdf-row-field {
-            margin-top: 0.5rem;
-        }
-        p:last-of-type {
-            margin-bottom: 0;
-        }
-        .ui.table {
-            margin-bottom: 0;
-            overflow: auto;
-            tr:last-of-type td {
-                border-bottom: none;
-            }
-            th, td {
-                border-color: $grey-2;
-            }
-        }
-        .sdf-link {
-            word-break: break-all;
-        }
-        .ui.checkbox {
-            margin-bottom: 0.5rem;
-            pointer-events: none;
-            label {
-                color: inherit;
-                font-size: 1rem;
-                cursor: auto;
-                &::after, &::before {
-                    border-color: $naturaGreen;
+    &-general {
+        width: 100%;
+        display: flex;
+        color: $text;
+        .sdf-head {
+            display: flex;
+            gap: 2rem;
+            align-items: start;
+            flex-grow: 1;
+            h1 {
+                margin-bottom: 0;
+                .sensitive {
+                    color: $messageError;
                 }
-                
             }
-            input:checked ~ label {
-                &:after {
-                    background-color: $naturaGreen;
-                    border-color: $naturaGreen;
+            b {
+                color: $naturaGreen;
+                font-size: 1.5rem;
+                margin-top: 0.25rem;
+            }
+            .logo {
+                width: 8rem;
+                min-width: 8rem;
+            }
+        }
+        .select--right {
+            width: auto;
+            margin-left: auto;
+            .ui.dropdown {
+                &.loading {
+                    .dropdown.icon {
+                        position: sticky !important;
+                    }
                 }
-                &:before {
-                    border-color: $naturaGreen;
+                .text {
+                    line-height: normal;
                 }
             }
         }
     }
-}
-
-.sdf-map {
-    #mapDiv {
-        height: 400px !important;
-        .esri-attribution {
-            display: none;
-        }
-        .esri-widget--button {
+    &-index {
+        ol {
+            width: fit-content;
+            padding-inline-start: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            column-gap: 2rem;
             color: $naturaBlue;
         }
     }
-}
-
-.sdf-scroll {
-    display: inline-block;
-    position: fixed;
-    bottom: 1.5rem;
-    right: 1.5rem;
-    z-index: 1;
-    button {
-        padding: 0.425rem 0.5rem !important;
-        margin: 0 !important;
-        i {
-            font-size: 2rem;
-            line-height: 2rem;
+    &-row {
+        margin-bottom: 1rem;
+        &-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        &-field {
+            border: solid 1px $grey-2;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.25rem;
+            ~.sdf-row-field {
+                margin-top: 0.5rem;
+            }
+            p:last-of-type {
+                margin-bottom: 0;
+            }
+            .ui.table {
+                margin-bottom: 0;
+                overflow: auto;
+                tr:last-of-type td {
+                    border-bottom: none;
+                }
+                th, td {
+                    border-color: $grey-2;
+                    font-size: 1rem;
+                }
+            }
+            .sdf-link {
+                word-break: break-all;
+            }
+            .ui.checkbox {
+                margin-bottom: 0.5rem;
+                pointer-events: none;
+                label {
+                    color: inherit;
+                    font-size: 1rem;
+                    cursor: auto;
+                    &::after, &::before {
+                        border-color: $naturaBlue;
+                    }
+                    
+                }
+                input:checked ~ label {
+                    &:after {
+                        background-color: $naturaBlue;
+                        border-color: $naturaBlue;
+                    }
+                    &:before {
+                        border-color: $naturaBlue;
+                    }
+                }
+            }
+        }
+    }
+    &-map {
+        #mapDiv {
+            height: 400px !important;
+            .esri-attribution {
+                display: none;
+            }
+            .esri-widget--button {
+                color: $naturaBlue;
+            }
+        }
+    }
+    &-scroll {
+        display: inline-block;
+        position: fixed;
+        bottom: 1.5rem;
+        right: 1.5rem;
+        z-index: 1;
+        button {
+            padding: 0.425rem 0.5rem !important;
+            margin: 0 !important;
+            i {
+                font-size: 2rem;
+                line-height: 2rem;
+            }
         }
     }
 }
@@ -173,5 +180,17 @@
             height: 400px !important;
             width: auto !important;
         }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .sdf-head {
+        flex-direction: column;
+        .select--right {
+            margin-left: 0;
+        }
+    }
+    .sdf-download .ui.button {
+        margin-left: 0;
     }
 }

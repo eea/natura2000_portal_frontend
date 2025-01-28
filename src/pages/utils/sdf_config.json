@@ -59,6 +59,15 @@
     "Conservation": "Conservation",
     "Global": "Global"
   },
+  "SpeciesGroups": {
+    "Amphibians": "A",
+    "Birds": "B",
+    "Fish": "F",
+    "Invertebrates": "I",
+    "Mammals": "M",
+    "Plants": "P",
+    "Reptiles": "R"
+  },
   "Species": {
     "Group": "Group",
     "Code": "Code",
@@ -76,6 +85,7 @@
     "Isolation": "Isolation",
     "Global": "Global"
   },
+  "SpeciesFilters": ["AnnexIV", "AnnexV", "OtherCategoriesA", "OtherCategoriesB", "OtherCategoriesC", "OtherCategoriesD"],
   "OtherSpecies": {
     "Group": "Group",
     "Code": "Code",
@@ -93,6 +103,7 @@
     "OtherCategoriesC": "Other Cat. C",
     "OtherCategoriesD": "Other Cat. D"
   },
+  "OtherSpeciesFilters": ["Type", "DataQuality", "Population", "Conservation", "Isolation", "Global"],
   "HabitatClasses": {
     "N01": "Marine areas, Sea inlets",
     "N02": "Tidal rivers, Estuaries, Mud flats, Sand flats, Lagoons (including saltwork basins)",

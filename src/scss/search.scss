@@ -31,14 +31,12 @@
         display: flex;
         justify-content: space-between;
         margin-bottom: 1rem;
+        padding-top: 0.25rem;
     }
     &-counter {
         font-size: 1.25rem;
         font-weight: bold;
         align-self: flex-end;
-    }
-    &-number {
-
     }
 }
 

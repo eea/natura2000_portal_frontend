@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { loadModules } from "esri-loader";
 
 class MapViewer extends React.Component {
@@ -78,7 +78,7 @@ class MapViewer extends React.Component {
                         target: feat?.geometry
                     })
                     .catch((error) => {
-                        if (error.name != "AbortError") {
+                        if(error.name !== "AbortError") {
                             console.error(error);
                         }
                     });

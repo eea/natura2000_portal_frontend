@@ -1,23 +1,17 @@
 import React, { useState, useEffect } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import ConfigData from "./config/data_config.json";
-import images from "../img/tools/images"
+import * as Utils from "./components/Utils";
+import ConfigData from "./utils/data_config.json";
+import ToolsImages from "../img/tools/images";
 
 const Tools = () => {
 
     const [showDescription, setShowDescription] = useState(false);
 
     useEffect(() => {
-        if(!showDescription) {
-            if(document.querySelector(".page-description")?.scrollHeight < 6*16) {
-                setShowDescription("all");
-            }
-            else {
-                setShowDescription("hide");
-            }
-        }
-    });
+        Utils.toggleDescription(showDescription, setShowDescription);
+    }, [showDescription]);
 
     return (
         <div className="main">
@@ -56,16 +50,16 @@ const Tools = () => {
                                             <div className="four wide computer twelve wide mobile six wide tablet column column-blocks-wrapper" key={i}>
                                                 <div className="card tools">
                                                     <div className="card-image">
-                                                        <img src={images[item.Image]}></img>
+                                                        <img src={ToolsImages[item.Image]} alt="Tool screenshot"></img>
                                                     </div>
                                                     <div className="card-body">
                                                         <div className="card-title">
-                                                            {item.Name}
+                                                            {Utils.highlightSensitiveText(item.Name)}
                                                         </div>
                                                         <div className="card-text">
-                                                            {item.Description}
+                                                            {Utils.highlightSensitiveText(item.Description)}
                                                         </div>
-                                                        <button className="ui button primary"><a href={item.Link} target="_blank">Explore</a></button>
+                                                        <button className="ui button primary"><a href={item.Link} target="_blank" rel="noreferrer">Explore</a></button>
                                                     </div>
                                                 </div>
                                             </div>

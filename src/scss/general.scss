@@ -3,7 +3,7 @@
         background-color: $naturaGreen;
         color: $white;
         &:hover, &:focus, &:active {
-            background-color: $eeaGreen;
+            background-color: $naturaGreen;
             color: $white;
         }
     }
@@ -11,12 +11,18 @@
         background-color: $naturaBlue;
         color: $white;
         &:hover, &:focus, &:active {
-            background-color: $eeaBlue;
+            background-color: $naturaBlue;
             color: $white;
         }
     }
     a {
         color: white !important;
+    }
+    .ui.loader.mini {
+        position: relative;
+        width: 1.25rem;
+        display: inline-block;
+        left: 0;
     }
 }
 p a {
@@ -26,7 +32,7 @@ p a {
 a {
     color: $naturaGreen;
     &:hover {
-        color: $eeaGreen;
+        color: $naturaGreen;
     }
 }
 
@@ -41,7 +47,7 @@ ul {
 }
 
 .eea.banner .image .gradient {
-    background: linear-gradient(8deg, $eeaGreen 30%, $naturaGreen 80%);
+    background: linear-gradient(8deg, $naturaGreen 30%, $naturaGreen 80%);
     .content {
         padding: 6rem 0 1.5rem;
     }
@@ -57,7 +63,10 @@ ul {
     margin-bottom: 2rem;
 }
 
-.modal {
+.ui.modal {
+    .header {
+        padding-right: 3.5rem;
+    }
     .ui.form {
         display: flex;
         flex-direction: column;
@@ -69,6 +78,13 @@ ul {
             }
             input[type="text"] {
                 height: auto;
+            }
+            .ui.loading.dropdown {
+                i.icon {
+                    &:before, &:after {
+                        left: auto;
+                    }
+                }
             }
         }
         .input.error {
@@ -104,35 +120,44 @@ ul {
     }
 }
 
-.about-table {
-    &.ui.table {
-        width: auto;
-        border: none;
-        td {
-            text-align: left;
-            padding: 0.75rem;
+.about {
+    &-menu {
+        li {
+            cursor: pointer;
+            color: $naturaGreen;
         }
     }
+    &-table {
+        &.ui.table {
+            width: auto;
+            border: none;
+            td {
+                text-align: left;
+                padding: 0.75rem;
+            }
+        }
+    }
+
 }
 
 .ui.checkbox {
     label {
         cursor: pointer;
         &:before {
-            border-color: $eeaBlue;
+            border-color: $naturaBlue;
             border-radius: 0;
         }
         &:hover {
             &:before {
-                border-color: $eeaBlue;
+                border-color: $naturaBlue;
             }
         }
     }
     input:checked {
         ~ label {
             &:before {
-                background-color: $eeaBlue;
-                border-color: $eeaBlue;
+                background-color: $naturaBlue;
+                border-color: $naturaBlue;
             }
             &:after {
                 color: #FFFFFF;
@@ -474,6 +499,66 @@ ul {
     font-size: 0.875rem;
 }
 
+.ui.selection.dropdown {
+    i {
+        background-color: inherit;
+    }
+}
+
 .sensitive {
     color: $messageError;
+}
+
+.error-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+    margin: auto;
+    font-size: 1.25rem;
+    img {
+        height: 10rem;
+    }
+}
+
+.ui.pagination.menu {
+    margin: auto;
+    margin-top: 1rem;
+    .item {
+        &.active {
+            border-radius: 0.15rem;
+        }
+    }
+    .double-arrow {
+        display: flex;
+        width: 1rem;
+        i:before {
+            display: block;
+            width: 0.25rem;
+        }
+    }
+    &.sites {
+        .item {
+            color: $sitesColor;
+            &.active {
+                background-color: $sitesColorLight;
+            }
+        }
+    }
+    &.habitats {
+        .item {
+            color: $habitatsColor;
+            &.active {
+                background-color: $habitatsColorLight;
+            }
+        }
+    }
+    &.species {
+        .item {
+        color: $speciesColor;
+            &.active {
+                background-color: $speciesColorLight;
+            }
+        }
+    }
 }
