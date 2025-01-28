@@ -7,6 +7,8 @@
 	"DownloadResultsSites": "https://blackneckedswan:480/N2kPortal_back/api/Download/SitesSearchResults",
 	"DownloadResultsHabitats": "https://blackneckedswan:480/N2kPortal_back/api/Download/HabitatsSearchResults",
 	"DownloadResultsSpecies": "https://blackneckedswan:480/N2kPortal_back/api/Download/SpeciesSearchResults",
+	"GetReports": "https://blackneckedswan:480/N2kPortal_back/api/Download/FileFinder",
+	"DownloadReports": "https://blackneckedswan:480/N2kPortal_back/api/Download/FileDownloader",
 	"DownloadComputingSAC": "https://blackneckedswan:480/N2kPortal_back/api/Download/ComputingSAC",
 	"DownloadDescriptiveDataSensitive": "https://blackneckedswan:480/N2kPortal_back/api/Download/DescriptiveDataSensitive",
 	"DownloadDescriptiveData": "https://blackneckedswan:480/N2kPortal_back/api/Download/DescriptiveData",
