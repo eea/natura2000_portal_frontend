@@ -7,6 +7,8 @@
 	"DownloadResultsSites": "https://n2k-portal-back-fdbycab9hthmc0dv.westeurope-01.azurewebsites.net/api/Download/SitesSearchResults",
 	"DownloadResultsHabitats": "https://n2k-portal-back-fdbycab9hthmc0dv.westeurope-01.azurewebsites.net/api/Download/HabitatsSearchResults",
 	"DownloadResultsSpecies": "https://n2k-portal-back-fdbycab9hthmc0dv.westeurope-01.azurewebsites.net/api/Download/SpeciesSearchResults",
+	"GetReports": "https://n2k-portal-back-fdbycab9hthmc0dv.westeurope-01.azurewebsites.net/api/Download/FileFinder",
+	"DownloadReports": "https://n2k-portal-back-fdbycab9hthmc0dv.westeurope-01.azurewebsites.net/api/Download/FileDownloader",
 	"DownloadComputingSAC": "https://n2k-portal-back-fdbycab9hthmc0dv.westeurope-01.azurewebsites.net/api/Download/ComputingSAC",
 	"DownloadDescriptiveDataSensitive": "https://n2k-portal-back-fdbycab9hthmc0dv.westeurope-01.azurewebsites.net/api/Download/DescriptiveDataSensitive",
 	"DownloadDescriptiveData": "https://n2k-portal-back-fdbycab9hthmc0dv.westeurope-01.azurewebsites.net/api/Download/DescriptiveData",

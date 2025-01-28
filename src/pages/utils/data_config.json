@@ -1,66 +1,4 @@
 {
-	"Releases": [
-		{
-			"ReleaseId": 12,
-			"ReleaseName": "End2022",
-			"ReleaseDate": "2024-08-07"
-		},
-		{
-			"ReleaseId": 11,
-			"ReleaseName": "End2021",
-			"ReleaseDate": "2022-10-06"
-		},
-		{
-			"ReleaseId": 10,
-			"ReleaseName": "End2020",
-			"ReleaseDate": "2021-06-22"
-		},
-		{
-			"ReleaseId": 9,
-			"ReleaseName": "End2019",
-			"ReleaseDate": "2020-06-12"
-		},
-		{
-			"ReleaseId": 8,
-			"ReleaseName": "End2018",
-			"ReleaseDate": "2019-03-15"
-		},
-		{
-			"ReleaseId": 7,
-			"ReleaseName": "End2017",
-			"ReleaseDate": "2018-05-25"
-		},
-		{
-			"ReleaseId": 6,
-			"ReleaseName": "End2016",
-			"ReleaseDate": "2017-02-02"
-		},
-		{
-			"ReleaseId": 5,
-			"ReleaseName": "End2015",
-			"ReleaseDate": "2016-02-03"
-		},
-		{
-			"ReleaseId": 4,
-			"ReleaseName": "End2014",
-			"ReleaseDate": "2015-04-21"
-		},
-		{
-			"ReleaseId": 3,
-			"ReleaseName": "End2013",
-			"ReleaseDate": "2014-02-07"
-		},
-		{
-			"ReleaseId": 2,
-			"ReleaseName": "End2012",
-			"ReleaseDate": "2012-12-31"
-		},
-		{
-			"ReleaseId": 1,
-			"ReleaseName": "End2011",
-			"ReleaseDate": "2011-12-31"
-		}
-	],
 	"Countries": [
 		{
 			"CountryCode": "AT",
@@ -169,6 +107,120 @@
 		{
 			"CountryCode": "SE",
 			"CountryName": "Sweden"
+		}
+	],
+	"ReportsCountries": [
+		{
+			"CountryCode": "AT",
+			"CountryName": "Austria"
+		},
+		{
+			"CountryCode": "BE",
+			"CountryName": "Belgium"
+		},
+		{
+			"CountryCode": "BG",
+			"CountryName": "Bulgaria"
+		},
+		{
+			"CountryCode": "HR",
+			"CountryName": "Croatia"
+		},
+		{
+			"CountryCode": "CY",
+			"CountryName": "Cyprus"
+		},
+		{
+			"CountryCode": "CZ",
+			"CountryName": "Czechia"
+		},
+		{
+			"CountryCode": "DK",
+			"CountryName": "Denmark"
+		},
+		{
+			"CountryCode": "EE",
+			"CountryName": "Estonia"
+		},
+		{
+			"CountryCode": "FI",
+			"CountryName": "Finland"
+		},
+		{
+			"CountryCode": "FR",
+			"CountryName": "France"
+		},
+		{
+			"CountryCode": "DE",
+			"CountryName": "Germany"
+		},
+		{
+			"CountryCode": "GR",
+			"CountryName": "Greece"
+		},
+		{
+			"CountryCode": "HU",
+			"CountryName": "Hungary"
+		},
+		{
+			"CountryCode": "IE",
+			"CountryName": "Ireland"
+		},
+		{
+			"CountryCode": "IT",
+			"CountryName": "Italy"
+		},
+		{
+			"CountryCode": "LV",
+			"CountryName": "Latvia"
+		},
+		{
+			"CountryCode": "LT",
+			"CountryName": "Lithuania"
+		},
+		{
+			"CountryCode": "LU",
+			"CountryName": "Luxembourg"
+		},
+		{
+			"CountryCode": "MT",
+			"CountryName": "Malta"
+		},
+		{
+			"CountryCode": "NL",
+			"CountryName": "Netherlands"
+		},
+		{
+			"CountryCode": "PL",
+			"CountryName": "Poland"
+		},
+		{
+			"CountryCode": "PT",
+			"CountryName": "Portugal"
+		},
+		{
+			"CountryCode": "RO",
+			"CountryName": "Romania"
+		},
+		{
+			"CountryCode": "SK",
+			"CountryName": "Slovakia"
+		},
+		{
+			"CountryCode": "SI",
+			"CountryName": "Slovenia"
+		},
+		{
+			"CountryCode": "ES",
+			"CountryName": "Spain"
+		},
+		{
+			"CountryCode": "SE",
+			"CountryName": "Sweden"
+		},
+		{
+			"CountryCode": "UK",
+			"CountryName": "United Kingdom"
 		}
 	],
 	"Bioregions": [
@@ -386,34 +438,29 @@
 	],
 	"Reports": [
 		{
-			"Product": "DescriptiveDataChangeDeliveryReport",
+			"Product": "DescriptiveReport",
 			"Name": "Descriptive Data Change Delivery Report",
-			"Description": "This is a text description for the report.This is a text description for the report. This is a text description for the report. This is a text description for the report. This is a text description for the report. ",
-			"Link": ""
+			"Description": "This is a text description for the report.This is a text description for the report. This is a text description for the report. This is a text description for the report. This is a text description for the report. "
 		},
 		{
-			"Product": "DescriptiveDataDeliveryChangeSubmission",
+			"Product": "DescriptiveBySubmission",
 			"Name": "Descriptive Data Delivery Change by Submission",
-			"Description": "This is a text description for the report.This is a text description for the report. This is a text description for the report. This is a text description for the report. This is a text description for the report. ",
-			"Link": ""
+			"Description": "This is a text description for the report.This is a text description for the report. This is a text description for the report. This is a text description for the report. This is a text description for the report. "
 		},
 		{
-			"Product": "SpatialDataDeliveryChangeReport",
+			"Product": "SpatialReports",
 			"Name": "Spatial Data Delivery Change Report",
-			"Description": "This is a text description for the report.This is a text description for the report. This is a text description for the report. This is a text description for the report. This is a text description for the report. ",
-			"Link": ""
+			"Description": "This is a text description for the report.This is a text description for the report. This is a text description for the report. This is a text description for the report. This is a text description for the report. "
 		},
 		{
-			"Product": "UnionListsChangesReport",
+			"Product": "UnionListsReports",
 			"Name": "UnionLists Changes Report",
-			"Description": "This is a text description for the report.This is a text description for the report. This is a text description for the report. This is a text description for the report. This is a text description for the report. ",
-			"Link": ""
+			"Description": "This is a text description for the report.This is a text description for the report. This is a text description for the report. This is a text description for the report. This is a text description for the report. "
 		},
 		{
-			"Product": "SensitiveSpeciesReport",
+			"Product": "SensitiveReports",
 			"Name": "Sensitive Species Report",
-			"Description": "This is a text description for the report.This is a text description for the report. This is a text description for the report. This is a text description for the report. This is a text description for the report. ",
-			"Link": ""
+			"Description": "This is a text description for the report.This is a text description for the report. This is a text description for the report. This is a text description for the report. This is a text description for the report. "
 		}
 	],
 	"ReportReleases": [
@@ -929,11 +976,5 @@
 			"Name": "Copernicus InSitu",
 			"Link": "https://insitu.copernicus.eu"
 		}
-	],
-	"Home": {
-		"SitesNumber": "27193",
-		"HabitatsNumber": "233",
-		"SpeciesNumber": "1689",
-		"ReleaseDate": "2024-03-12T13:12:54.1"
-	}
+	]
 }
