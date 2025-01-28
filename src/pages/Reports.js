@@ -178,7 +178,7 @@ const Reports = () => {
                                                             >
                                                                 <i aria-hidden="true" className="small icon ri-arrow-down-s-line"></i>
                                                                 <div className="document-text">
-                                                                    {ConfigData.ReportsCountries.find(a => a.CountryCode === country).CountryName}
+                                                                    {ConfigData.ReportsCountries.some(a => a.CountryCode === country) ? ConfigData.ReportsCountries.find(a => a.CountryCode === country).CountryName : country}
                                                                 </div>
                                                             </AccordionTitle>
                                                             <AccordionContent active={activeCountry.includes(report.Product+country)}>
