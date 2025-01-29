@@ -48,6 +48,7 @@ const SDF = () => {
         let params = Object.fromEntries([...searchParams]);
         setSiteCode(params.sitecode ? params.sitecode : "nodata");
         setRelease(params.release ? parseInt(params.release) : "");
+        setSensitive(params.sensitive && JSON.parse(params.sensitive));
         setNav(params.nav);
     }
 
@@ -160,7 +161,7 @@ const SDF = () => {
                                                     </div>
 
                                                     <div>
-                                                        <h1>NATURA 2000 - STANDARD DATA FORM</h1>
+                                                        <h1>NATURA 2000 - STANDARD DATA FORM {sensitive && <span className="sensitive">SENSITIVE</span>}</h1>
                                                         {release && releases.length > 0 && <b>RELEASE {releases.find(a => a.ReleaseId === release)?.ReleaseName} ({formatDate(releases.find(a => a.ReleaseId === release)?.ReleaseDate, true)})</b>}
                                                     </div>
                                                     <div className="select--right">
