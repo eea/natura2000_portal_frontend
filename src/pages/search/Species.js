@@ -79,7 +79,7 @@ const Search = () => {
     const loadData = () => {
         setLoadingData(true);
         setDownloadParams(filters);
-        let url = ConfigJson.GetSpecies + "?" + new URLSearchParams(downloadParams);
+        let url = ConfigJson.GetSpecies + "?" + new URLSearchParams(filters);
         fetch(url)
         .then(response => response.json())
         .then(data => {
@@ -368,7 +368,7 @@ const Search = () => {
                                                         </div>
                                                         <div className="card-body">
                                                             <div className="card-title">
-                                                                {item.SpeciesName}{item.SpeciesName && item.SpeciesScientificName && " - "}<i>{item.SpeciesScientificName}</i>
+                                                                {((item.SpeciesName && item.SpeciesScientificName) && (item.SpeciesName !== item.SpeciesScientificName)) ? (<><span>{item.SpeciesName}</span> - <i>{item.SpeciesScientificName}</i></>) : <i>{item.SpeciesName}</i>}
                                                             </div>
                                                             <div className="card-text">
                                                                 {item.SpeciesGroupCode}
