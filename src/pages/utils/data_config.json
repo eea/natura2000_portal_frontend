@@ -477,7 +477,7 @@
 		{
 			"Product": "DescriptiveDataSensitive",
 			"Name": "Natura 2000 sites SDF data (descriptive data) with sensitive species, for a given release",
-			"Description": "Export descriptive data, including sensitive species - Access database format. DO NOT SHARE PUBLICLY - Commission/EEA use only",
+			"Description": "Export descriptive data, including sensitive species - Access database format. DO NOT SHARE PUBLICLY - Commission/EEA/ETC use only",
 			"Fields": [
 				"releaseId"
 			]
