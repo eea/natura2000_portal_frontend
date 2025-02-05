@@ -46,7 +46,7 @@ const Reports = () => {
                         let country = item.split("\\")[0];
                         let files = item.split("\\")[1];
                         if(country in reportData) {
-                            reportData[country].push(files);
+                            reportData[country].unshift(files);
                         }
                         else {
                             reportData[country] = [files];
