@@ -35,7 +35,7 @@ const Reports = () => {
     const loadData = () => {
         setLoadingData(true);
         let reports = ConfigData.Reports.map(a => a.Product);
-        let countries = ConfigData.Countries;
+        let countries = ConfigData.ReportsCountries;
         reports.forEach(report => {
             let url = ConfigJson.GetReports + "?section=" +report;
             fetch(url)
