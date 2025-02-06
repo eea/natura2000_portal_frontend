@@ -59,7 +59,7 @@ const Reports = () => {
                                 reportData[country].push(files);
                             }
                             else {
-                                reportData = Object.assign({country: files}, reportData);
+                                reportData = Object.assign({[country]: [files]}, reportData);
                             }
                         }
                     });
