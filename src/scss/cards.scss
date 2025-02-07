@@ -119,6 +119,14 @@
                         vertical-align: text-top;
                     }
                 }
+                .sensitive {
+                    color: $messageError;
+                    margin-left: auto;
+                    i {
+                        font-size: 1.5rem;
+                        line-height: 1.25rem;
+                    }
+                }
             }
             &-popup {
                 margin-left: auto;
