@@ -346,6 +346,12 @@ const Search = () => {
                                         <div className="search-counter">
                                             <span className="search-number">{results}</span> results
                                         </div>
+                                        {data &&
+                                            <div className="legend-sensitive">
+                                                <i className="ri-alert-line"></i>
+                                                Number of sites where the species is sensitive
+                                            </div>
+                                        }
                                         <button className="ui button inverted" disabled={data.length === 0 || !data || downloading} onClick={()=>downloadResults()}>
                                             {downloading ? <Loader active={true} size='mini'></Loader> : <i className="icon ri-download-line"></i>}Download results
                                         </button>
@@ -383,11 +389,11 @@ const Search = () => {
                                                             <div className="card-links">
                                                                 Found in <b>{item.SitesNumber} sites</b>
                                                                 {item.IsSensitive &&
-                                                                    <div className="card-popup sensitive">
-                                                                        <a href={"/#/search/sites?"+setSitesUrl()+"&species="+item.SpeciesCode+"&sensitive=true"}>
-                                                                            <Popup content={"The species is sensitive in "+item.SitesNumberSensitive+" sites"} inverted position="top center" trigger={<i className="ri-alert-line"></i>} />
+                                                                    
+                                                                        <a className="sensitive" href={"/#/search/sites?"+setSitesUrl()+"&species="+item.SpeciesCode+"&sensitive=true"}>
+                                                                            <i className="ri-alert-line"></i> {item.SitesNumberSensitive}
                                                                         </a>
-                                                                    </div>
+                                                                    
                                                                 }
                                                             </div>
                                                         </div>
