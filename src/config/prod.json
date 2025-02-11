@@ -1,5 +1,5 @@
 {
-	"GetReleases": https://n2kportal.eea.europa.eu/N2kPortal_back/api/Info/GetOfficialReleases",
+	"GetReleases": "https://n2kportal.eea.europa.eu/N2kPortal_back/api/Info/GetOfficialReleases",
 	"GetLastReleaseData": "https://n2kportal.eea.europa.eu/N2kPortal_back/api/Info/GetLatestReleaseCounters",
 	"GetSites": "https://n2kportal.eea.europa.eu/N2kPortal_back/api/Info/GetParameteredSites",
 	"GetHabitats": "https://n2kportal.eea.europa.eu/N2kPortal_back//api/Info/GetParameteredHabitats",
