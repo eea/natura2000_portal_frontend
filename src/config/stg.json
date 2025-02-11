@@ -10,7 +10,7 @@
 	"GetReports": "https://blackneckedswan:480/N2kPortal_back/api/Download/FileFinder",
 	"DownloadReports": "https://blackneckedswan:480/N2kPortal_back/api/Download/FileDownloader",
 	"DownloadComputingSAC": "https://blackneckedswan:480/N2kPortal_back/api/Download/ComputingSAC",
-	"DownloadDescriptiveDataSensitive": "https://blackneckedswan:480/N2kPortal_back/api/Download/DescriptiveDataSensitive",
+	"DownloadDescriptiveDataSensitive": "https://n2kportal.eea.europa.eu/n2kportal/mdbofficial/",
 	"DownloadDescriptiveData": "https://blackneckedswan:480/N2kPortal_back/api/Download/DescriptiveData",
 	"DownloadSpatialData": "https://blackneckedswan:480/N2kPortal_back/api/Download/SpatialData",
 	"PublicSDF": "https://blackneckedswan/n2kbackbone_back/api/PublicData/GetReleaseData",
