@@ -133,30 +133,6 @@ const Downloads = () => {
 
     const renderFields = (field) => {
         switch (field) {
-            case "country":
-                return (
-                    <div className="field">
-                        <label>Member State</label>
-                        <Select
-                            placeholder="Select a country"
-                            name="country"
-                            options=
-                                {
-                                    ConfigData.Countries.map((item, i) => (
-                                        {
-                                            key: item.CountryCode, value: item.CountryCode, text: item.CountryName, selected: fields[field] === item.CountryCode
-                                        }
-                                    ))
-                                }
-                            value={fields[field]}
-                            onChange={onChangeFields}
-                            selectOnBlur={false}
-                            error={errors[field]}
-                            loading={loading}
-                            disabled={loading || errorLoading || downloading}
-                        />
-                    </div>
-                );
             case "releaseId":
                 return (
                     <div className="field">
@@ -206,8 +182,30 @@ const Downloads = () => {
         e.preventDefault();
         e.stopPropagation();
         if(validateFields(product)) {
-            downloadRequest(product);
+            switch(product) {
+                case "ComputingSAC":
+                    downloadRequest(product);
+                    break;
+                case "DescriptiveDataSensitive": {
+                    let release = data.find(a => a.ReleaseId.toString() === fields.releaseId).ReleaseName;
+                    let url = ConfigJson["Download" + product] + release + "/Natura2000OfficialDescriptive.mdb";
+                    let link = document.createElement("a");
+                    link.download = "Natura2000OfficialDescriptive_" + release;
+                    link.href = url;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    break
+                }
+                case "DescriptiveData":
+
+                    break;
+                case "SpatialData":
+
+                    break;
+            }
         }
+        
     }
 
     const validateFields = (product) => {
