@@ -499,6 +499,7 @@
 			]
 		}
 	],
+	"ReleasesFilters": "?initialValidation=true&internalPortalSDFSensitive=true&productsCreated=true",
 	"HomeLinks": [
 		{
 			"Name": "European Environment Agency website",

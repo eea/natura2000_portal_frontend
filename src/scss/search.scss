@@ -52,3 +52,13 @@
 .noresults {
     margin: 2rem auto;
 }
+
+@media only screen and (max-width: 768px) {
+    .search-results {
+        flex-direction: column;
+        gap: 0.5rem;
+        .search-counter {
+            align-self: flex-start;
+        }
+    }
+}

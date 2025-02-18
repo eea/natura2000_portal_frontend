@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import ConfigJson from "../config.json";
+import ConfigData from "./utils/data_config.json";
 import SDFStructure from "./components/SDFStructure";
 import Logo from "../img/natura2000_logo.svg";
 import {
@@ -18,7 +19,7 @@ const SDF = () => {
     const [siteCode, setSiteCode] = useState("");
     const [release, setRelease] = useState("");
     const [releases, setReleases] = useState([]);
-    const [sensitive, setSensitive] = useState(true);
+    const [sensitive, setSensitive] = useState(false);
     const [nav, setNav] = useState("");
     const [showScrollBtn, setShowScrollBtn] = useState(false);
 
@@ -55,12 +56,12 @@ const SDF = () => {
     const loadData = () => {
         if(siteCode !== "" && !isLoading) {
             setIsLoading(true);
-            let url = sensitive ? ConfigJson.SensitiveSDF : ConfigJson.PublicSDF;
+            let url = ConfigJson.SensitiveSDF + ConfigData.ReleasesFilters;
             if(release) {
-                url += "?siteCode=" + siteCode + "&releaseId=" + release;
+                url += "&siteCode=" + siteCode + "&releaseId=" + release;
             }
             else {
-                url += "?siteCode=" + siteCode;
+                url += "&siteCode=" + siteCode;
             }
             fetch(url)
                 .then(response => response.json())
@@ -161,7 +162,7 @@ const SDF = () => {
                                                     </div>
 
                                                     <div>
-                                                        <h1>NATURA 2000 - STANDARD DATA FORM {sensitive && <span className="sensitive">SENSITIVE</span>}</h1>
+                                                        <h1>NATURA 2000 - STANDARD DATA FORM {sensitive && <div className="sensitive">SENSITIVE</div>}</h1>
                                                         {release && releases.length > 0 && <b>RELEASE {releases.find(a => a.ReleaseId === release)?.ReleaseName} ({formatDate(releases.find(a => a.ReleaseId === release)?.ReleaseDate, true)})</b>}
                                                     </div>
                                                     <div className="select--right">
