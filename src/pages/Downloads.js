@@ -41,7 +41,7 @@ const Downloads = () => {
     const loadData = () => {
         setLoading(true);
         let promises = [];
-        let url = ConfigJson.GetReleases;
+        let url = ConfigJson.GetReleases + ConfigData.ReleasesFilters;
         promises.push(
             fetch(url)
             .then(response => response.json())
