@@ -41,7 +41,7 @@ const Downloads = () => {
     const loadData = () => {
         setLoading(true);
         let promises = [];
-        let url = ConfigJson.GetReleases + ConfigData.ReleasesFilters;
+        let url = ConfigJson.GetReleases + (downloadType === "ComputingSAC" ? ConfigData.ReleasesFilters.SACComputation : ConfigData.ReleasesFilters.PortalSDFSensitive);
         promises.push(
             fetch(url)
             .then(response => response.json())
