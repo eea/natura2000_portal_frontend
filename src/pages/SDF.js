@@ -56,7 +56,7 @@ const SDF = () => {
     const loadData = () => {
         if(siteCode !== "" && !isLoading) {
             setIsLoading(true);
-            let url = ConfigJson.SensitiveSDF + ConfigData.ReleasesFilters;
+            let url = ConfigJson.SensitiveSDF + ConfigData.ReleasesFilters.PortalSDFSensitive;
             if(release) {
                 url += "&siteCode=" + siteCode + "&releaseId=" + release;
             }
