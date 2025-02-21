@@ -32,6 +32,9 @@ const SDF = () => {
                 setShowScrollBtn(true);
             }
         });
+        if (!document.title.includes(siteCode)) {
+            document.title = "Natura 2000 SDF - " + siteCode;
+        }
     }, []);
 
     useEffect(() => {
