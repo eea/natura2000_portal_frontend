@@ -182,30 +182,37 @@ const Downloads = () => {
         e.preventDefault();
         e.stopPropagation();
         if(validateFields(product)) {
-            switch(product) {
-                case "ComputingSAC":
-                    downloadRequest(product);
-                    break;
-                case "DescriptiveDataSensitive": {
-                    let release = data.find(a => a.ReleaseId.toString() === fields.releaseId).ReleaseName;
-                    let url = ConfigJson["Download" + product] + release + "/Natura2000OfficialDescriptive.mdb";
-                    let link = document.createElement("a");
-                    link.download = "Natura2000OfficialDescriptive_" + release;
-                    link.href = url;
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                    break
+            if(product === "ComputingSAC") {
+                downloadRequest(product);
+            }
+            else {
+                setDownloading(true);
+                let release = data.find(a => a.ReleaseId.toString() === fields.releaseId);
+                let url = "";
+                let filename = "";
+                switch(product) {
+                    case "DescriptiveDataSensitive":
+                        url = release["SensitiveMDB"];
+                        filename = "Natura2000OfficialDescriptive_" + release.ReleaseName;
+                        break;
+                    case "DescriptiveData":
+                        url = release["PublicMDB"];
+                        filename = "Natura2000PublicDescriptive_" + release.ReleaseName;
+                        break;
+                    case "SpatialData":
+                        url = release["SHP"];
+                        filename = "Natura2000Spatial_" + release.ReleaseName;
+                        break;
                 }
-                case "DescriptiveData":
-
-                    break;
-                case "SpatialData":
-
-                    break;
+                let link = document.createElement("a");
+                link.download = filename;
+                link.href = url;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                setDownloading(false);
             }
         }
-        
     }
 
     const validateFields = (product) => {
