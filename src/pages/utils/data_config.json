@@ -500,7 +500,7 @@
 		}
 	],
 	"ReleasesFilters": {
-		"PortalSDFSensitive": "?initialValidation=true&productsCreated=true&jediDimensionCreated=true&internalPortalSDFSensitive=true",
+		"PortalSDFSensitive": "",
 		"SACComputation": "?initialValidation=true&productsCreated=true&jediDimensionCreated=true"
 	},
 	"HomeLinks": [
