@@ -204,25 +204,13 @@ const Downloads = () => {
                         filename = "Natura2000Spatial_" + release.ReleaseName;
                         break;
                 }
-                fetch(url)
-                .then(data => {
-                    if(data?.ok) {
-                        data.blob()
-                        .then(blobresp => {
-                            let link = document.createElement("a");
-                            link.download = filename;
-                            link.href = window.URL.createObjectURL(blobresp);
-                            document.body.appendChild(link);
-                            link.click();
-                            document.body.removeChild(link);
-                            setDownloading(false);
-                        })
-                    }
-                    else {
-                        setErrorDownloading(true);
-                        setDownloading(false);
-                    }
-                })
+                let link = document.createElement("a");
+                link.download = filename;
+                link.href = url;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                setDownloading(false);
             }
         }
     }
