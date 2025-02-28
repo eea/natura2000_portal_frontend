@@ -499,10 +499,7 @@
 			]
 		}
 	],
-	"ReleasesFilters": {
-		"PortalSDFSensitive": "?initialValidation=true&productsCreated=true&jediDimensionCreated=true&internalPortalSDFSensitive=true",
-		"SACComputation": "?initialValidation=true&productsCreated=true&jediDimensionCreated=true"
-	},
+	"ReleasesFilters": "?internalPortalSDFSensitive=true",
 	"HomeLinks": [
 		{
 			"Name": "European Environment Agency website",

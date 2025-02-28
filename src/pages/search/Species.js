@@ -57,7 +57,7 @@ const Search = () => {
 
     const loadReleases = () => {
         setLoadingReleases(true);
-        let url = ConfigJson.GetReleases + ConfigData.ReleasesFilters.PortalSDFSensitive;
+        let url = ConfigJson.GetReleases + ConfigData.ReleasesFilters;
         fetch(url)
         .then(response => response.json())
         .then(data => {

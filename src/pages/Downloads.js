@@ -41,7 +41,7 @@ const Downloads = () => {
     const loadData = () => {
         setLoading(true);
         let promises = [];
-        let url = ConfigJson.GetReleases + (downloadType === "ComputingSAC" ? ConfigData.ReleasesFilters.SACComputation : ConfigData.ReleasesFilters.PortalSDFSensitive);
+        let url = ConfigJson.GetReleases + ConfigData.ReleasesFilters;
         promises.push(
             fetch(url)
             .then(response => response.json())
@@ -194,14 +194,17 @@ const Downloads = () => {
                     case "DescriptiveDataSensitive":
                         url = release["SensitiveMDB"];
                         filename = "Natura2000OfficialDescriptive_" + release.ReleaseName;
+                        url="https://n2kportal.eea.europa.eu/n2kportal/mdbofficial/end2010/Natura2000OfficialDescriptive.mdb"
                         break;
                     case "DescriptiveData":
                         url = release["PublicMDB"];
                         filename = "Natura2000PublicDescriptive_" + release.ReleaseName;
+                        url="https://sdi.eea.europa.eu/datashare/s/sJctC9e89F5DZSs/download?path=%2F&files=ACCESS%20DB&downloadStartSecret=se84velkpji"
                         break;
                     case "SpatialData":
                         url = release["SHP"];
                         filename = "Natura2000Spatial_" + release.ReleaseName;
+                        url="https://sdi.eea.europa.eu/datashare/s/NPpTTHmERYszoLX/download?path=%2F&files=SHP&downloadStartSecret=u3ge6biofd"
                         break;
                 }
                 let link = document.createElement("a");
