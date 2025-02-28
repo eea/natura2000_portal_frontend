@@ -41,7 +41,7 @@ const Downloads = () => {
     const loadData = () => {
         setLoading(true);
         let promises = [];
-        let url = ConfigJson.GetReleases + (downloadType === "ComputingSAC" ? ConfigData.ReleasesFilters.SACComputation : ConfigData.ReleasesFilters.PortalSDFSensitive);
+        let url = ConfigJson.GetReleases + ConfigData.ReleasesFilters;
         promises.push(
             fetch(url)
             .then(response => response.json())
@@ -207,25 +207,13 @@ const Downloads = () => {
                         url="https://sdi.eea.europa.eu/datashare/s/NPpTTHmERYszoLX/download?path=%2F&files=SHP&downloadStartSecret=u3ge6biofd"
                         break;
                 }
-                fetch(url)
-                .then(data => {
-                    if(data?.ok) {
-                        data.blob()
-                        .then(blobresp => {
-                            let link = document.createElement("a");
-                            link.download = filename;
-                            link.href = window.URL.createObjectURL(blobresp);
-                            document.body.appendChild(link);
-                            link.click();
-                            document.body.removeChild(link);
-                            setDownloading(false);
-                        })
-                    }
-                    else {
-                        setErrorDownloading(true);
-                        setDownloading(false);
-                    }
-                })
+                let link = document.createElement("a");
+                link.download = filename;
+                link.href = url;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                setDownloading(false);
             }
         }
     }
