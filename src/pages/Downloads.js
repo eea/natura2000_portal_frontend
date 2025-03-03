@@ -11,7 +11,8 @@ import {
     Modal,
     ModalHeader,
     ModalContent,
-    ModalActions
+    ModalActions,
+    Loader
 } from "semantic-ui-react"
 
 const Downloads = () => {
@@ -125,7 +126,9 @@ const Downloads = () => {
                 </ModalContent>
                 <ModalActions>
                     <button className="ui button cancel" disabled={loading || errorLoading || downloading} onClick={()=>closeModal()}>Cancel</button>
-                    <button className="ui button primary ok submit" disabled={loading || errorLoading || downloading} onClick={(e)=>downloadProduct(e, modal.Product)}>Download</button>
+                    <button className="ui button primary ok submit" disabled={loading || errorLoading || downloading} onClick={(e)=>downloadProduct(e, modal.Product)}>
+                        {downloading ? <Loader active={true} size="mini"></Loader> : <i className="icon ri-download-line"></i>}Download
+                    </button>
                 </ModalActions>
             </>
         )
@@ -207,13 +210,25 @@ const Downloads = () => {
                         url="https://sdi.eea.europa.eu/datashare/s/NPpTTHmERYszoLX/download?path=%2F&files=SHP&downloadStartSecret=u3ge6biofd"
                         break;
                 }
-                let link = document.createElement("a");
-                link.download = filename;
-                link.href = url;
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-                setDownloading(false);
+                fetch(url)
+                .then(data => {
+                    if(data?.ok) {
+                        data.blob()
+                        .then(blobresp => {
+                            let link = document.createElement("a");
+                            link.download = filename;
+                            link.href = window.URL.createObjectURL(blobresp);
+                            document.body.appendChild(link);
+                            link.click();
+                            document.body.removeChild(link);
+                            setDownloading(false);
+                        })
+                    }
+                    else {
+                        setErrorDownloading(true);
+                        setDownloading(false);
+                    }
+                })
             }
         }
     }
@@ -297,7 +312,7 @@ const Downloads = () => {
                                                 <div className="download-description">{Utils.highlightSensitiveText(item.Description)}</div>
                                             </div>
                                             <div className="download-button">
-                                                <button className="ui button primary" onClick={() => openModal(item.Product)}>Download</button>
+                                                <button className="ui button primary" onClick={() => openModal(item.Product)}>Go to download</button>
                                             </div>
                                         </div>
                                     )

@@ -352,8 +352,8 @@ const Search = () => {
                                                 Number of sites where the species is sensitive
                                             </div>
                                         }
-                                        <button className="ui button inverted" disabled={data.length === 0 || !data || downloading} onClick={()=>downloadResults()}>
-                                            {downloading ? <Loader active={true} size='mini'></Loader> : <i className="icon ri-download-line"></i>}Download results
+                                        <button className="ui button primary" disabled={data.length === 0 || !data || downloading} onClick={()=>downloadResults()}>
+                                            {downloading ? <Loader active={true} size="mini"></Loader> : <i className="icon ri-download-line"></i>}Download results
                                         </button>
                                     </div>
                                 }

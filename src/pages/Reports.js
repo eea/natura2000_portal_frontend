@@ -204,7 +204,7 @@ const Reports = () => {
                                                                             </div>
                                                                             <div className="document-button">
                                                                                 <button className="ui button primary" disabled={downloading.includes(file)} onClick={() => downloadFile(report.Product, country, file)}>
-                                                                                    {downloading.includes(file) ? <Loader active={true} size='mini'></Loader> : <i className="icon ri-download-line"></i>}Download
+                                                                                    {downloading.includes(file) ? <Loader active={true} size="mini"></Loader> : <i className="icon ri-download-line"></i>}Download
                                                                                 </button>
                                                                             </div>
                                                                         </div>
