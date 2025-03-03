@@ -186,22 +186,6 @@
         font-size: 1.25rem;
         font-weight: bold;
     }
-    &-button {
-        button {
-            margin: 0 !important;
-            .ui.mini.loader {
-                &:before, &:after {
-                    margin-top: 0.5rem;
-                }
-                &:before {
-                    border-color: #ffffff80;
-                }
-                &:after {
-                    border-color: #ffffff transparent transparent;
-                }
-            }
-        }
-    }
     &:last-of-type {
         border-bottom: none;
     }

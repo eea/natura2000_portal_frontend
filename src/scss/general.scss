@@ -6,6 +6,14 @@
             background-color: $naturaGreen;
             color: $white;
         }
+        .ui.loader.mini {
+            &:before {
+                border-color: #ffffff80;
+            }
+            &:after {
+                border-color: #ffffff transparent transparent;
+            }
+        }
     }
     &.secondary {
         background-color: $naturaBlue;
@@ -19,10 +27,13 @@
         color: white !important;
     }
     .ui.loader.mini {
-        position: relative;
+        position: static;
         width: 1.25rem;
         display: inline-block;
         left: 0;
+        &:before, &:after {
+            margin-top: 0.5rem;
+        }
     }
 }
 p a {
