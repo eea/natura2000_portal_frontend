@@ -397,7 +397,7 @@
 			"Name": "Natura 2000 Barometer",
 			"Description": "An overview of the Natura 2000 network of sites",
 			"Image": "natura2000barometer",
-			"Link": "https://www.eea.europa.eu/data-and-maps/dashboards/natura-2000-barometer"
+			"Link": "https://tableau-public.discomap.eea.europa.eu/#/views/Barometer_Backbone_stg/Barometerstatistics"
 		},
 		{
 			"Name": "Natura online list",
@@ -477,7 +477,7 @@
 		{
 			"Product": "DescriptiveDataSensitive",
 			"Name": "Natura 2000 sites SDF data (descriptive data) with sensitive species, for a given release",
-			"Description": "Export descriptive data, including sensitive species - Access database format. DO NOT SHARE PUBLICLY - Commission/EEA use only",
+			"Description": "Export descriptive data, including sensitive species - Access database format. DO NOT SHARE PUBLICLY - Commission/EEA/ETC use only",
 			"Fields": [
 				"releaseId"
 			]
@@ -499,6 +499,7 @@
 			]
 		}
 	],
+	"ReleasesFilters": "?internalPortalSDFSensitive=true",
 	"HomeLinks": [
 		{
 			"Name": "European Environment Agency website",

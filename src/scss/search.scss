@@ -32,6 +32,15 @@
         justify-content: space-between;
         margin-bottom: 1rem;
         padding-top: 0.25rem;
+        .legend-sensitive {
+            display: flex;
+            align-items: end;
+            gap: 0.25rem;
+            color: $messageError;
+            i {
+                color: $messageError;
+            }
+        }
     }
     &-counter {
         font-size: 1.25rem;
@@ -42,4 +51,14 @@
 
 .noresults {
     margin: 2rem auto;
+}
+
+@media only screen and (max-width: 768px) {
+    .search-results {
+        flex-direction: column;
+        gap: 0.5rem;
+        .search-counter {
+            align-self: flex-start;
+        }
+    }
 }

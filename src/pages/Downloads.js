@@ -11,7 +11,8 @@ import {
     Modal,
     ModalHeader,
     ModalContent,
-    ModalActions
+    ModalActions,
+    Loader
 } from "semantic-ui-react"
 
 const Downloads = () => {
@@ -41,7 +42,7 @@ const Downloads = () => {
     const loadData = () => {
         setLoading(true);
         let promises = [];
-        let url = ConfigJson.GetReleases;
+        let url = ConfigJson.GetReleases + ConfigData.ReleasesFilters;
         promises.push(
             fetch(url)
             .then(response => response.json())
@@ -125,7 +126,9 @@ const Downloads = () => {
                 </ModalContent>
                 <ModalActions>
                     <button className="ui button cancel" disabled={loading || errorLoading || downloading} onClick={()=>closeModal()}>Cancel</button>
-                    <button className="ui button primary ok submit" disabled={loading || errorLoading || downloading} onClick={(e)=>downloadProduct(e, modal.Product)}>Download</button>
+                    <button className="ui button primary ok submit" disabled={loading || errorLoading || downloading} onClick={(e)=>downloadProduct(e, modal.Product)}>
+                        {downloading ? <Loader active={true} size="mini"></Loader> : <i className="icon ri-download-line"></i>}Download
+                    </button>
                 </ModalActions>
             </>
         )
@@ -133,30 +136,6 @@ const Downloads = () => {
 
     const renderFields = (field) => {
         switch (field) {
-            case "country":
-                return (
-                    <div className="field">
-                        <label>Member State</label>
-                        <Select
-                            placeholder="Select a country"
-                            name="country"
-                            options=
-                                {
-                                    ConfigData.Countries.map((item, i) => (
-                                        {
-                                            key: item.CountryCode, value: item.CountryCode, text: item.CountryName, selected: fields[field] === item.CountryCode
-                                        }
-                                    ))
-                                }
-                            value={fields[field]}
-                            onChange={onChangeFields}
-                            selectOnBlur={false}
-                            error={errors[field]}
-                            loading={loading}
-                            disabled={loading || errorLoading || downloading}
-                        />
-                    </div>
-                );
             case "releaseId":
                 return (
                     <div className="field">
@@ -206,7 +185,36 @@ const Downloads = () => {
         e.preventDefault();
         e.stopPropagation();
         if(validateFields(product)) {
-            downloadRequest(product);
+            if(product === "ComputingSAC") {
+                downloadRequest(product);
+            }
+            else {
+                setDownloading(true);
+                let release = data.find(a => a.ReleaseId.toString() === fields.releaseId);
+                let url = "";
+                let filename = "";
+                switch(product) {
+                    case "DescriptiveDataSensitive":
+                        url = release["SensitiveMDB"];
+                        filename = "Natura2000OfficialDescriptive_" + release.ReleaseName;
+                        break;
+                    case "DescriptiveData":
+                        url = release["PublicMDB"];
+                        filename = "Natura2000PublicDescriptive_" + release.ReleaseName;
+                        break;
+                    case "SpatialData":
+                        url = release["SHP"];
+                        filename = "Natura2000Spatial_" + release.ReleaseName;
+                        break;
+                }
+                let link = document.createElement("a");
+                link.download = filename;
+                link.href = url;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                setDownloading(false);
+            }
         }
     }
 
@@ -289,7 +297,7 @@ const Downloads = () => {
                                                 <div className="download-description">{Utils.highlightSensitiveText(item.Description)}</div>
                                             </div>
                                             <div className="download-button">
-                                                <button className="ui button primary" onClick={() => openModal(item.Product)}>Download</button>
+                                                <button className="ui button primary" onClick={() => openModal(item.Product)}>Go to download</button>
                                             </div>
                                         </div>
                                     )

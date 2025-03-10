@@ -60,7 +60,7 @@ const Search = () => {
             let values = active.concat(1);
             setActive(values);
         }
-        let url = ConfigJson.GetReleases;
+        let url = ConfigJson.GetReleases + ConfigData.ReleasesFilters;
         fetch(url)
         .then(response => response.json())
         .then(data => {
@@ -161,12 +161,13 @@ const Search = () => {
             if(data?.ok) {
                 const regExp = /filename=(?<filename>.*);/;
                 const filename = regExp.exec(data.headers.get('Content-Disposition'))?.groups?.filename ?? null;
+                const release = releases.find(a => a.ReleaseId === parseInt(downloadParams.releaseId)).ReleaseName.replaceAll(" ", "_");
                 data.blob()
                   .then(blobresp => {
                     var blob = new Blob([blobresp], { type: "octet/stream" });
                     var url = window.URL.createObjectURL(blob);
                     let link = document.createElement("a");
-                    link.download = filename;
+                    link.download = release + "_" + filename;
                     link.href = url;
                     document.body.appendChild(link);
                     link.click();
@@ -375,8 +376,14 @@ const Search = () => {
                                         <div className="search-counter">
                                             <span className="search-number">{results}</span> results
                                         </div>
-                                        <button className="ui button inverted" disabled={data.length === 0 || !data || downloading} onClick={()=>downloadResults()}>
-                                            {downloading ? <Loader active={true} size='mini'></Loader> : <i className="icon ri-download-line"></i>}Download results
+                                        {data &&
+                                            <div className="legend-sensitive">
+                                                <i className="ri-alert-line"></i>
+                                                Contains sensitive species
+                                            </div>
+                                        }
+                                        <button className="ui button primary" disabled={data.length === 0 || !data || downloading} onClick={()=>downloadResults()}>
+                                            {downloading ? <Loader active={true} size="mini"></Loader> : <i className="icon ri-download-line"></i>}Download results
                                         </button>
                                     </div>
                                 }
@@ -414,11 +421,11 @@ const Search = () => {
                                                             </div>
                                                         </div>
                                                         <div className="card-links">
-                                                            <a href={"#/sdf?sitecode=" + item.SiteCode + "&release=" + filters.releaseId} target="_blank" rel="noreferrer">SDF<i className="icon ri-external-link-line"></i></a>
+                                                            <a href={"#/sdf?sitecode=" + item.SiteCode + "&release=" + filters.releaseId + "&sensitive=" + item.IsSensitive} target="_blank" rel="noreferrer">SDF<i className="icon ri-external-link-line"></i></a>
                                                             <a href={"https://natura2000.eea.europa.eu/?sitecode=" + item.SiteCode} target="_blank" rel="noreferrer">Natura 2000 viewer<i className="icon ri-external-link-line"></i></a>
                                                             {item.IsSensitive &&
-                                                                <div className="card-popup sensitive">
-                                                                    <Popup content="Contains sensitive species" inverted position="top center" trigger={<i className="ri-alert-line"></i>} />
+                                                                <div className="sensitive">
+                                                                    <i className="ri-alert-line"></i>
                                                                 </div>
                                                             }
                                                         </div>

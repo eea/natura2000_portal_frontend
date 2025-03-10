@@ -59,7 +59,7 @@ const Tools = () => {
                                                         <div className="card-text">
                                                             {Utils.highlightSensitiveText(item.Description)}
                                                         </div>
-                                                        <button className="ui button primary"><a href={item.Link} target="_blank" rel="noreferrer">Explore</a></button>
+                                                        <a className="ui button primary" href={item.Link} target="_blank" rel="noreferrer">Explore</a>
                                                     </div>
                                                 </div>
                                             </div>

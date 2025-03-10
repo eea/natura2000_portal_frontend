@@ -56,7 +56,7 @@ const Search = () => {
 
     const loadReleases = () => {
         setLoadingReleases(true);
-        let url = ConfigJson.GetReleases;
+        let url = ConfigJson.GetReleases + ConfigData.ReleasesFilters;
         fetch(url)
         .then(response => response.json())
         .then(data => {
@@ -162,12 +162,13 @@ const Search = () => {
             if(data?.ok) {
                 const regExp = /filename=(?<filename>.*);/;
                 const filename = regExp.exec(data.headers.get('Content-Disposition'))?.groups?.filename ?? null;
+                const release = releases.find(a => a.ReleaseId === parseInt(downloadParams.releaseId)).ReleaseName.replaceAll(" ", "_");
                 data.blob()
                   .then(blobresp => {
                     var blob = new Blob([blobresp], { type: "octet/stream" });
                     var url = window.URL.createObjectURL(blob);
                     let link = document.createElement("a");
-                    link.download = filename;
+                    link.download = release + "_" + filename;
                     link.href = url;
                     document.body.appendChild(link);
                     link.click();
@@ -330,8 +331,8 @@ const Search = () => {
                                         <div className="search-counter">
                                             <span className="search-number">{results}</span> results
                                         </div>
-                                        <button className="ui button inverted" disabled={data.length === 0 || !data || downloading} onClick={()=>downloadResults()}>
-                                            {downloading ? <Loader active={true} size='mini'></Loader> : <i className="icon ri-download-line"></i>}Download results
+                                        <button className="ui button primary" disabled={data.length === 0 || !data || downloading} onClick={()=>downloadResults()}>
+                                            {downloading ? <Loader active={true} size="mini"></Loader> : <i className="icon ri-download-line"></i>}Download results
                                         </button>
                                     </div>
                                 }

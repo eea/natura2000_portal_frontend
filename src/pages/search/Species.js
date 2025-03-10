@@ -57,7 +57,7 @@ const Search = () => {
 
     const loadReleases = () => {
         setLoadingReleases(true);
-        let url = ConfigJson.GetReleases;
+        let url = ConfigJson.GetReleases + ConfigData.ReleasesFilters;
         fetch(url)
         .then(response => response.json())
         .then(data => {
@@ -79,7 +79,7 @@ const Search = () => {
     const loadData = () => {
         setLoadingData(true);
         setDownloadParams(filters);
-        let url = ConfigJson.GetSpecies + "?" + new URLSearchParams(downloadParams);
+        let url = ConfigJson.GetSpecies + "?" + new URLSearchParams(filters);
         fetch(url)
         .then(response => response.json())
         .then(data => {
@@ -163,12 +163,13 @@ const Search = () => {
             if(data?.ok) {
                 const regExp = /filename=(?<filename>.*);/;
                 const filename = regExp.exec(data.headers.get('Content-Disposition'))?.groups?.filename ?? null;
+                const release = releases.find(a => a.ReleaseId === parseInt(downloadParams.releaseId)).ReleaseName.replaceAll(" ", "_");
                 data.blob()
                   .then(blobresp => {
                     var blob = new Blob([blobresp], { type: "octet/stream" });
                     var url = window.URL.createObjectURL(blob);
                     let link = document.createElement("a");
-                    link.download = filename;
+                    link.download = release + "_" + filename;
                     link.href = url;
                     document.body.appendChild(link);
                     link.click();
@@ -345,8 +346,14 @@ const Search = () => {
                                         <div className="search-counter">
                                             <span className="search-number">{results}</span> results
                                         </div>
-                                        <button className="ui button inverted" disabled={data.length === 0 || !data || downloading} onClick={()=>downloadResults()}>
-                                            {downloading ? <Loader active={true} size='mini'></Loader> : <i className="icon ri-download-line"></i>}Download results
+                                        {data &&
+                                            <div className="legend-sensitive">
+                                                <i className="ri-alert-line"></i>
+                                                Number of sites where the species is sensitive
+                                            </div>
+                                        }
+                                        <button className="ui button primary" disabled={data.length === 0 || !data || downloading} onClick={()=>downloadResults()}>
+                                            {downloading ? <Loader active={true} size="mini"></Loader> : <i className="icon ri-download-line"></i>}Download results
                                         </button>
                                     </div>
                                 }
@@ -368,7 +375,7 @@ const Search = () => {
                                                         </div>
                                                         <div className="card-body">
                                                             <div className="card-title">
-                                                                {item.SpeciesName}{item.SpeciesName && item.SpeciesScientificName && " - "}<i>{item.SpeciesScientificName}</i>
+                                                                {((item.SpeciesName && item.SpeciesScientificName) && (item.SpeciesName !== item.SpeciesScientificName)) ? (<><span>{item.SpeciesName}</span> - <i>{item.SpeciesScientificName}</i></>) : <i>{item.SpeciesName}</i>}
                                                             </div>
                                                             <div className="card-text">
                                                                 {item.SpeciesGroupCode}
@@ -382,11 +389,11 @@ const Search = () => {
                                                             <div className="card-links">
                                                                 Found in <b>{item.SitesNumber} sites</b>
                                                                 {item.IsSensitive &&
-                                                                    <div className="card-popup sensitive">
-                                                                        <a href={"/#/search/sites?"+setSitesUrl()+"&species="+item.SpeciesCode+"&sensitive=true"}>
-                                                                            <Popup content={"The species is sensitive in "+item.SitesNumberSensitive+" sites"} inverted position="top center" trigger={<i className="ri-alert-line"></i>} />
+                                                                    
+                                                                        <a className="sensitive" href={"/#/search/sites?"+setSitesUrl()+"&species="+item.SpeciesCode+"&sensitive=true"}>
+                                                                            <i className="ri-alert-line"></i> {item.SitesNumberSensitive}
                                                                         </a>
-                                                                    </div>
+                                                                    
                                                                 }
                                                             </div>
                                                         </div>

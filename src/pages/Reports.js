@@ -35,6 +35,7 @@ const Reports = () => {
     const loadData = () => {
         setLoadingData(true);
         let reports = ConfigData.Reports.map(a => a.Product);
+        let countries = ConfigData.ReportsCountries;
         reports.forEach(report => {
             let url = ConfigJson.GetReports + "?section=" +report;
             fetch(url)
@@ -45,11 +46,21 @@ const Reports = () => {
                     data.Data.forEach(item => {
                         let country = item.split("\\")[0];
                         let files = item.split("\\")[1];
-                        if(country in reportData) {
-                            reportData[country].push(files);
+                        if(countries.some(a => a.CountryCode === country)) {
+                            if(country in reportData) {
+                                reportData[country].unshift(files);
+                            }
+                            else {
+                                reportData[country] = [files];
+                            }
                         }
                         else {
-                            reportData[country] = [files];
+                            if(country in reportData) {
+                                reportData[country].push(files);
+                            }
+                            else {
+                                reportData = Object.assign({[country]: [files]}, reportData);
+                            }
                         }
                     });
                     setData(prev => { return {...prev, [report] : reportData}});
@@ -193,7 +204,7 @@ const Reports = () => {
                                                                             </div>
                                                                             <div className="document-button">
                                                                                 <button className="ui button primary" disabled={downloading.includes(file)} onClick={() => downloadFile(report.Product, country, file)}>
-                                                                                    {downloading.includes(file) ? <Loader active={true} size='mini'></Loader> : <i className="icon ri-download-line"></i>}Download
+                                                                                    {downloading.includes(file) ? <Loader active={true} size="mini"></Loader> : <i className="icon ri-download-line"></i>}Download
                                                                                 </button>
                                                                             </div>
                                                                         </div>
