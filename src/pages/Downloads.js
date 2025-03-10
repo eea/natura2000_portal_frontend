@@ -208,7 +208,6 @@ const Downloads = () => {
                         break;
                 }
                 let link = document.createElement("a");
-                link.download = filename;
                 link.href = url;
                 document.body.appendChild(link);
                 link.click();
