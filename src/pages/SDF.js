@@ -50,9 +50,8 @@ const SDF = () => {
 
     const getSiteCode = () => {
         let params = Object.fromEntries([...searchParams]);
-        setSiteCode(params.sitecode ? params.sitecode : "nodata");
+        setSiteCode(params.site ? params.site : "nodata");
         setRelease(params.release ? parseInt(params.release) : "");
-        setSensitive(params.sensitive && JSON.parse(params.sensitive));
         setNav(params.nav);
     }
 
@@ -77,10 +76,12 @@ const SDF = () => {
                             let releases = data.Data.SiteInfo.Releases.sort((a, b) => new Date(b.ReleaseDate) - new Date(a.ReleaseDate));
                             setReleases(releases);
                             setData(formatData(data));
+                            let hasSensitives = data.Data.EcologicalInformation.Species.some(a => a.Sensitive === "Yes") || data.Data.EcologicalInformation.OtherSpecies.some(a => a.Sensitive === "Yes");
+                            setSensitive(hasSensitives);
                             if(!release) {
                                 let release = releases[0].ReleaseId;
                                 setRelease(release);
-                                setSearchParams({"sitecode": siteCode, "release": release});
+                                setSearchParams({"site": siteCode, "release": release});
                             }
                         }
                     }

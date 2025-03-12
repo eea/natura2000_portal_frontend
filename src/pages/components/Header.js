@@ -93,7 +93,7 @@ const Header = (props) => {
                         <div id="mega-menu" className="slide down transition" hidden={showMenu ? "" : " hidden"} ref={refMenu}>
                             <div className="ui container">
                                 <div className="menu-content tablet hidden mobile hidden">
-                                    <div className="ui four column grid">
+                                    <div className="ui three column grid">
                                         <div className="column">
                                             <a title="Search by Natura 2000 sites" className={"sub-title" + (props.active.includes("sites") ? " active" : "")} id="publications-sub-title" href="/#/search/sites">
                                                 <span>Search by Natura 2000 sites</span>
@@ -107,11 +107,6 @@ const Header = (props) => {
                                         <div className="column">
                                             <a title="Search by Species" className={"sub-title" + (props.active.includes("species") ? " active" : "")} id="publications-sub-title" href="/#/search/species">
                                                 <span>Search by Species</span>
-                                            </a>
-                                        </div>
-                                        <div className="column">
-                                            <a title="EUNIS" className="sub-title" id="publications-sub-title" href="https://eunis.eea.europa.eu/" target="_blank" rel="noreferrer">
-                                                <span>EUNIS<i className="icon ri-external-link-line"></i></span>
                                             </a>
                                         </div>
                                     </div>
@@ -135,9 +130,6 @@ const Header = (props) => {
                                             </a>
                                             <a title="Search by Species" className={"item sub-title" + (props.active.includes("species") ? " active" : "")} id="publications-sub-title" href="/#/search/species">
                                                 <span>Search by Species</span>
-                                            </a>
-                                            <a title="EUNIS" className="item sub-title" id="publications-sub-title" href="https://eunis.eea.europa.eu/" target="_blank" rel="noreferrer">
-                                                <span>EUNIS<i className="icon ri-external-link-line"></i></span>
                                             </a>
                                         </AccordionContent>
                                         <a className={"title" + (props.active === "tools" ? " active" : "")} href="/#/tools" title="Tools">Tools</a>

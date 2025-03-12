@@ -421,7 +421,7 @@ const Search = () => {
                                                             </div>
                                                         </div>
                                                         <div className="card-links">
-                                                            <a href={"#/sdf?sitecode=" + item.SiteCode + "&release=" + filters.releaseId + "&sensitive=" + item.IsSensitive} target="_blank" rel="noreferrer">SDF<i className="icon ri-external-link-line"></i></a>
+                                                            <a href={"#/sdf?site=" + item.SiteCode + "&release=" + filters.releaseId} target="_blank" rel="noreferrer">SDF<i className="icon ri-external-link-line"></i></a>
                                                             <a href={"https://natura2000.eea.europa.eu/?sitecode=" + item.SiteCode} target="_blank" rel="noreferrer">Natura 2000 viewer<i className="icon ri-external-link-line"></i></a>
                                                             {item.IsSensitive &&
                                                                 <div className="sensitive">
