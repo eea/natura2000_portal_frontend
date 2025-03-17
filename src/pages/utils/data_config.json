@@ -397,13 +397,13 @@
 			"Name": "Natura 2000 Barometer",
 			"Description": "An overview of the Natura 2000 network of sites",
 			"Image": "natura2000barometer",
-			"Link": "https://tableau-public.discomap.eea.europa.eu/#/views/Barometer_Backbone_stg/Barometerstatistics"
+			"Link": "https://tableau-public.discomap.eea.europa.eu/#/views/Barometer_Backbone_prod/Barometerstatistics"
 		},
 		{
 			"Name": "Natura online list",
 			"Description": "Explore the Natura 2000 sites for each release",
 			"Image": "naturaonlinelist",
-			"Link": "https://tableau-public.discomap.eea.europa.eu/views/Natura2000_Online_List_stg/AllNatura2000sites"
+			"Link": "https://tableau-public.discomap.eea.europa.eu/#/views/Natura2000_Online_List_prod/AllNatura2000sites"
 		},
 		{
 			"Name": "Natura 2000 expert view",
@@ -433,7 +433,7 @@
 			"Name": "CDR submission dashboard",
 			"Description": "Explore the submission status",
 			"Image": "cdrsubmissiondashboard",
-			"Link": "https://mytableau.discomap.eea.europa.eu/#/views/Natura2000DataWorkflowMonitoring/"
+			"Link": "https://mytableau.discomap.eea.europa.eu/#/views/Natura2000DataWorkflowMonitoring/Summary"
 		}
 	],
 	"Reports": [
