@@ -514,7 +514,7 @@ const sectionsContent = (activekey, data) => {
                         return (
                             <div key={"m_" + i}>
                                 <div className="ui checkbox">
-                                    <input type="checkbox" className="input-checkbox" id={"management_check_" + i} defaultChecked={checked === a.value} />
+                                    <input type="checkbox" className="input-checkbox" id={"management_check_" + i} defaultChecked={checked === a.value} disabled={checked !== a.value} />
                                     <label htmlFor={"management_check_" + i} className="input-label">{a.text}</label>
                                 </div >
                                 {checked === "Y" && checked === a.value &&
