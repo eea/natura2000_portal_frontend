@@ -448,7 +448,7 @@ const sectionsContent = (activekey, data) => {
                                     </>
                                     :
                                     <div className="sdf-legend mt-2">
-                                        {Object.keys(legend).map(a => <div key={a}><b>{a}: </b>{legend[a]}</div>)}
+                                        {Object.keys(legend).map(a => <div key={a}><b>{a}: </b>{checkLegendLinks(legend[a])}</div>)}
                                     </div>
                                 )
                             }
@@ -514,7 +514,7 @@ const sectionsContent = (activekey, data) => {
                         return (
                             <div key={"m_" + i}>
                                 <div className="ui checkbox">
-                                    <input type="checkbox" className="input-checkbox" id={"management_check_" + i} defaultChecked={checked === a.value} />
+                                    <input type="checkbox" className="input-checkbox" id={"management_check_" + i} defaultChecked={checked === a.value} disabled={checked !== a.value} />
                                     <label htmlFor={"management_check_" + i} className="input-label">{a.text}</label>
                                 </div >
                                 {checked === "Y" && checked === a.value &&
@@ -547,6 +547,15 @@ const sectionsContent = (activekey, data) => {
         );
     }
     return fields;
+}
+
+const checkLegendLinks = (string) => {
+    if (string.includes("(see reference portal)")) {
+        return <>{string.split("(see reference portal)")} (<a href={ConfigSDF.Links.ReferencePortal} target="_blank">see reference portal</a>)</>
+    }
+    else {
+        return string;
+    }
 }
 
 const renderSections = (data) => {
