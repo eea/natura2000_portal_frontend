@@ -41,11 +41,6 @@ const SDFVisualization = (props) => {
     const showMainData = () => {
         return (
             <div className="ui container">
-                <div className="sdf-download">
-                    <button className="ui button secondary" onClick={() => { window.print() }}>
-                        <i className="icon ri-download-line"></i> Download PDF
-                    </button>
-                </div>
                 <div className="sdf-index py-4">
                     <div className="column">
                         <h2>Table of contents</h2>
@@ -471,7 +466,7 @@ const SDFVisualization = (props) => {
                             }
                             let tableHeader = ConfigSDF.TableHeader[a[0]];
                             tables.push(
-                                <div className="six wide computer six wide tablet twelve wide mobile column" key={a[0]}>
+                                <div className="twelve wide mobile twelve wide tablet six wide computer column" key={a[0]}>
                                     <div className="mb-2">
                                         <div className="sdf-row-field">
                                             <table className="ui table unstackable">
@@ -497,7 +492,7 @@ const SDFVisualization = (props) => {
                             );
                         });
                         return (
-                            <div>
+                            <div className="ui grid">
                                 {tables}
                                 {legend &&
                                     <div className="sdf-legend">
@@ -537,7 +532,7 @@ const SDFVisualization = (props) => {
             }
 
             fields.push(
-                <div className={"sdf-row" + (layout === 2 ? " col-md-6 col-12" : "")} key={index}>
+                <div className={"sdf-row" + (layout === 2 ? " twelve wide mobile six wide tablet six wide computer column" : "")} key={index}>
                     <div className="column">
                         <div className="sdf-row-title">{index + " " + title}</div>
                         {dataType(field[0], type, value)}
@@ -626,9 +621,11 @@ const SDFVisualization = (props) => {
         let sections = [];
         Object.keys(data).filter(a => a !== "SiteInfo").forEach((item, i) => {
             sections.push(
-                <div className="pb-4" id={i + 1} name={i + 1} key={i}>
-                    <h2>{i + 1}. {ConfigSDF.Titles[i]}</h2>
-                    {sectionsContent(i + 1, data[item], item)}
+                <div id={i + 1} key={i}>
+                    <div className="ui grid pb-4">
+                        <h2>{i + 1}. {ConfigSDF.Titles[i]}</h2>
+                        {sectionsContent(i + 1, data[item], item)}
+                    </div>
                 </div>
             )
         });
