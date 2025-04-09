@@ -84,11 +84,13 @@ const SDFVisualization = (props) => {
                             title = "Type";
                             value = field[1];
                             type = "single";
+                            layout = 2;
                             break;
                         case "SiteCode":
                             title = "Site Code";
                             value = field[1];
                             type = "single";
+                            layout = 2;
                             break;
                         case "SiteName":
                             title = "Site Name";
@@ -99,11 +101,13 @@ const SDFVisualization = (props) => {
                             title = "First Compilation date";
                             value = field[1];
                             type = "single";
+                            layout = 2;
                             break;
                         case "UpdateDate":
                             title = "Update date";
                             value = field[1];
                             type = "single";
+                            layout = 2;
                             break;
                         case "Respondent":
                             title = "Respondent";
