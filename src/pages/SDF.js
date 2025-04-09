@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import ConfigJson from "../config.json";
 import ConfigData from "./utils/data_config.json";
+import ConfigSDF from "./utils/sdf_config.json";
 import SDFStructure from "./components/SDFStructure";
 import Logo from "../img/natura2000_logo.svg";
 import {
@@ -166,8 +167,12 @@ const SDF = () => {
                                                     </div>
                                                     <div>
                                                         <h1>NATURA 2000 - STANDARD DATA FORM</h1>
-                                                        {sensitive && <b className="sensitive">SENSITIVE</b>}
                                                         {release && releases.length > 0 && <b>RELEASE {releases.find(a => a.ReleaseId === release)?.ReleaseName} ({formatDate(releases.find(a => a.ReleaseId === release)?.ReleaseDate, true)})</b>}
+                                                        {
+                                                            !isLoading && siteCode && siteCode !== "nodata" && Object.keys(data).length > 0 && !errorLoading &&
+                                                            <h2>{data.SiteInfo.SiteName} ({data.SiteInfo.SiteCode} - {ConfigSDF.SiteType[data.SiteInfo.Directive]})</h2>
+                                                        }
+                                                        {sensitive && <b className="sensitive">SENSITIVE</b>}
                                                     </div>
                                                     <div className="select--right">
                                                         <Select
@@ -195,7 +200,6 @@ const SDF = () => {
                                                                 </button>
                                                             </div>
                                                         }
-                                                        
                                                     </div>
                                                 </div>
                                             </div>
