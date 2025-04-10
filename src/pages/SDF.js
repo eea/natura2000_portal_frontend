@@ -169,7 +169,7 @@ const SDF = () => {
                                                         <h1>NATURA 2000 - STANDARD DATA FORM</h1>
                                                         {release && releases.length > 0 && <b>RELEASE {releases.find(a => a.ReleaseId === release)?.ReleaseName} ({formatDate(releases.find(a => a.ReleaseId === release)?.ReleaseDate, true)})</b>}
                                                         {
-                                                            !isLoading && siteCode && siteCode !== "nodata" && Object.keys(data).length > 0 && !errorLoading &&
+                                                            !isLoading && siteCode && siteCode !== "nodata" && data !== "nodata" && Object.keys(data).length > 0 && !errorLoading &&
                                                             <h2>{data.SiteInfo.SiteName} ({data.SiteInfo.SiteCode} - {ConfigSDF.SiteType[data.SiteInfo.Directive]})</h2>
                                                         }
                                                         {sensitive && <b className="sensitive">SENSITIVE</b>}
@@ -193,7 +193,7 @@ const SDF = () => {
                                                             disabled={isLoading || errorLoading || siteCode === "nodata"}
                                                         />
                                                         {
-                                                            !isLoading && siteCode && siteCode !== "nodata" && Object.keys(data).length > 0 && !errorLoading &&
+                                                            !isLoading && siteCode && siteCode !== "nodata" && data !== "nodata" && Object.keys(data).length > 0 && !errorLoading &&
                                                             <div className="sdf-download">
                                                                 <button className="ui button secondary" onClick={() => { window.print() }}>
                                                                     <i className="icon ri-download-line"></i> Download PDF
