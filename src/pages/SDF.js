@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import ConfigJson from "../config.json";
 import ConfigData from "./utils/data_config.json";
+import ConfigSDF from "./utils/sdf_config.json";
 import SDFStructure from "./components/SDFStructure";
 import Logo from "../img/natura2000_logo.svg";
 import {
@@ -164,10 +165,14 @@ const SDF = () => {
                                                             <img title="Site" src={Logo} alt="Natura 2000" className="ui image eea-logo" />
                                                         </a>
                                                     </div>
-
                                                     <div>
-                                                        <h1>NATURA 2000 - STANDARD DATA FORM {sensitive && <div className="sensitive">SENSITIVE</div>}</h1>
+                                                        <h1>NATURA 2000 - STANDARD DATA FORM</h1>
                                                         {release && releases.length > 0 && <b>RELEASE {releases.find(a => a.ReleaseId === release)?.ReleaseName} ({formatDate(releases.find(a => a.ReleaseId === release)?.ReleaseDate, true)})</b>}
+                                                        {
+                                                            !isLoading && siteCode && siteCode !== "nodata" && data !== "nodata" && Object.keys(data).length > 0 && !errorLoading &&
+                                                            <h2>{data.SiteInfo.SiteName} ({data.SiteInfo.SiteCode} - {ConfigSDF.SiteType[data.SiteInfo.Directive]})</h2>
+                                                        }
+                                                        {sensitive && <b className="sensitive">SENSITIVE</b>}
                                                     </div>
                                                     <div className="select--right">
                                                         <Select
@@ -185,8 +190,16 @@ const SDF = () => {
                                                             onChange={changeRelease}
                                                             selectOnBlur={false}
                                                             loading={isLoading}
-                                                            disabled={isLoading || errorLoading}
+                                                            disabled={isLoading || errorLoading || siteCode === "nodata"}
                                                         />
+                                                        {
+                                                            !isLoading && siteCode && siteCode !== "nodata" && data !== "nodata" && Object.keys(data).length > 0 && !errorLoading &&
+                                                            <div className="sdf-download">
+                                                                <button className="ui button secondary" onClick={() => { window.print() }}>
+                                                                    <i className="icon ri-download-line"></i> Download PDF
+                                                                </button>
+                                                            </div>
+                                                        }
                                                     </div>
                                                 </div>
                                             </div>
