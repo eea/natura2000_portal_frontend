@@ -256,7 +256,6 @@ const Downloads = () => {
         setDownloading(true);
         let url = ConfigJson["Download" + product] + "?" + new URLSearchParams(fields);
         fetch(url)
-        .then(response => response.json())
         .then(data => {
             if(data?.ok) {
                 const regExp = /filename=(?<filename>.*);/;
