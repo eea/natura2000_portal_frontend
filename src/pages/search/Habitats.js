@@ -164,7 +164,7 @@ const Search = () => {
                 const filename = regExp.exec(data.headers.get('Content-Disposition'))?.groups?.filename ?? null;
                 const release = releases.find(a => a.ReleaseId === parseInt(downloadParams.releaseId)).ReleaseName.replaceAll(" ", "_");
                 data.blob()
-                  .then(blobresp => {
+                .then(blobresp => {
                     var blob = new Blob([blobresp], { type: "octet/stream" });
                     var url = window.URL.createObjectURL(blob);
                     let link = document.createElement("a");
@@ -173,7 +173,7 @@ const Search = () => {
                     document.body.appendChild(link);
                     link.click();
                     document.body.removeChild(link);
-                  })
+                })
             } else {
                 setErrorDownloading(true);
             }
