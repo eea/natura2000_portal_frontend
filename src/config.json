@@ -10,7 +10,7 @@
 	"GetReports": "https://n2k-portal-back-fdbycab9hthmc0dv.westeurope-01.azurewebsites.net/api/Download/FileFinder",
 	"DownloadReports": "https://n2k-portal-back-fdbycab9hthmc0dv.westeurope-01.azurewebsites.net/api/Download/FileDownloader",
 	"DownloadComputingSAC": "https://n2k-portal-back-fdbycab9hthmc0dv.westeurope-01.azurewebsites.net/api/Download/ComputingSAC",
-	"PublicSDF": "https://n2kbackboneback-dev.azurewebsites.net/api/PublicData/GetReleaseData",
+	"DownloadSpatialData": "https://n2k-portal-back-fdbycab9hthmc0dv.westeurope-01.azurewebsites.net/api/Download/SpatialDataSDI",
 	"SensitiveSDF": "https://n2k-portal-back-fdbycab9hthmc0dv.westeurope-01.azurewebsites.net/api/SDF/GetReleaseData",
 	"MapReleases": "https://bio.discomap.eea.europa.eu/arcgis/rest/services/N2K_Backbone/Releases/MapServer/0"
 }
