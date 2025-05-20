@@ -110,17 +110,17 @@ const Reports = () => {
                 const regExp = /filename=(?<filename>.*);/;
                 const filename = regExp.exec(data.headers.get('Content-Disposition'))?.groups?.filename ?? null;
                 data.blob()
-                    .then(blobresp => {
-                        var blob = new Blob([blobresp], { type: "octet/stream" });
-                        var url = window.URL.createObjectURL(blob);
-                        let link = document.createElement("a");
-                        link.download = filename;
-                        link.href = url;
-                        document.body.appendChild(link);
-                        link.click();
-                        document.body.removeChild(link);
-                        toggleDownloading(file);
-                    })
+                .then(blobresp => {
+                    var blob = new Blob([blobresp], { type: "octet/stream" });
+                    var url = window.URL.createObjectURL(blob);
+                    let link = document.createElement("a");
+                    link.download = filename;
+                    link.href = url;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    toggleDownloading(file);
+                })
             } else {
                 setErrorDownloading(true);
                 toggleDownloading(file);

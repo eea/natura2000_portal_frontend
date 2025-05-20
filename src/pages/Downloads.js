@@ -188,6 +188,9 @@ const Downloads = () => {
             if(product === "ComputingSAC") {
                 downloadRequest(product);
             }
+            else if(product === "SpatialData") {
+                downloadFile(product);
+            }
             else {
                 setDownloading(true);
                 let release = data.find(a => a.ReleaseId.toString() === fields.releaseId);
@@ -201,10 +204,6 @@ const Downloads = () => {
                     case "DescriptiveData":
                         url = release["PublicMDB"];
                         filename = "Natura2000PublicDescriptive_" + release.ReleaseName;
-                        break;
-                    case "SpatialData":
-                        url = release["SHP"];
-                        filename = "Natura2000Spatial_" + release.ReleaseName;
                         break;
                 }
                 let link = document.createElement("a");
@@ -247,6 +246,32 @@ const Downloads = () => {
                 setSuccessDownloading(true);
             }
             else {
+                setErrorDownloading(true);
+            }
+            setDownloading(false);
+        })
+    }
+
+    const downloadFile = (product) => {
+        setDownloading(true);
+        let url = ConfigJson["Download" + product] + "?" + new URLSearchParams(fields);
+        fetch(url)
+        .then(data => {
+            if(data?.ok) {
+                const regExp = /filename=(?<filename>.*);/;
+                const filename = regExp.exec(data.headers.get('Content-Disposition'))?.groups?.filename ?? null;
+                data.blob()
+                .then(blobresp => {
+                    var blob = new Blob([blobresp], { type: "octet/stream" });
+                    var url = window.URL.createObjectURL(blob);
+                    let link = document.createElement("a");
+                    link.download = filename;
+                    link.href = url;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                })
+            } else {
                 setErrorDownloading(true);
             }
             setDownloading(false);
