@@ -55,6 +55,9 @@
         margin: 0 auto 1rem auto;
     }
     &.home {
+        .card-image {
+            position: relative;
+        }
         .card-body {
             align-items: center;
             text-align: center;
