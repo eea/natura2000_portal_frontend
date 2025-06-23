@@ -52,6 +52,13 @@ const Home = () => {
                     <div id="view">
                         <div id="page-document" className="ui container">
                             <div className="eea hero-block inverted full-height">
+                                <div class="eea copyright">
+                                    <div class="wrapper">
+                                        <span class="icon-prefix">Image</span>
+                                        <i aria-hidden="true" class="icon ri-copyright-line"></i>
+                                        <span class="icon-content">Amanda Rodríguez</span>
+                                    </div>
+                                </div>
                                 <div className="hero-block-image-wrapper full-width">
                                     <div className="hero-block-image"
                                         style={{backgroundImage: "url("+BackgroundImage+")"}}>
@@ -68,6 +75,13 @@ const Home = () => {
                                             <div className="card home sites">
                                                 <div className="card-image">
                                                     <img src={SitesImage} alt="Natura 2000 sites"/>
+                                                    <div class="eea copyright">
+                                                        <div class="wrapper">
+                                                            <span class="icon-prefix">Image</span>
+                                                            <i aria-hidden="true" class="icon ri-copyright-line"></i>
+                                                            <span class="icon-content">Amanda Rodríguez</span>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div className="card-body">
                                                     <div className="card-title title">
@@ -91,6 +105,13 @@ const Home = () => {
                                             <div className="card home habitats">
                                                 <div className="card-image">
                                                     <img src={HabitatsImage} alt="Habitats"/>
+                                                    <div class="eea copyright">
+                                                        <div class="wrapper">
+                                                            <span class="icon-prefix">Image</span>
+                                                            <i aria-hidden="true" class="icon ri-copyright-line"></i>
+                                                            <span class="icon-content">Amanda Rodríguez</span>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div className="card-body">
                                                     <div className="card-title title">
@@ -114,6 +135,13 @@ const Home = () => {
                                             <div className="card home species">
                                                 <div className="card-image">
                                                     <img src={SpeciesImage} alt="Species"/>
+                                                    <div class="eea copyright">
+                                                        <div class="wrapper">
+                                                            <span class="icon-prefix">Image</span>
+                                                            <i aria-hidden="true" class="icon ri-copyright-line"></i>
+                                                            <span class="icon-content">Amanda Rodríguez</span>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div className="card-body">
                                                     <div className="card-title title">
