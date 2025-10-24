@@ -25,7 +25,6 @@ export const formatDate = (date) => {
     var m = date.getMonth() + 1;
     var y = date.getFullYear();
     date = (d <= 9 ? "0" + d : d) + "/" + (m <= 9 ? "0" + m : m) + "/" + y;
-    // date = y + "-" + (m <= 9 ? "0" + m : m) + "-" + (d <= 9 ? "0" + d : d);
     return date;
 };
 

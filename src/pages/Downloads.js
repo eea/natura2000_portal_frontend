@@ -42,26 +42,53 @@ const Downloads = () => {
     const loadData = () => {
         setLoading(true);
         let promises = [];
-        let url = ConfigJson.GetReleases + ConfigData.ReleasesFilters;
-        promises.push(
-            fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                if(data?.Success) {
-                    let releases = data.Data.sort((a, b) => new Date(b.ReleaseDate) - new Date(a.ReleaseDate));
-                    releases = releases.map(a => ({...a, "ReleaseDate": Utils.formatDate(a.ReleaseDate)}));
-                    setData(releases);
-                }
-                else {
-                    setErrorLoading(true);
-                }
-            })       
-        );
+        let url;
+        if(downloadType === "SubmissionComparer") {
+            url = ConfigJson.GetSubmissions + ConfigData.ReleasesFilters;
+            promises.push(
+                fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    if(data?.Success) {
+                        const releases = data.Data.map(country => ({
+                            ...country,
+                            Submissions: country.Submissions.sort((a, b) => convertToDate(b.ImportDate) - convertToDate(a.ImportDate))
+                        }));
+                        setData(releases);
+                    }
+                    else {
+                        setErrorLoading(true);
+                    }
+                })       
+            );
+        }
+        else {
+            url = ConfigJson.GetReleases + ConfigData.ReleasesFilters;
+            promises.push(
+                fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    if(data?.Success) {
+                        let releases = data.Data.sort((a, b) => new Date(b.ReleaseDate) - new Date(a.ReleaseDate));
+                        releases = releases.map(a => ({...a, "OriginalDate": a.ReleaseDate,"ReleaseDate": Utils.formatDate(a.ReleaseDate)}));
+                        setData(releases);
+                    }
+                    else {
+                        setErrorLoading(true);
+                    }
+                })
+            );
+        }
         Promise.all(promises)
         .then(results => {
             setLoading(false);
         });
     }
+
+    const convertToDate = (dateString) => {
+        const [day, month, year] = dateString.split('-');
+        return new Date(`${year}-${month}-${day}`);
+    };
 
     const onChangeFields = (event, data) => {
         let field = data.name;
@@ -74,6 +101,12 @@ const Downloads = () => {
         }
         if(errors[field]) {
             setErrors({ ...errors, [field]: false});
+        }
+        if(field === "countryCode") {
+            setFields(prevFields => {
+                const { versionFrom, versionTo, ...rest } = prevFields;
+                return rest;
+            });
         }
     }
 
@@ -136,21 +169,21 @@ const Downloads = () => {
 
     const renderFields = (field) => {
         switch (field) {
-            case "releaseId":
+            case "countryCode":
                 return (
                     <div className="field">
-                        <label>Release</label>
+                        <label>Country</label>
                         <Select
-                            placeholder="Select a release"
-                            name="releaseId"
-                            options=
-                                {
-                                    data && data.map((item, i) => (
-                                        {
-                                            key: item.ReleaseId, value: item.ReleaseId.toString(), text: (item.ReleaseName + " (" + item.ReleaseDate + ")"), selected: fields[field] === item.ReleaseId
-                                        }
-                                    ))
-                                }
+                            placeholder="Select a country"
+                            name="countryCode"
+                            options={
+                                data && data.map((item) => ({
+                                    key: item.CountryCode,
+                                    value: item.CountryCode,
+                                    text: ConfigData.ReportsCountries.find(a => a.CountryCode === item.CountryCode).CountryName,
+                                    selected: fields[field] === item.CountryCode
+                                }))
+                            }
                             value={fields[field]}
                             onChange={onChangeFields}
                             selectOnBlur={false}
@@ -160,13 +193,90 @@ const Downloads = () => {
                         />
                     </div>
                 );
+            case "releaseId":
+                return (
+                    <div className="field">
+                        <label>Release</label>
+                        <Select
+                            placeholder="Select a release"
+                            name="releaseId"
+                            options={
+                                data && data.map((item) => ({
+                                    key: item.ReleaseId,
+                                    value: item.ReleaseId.toString(),
+                                    text: item.ReleaseName + " (" + item.ReleaseDate + ")",
+                                    selected: fields[field] === item.ReleaseId
+                                }))
+                            }
+                            value={fields[field]}
+                            onChange={onChangeFields}
+                            selectOnBlur={false}
+                            error={errors[field]}
+                            loading={loading}
+                            disabled={loading || errorLoading || downloading}
+                        />
+                    </div>
+                );
+            case "versionFrom":
+                return (
+                    <div className="field">
+                        <div className="ui grid">
+                            <div className="six wide computer twelve wide mobile six wide tablet column column-blocks-wrapper">
+                                <div className="field">
+                                    <label>Submission from</label>
+                                    <Select
+                                        placeholder="Select a submission"
+                                        name="versionFrom"
+                                        options={
+                                            data && fields.countryCode && data.find(a => a.CountryCode === fields.countryCode).Submissions.map((item, i) => ({
+                                                key: item.VersionID,
+                                                value: item.VersionID.toString(),
+                                                text: item.ImportDate +" (" + item.VersionID + ")"
+                                            }))
+                                        }
+                                        value={fields.versionFrom?.toString() || null}
+                                        onChange={onChangeFields}
+                                        selectOnBlur={false}
+                                        error={errors["versionFrom"]}
+                                        loading={loading}
+                                        disabled={loading || errorLoading || downloading || !fields.countryCode}
+                                    />
+                                </div>
+                            </div>
+                            <div className="six wide computer twelve wide mobile six wide tablet column column-blocks-wrapper">
+                                <div className="field">
+                                    <label>Submission to</label>
+                                    <Select
+                                        placeholder="Select a submission"
+                                        name="versionTo"
+                                        options={
+                                            data && fields.countryCode && fields.versionFrom && data.find(a => a.CountryCode === fields.countryCode).Submissions.filter(a => new Date(convertToDate(a.ImportDate)) > new Date(convertToDate(data.find(a => a.CountryCode === fields.countryCode).Submissions.find(b => b.VersionID === parseInt(fields.versionFrom))?.ImportDate))).map((item, i) => ({
+                                                key: item.VersionID,
+                                                value: item.VersionID.toString(),
+                                                text: item.ImportDate +" (" + item.VersionID + ")"
+                                           }))
+                                        }
+                                        value={fields.versionTo?.toString() || null}
+                                        onChange={onChangeFields}
+                                        selectOnBlur={false}
+                                        error={errors["versionFrom"]}
+                                        loading={loading}
+                                        disabled={loading || errorLoading || downloading || !fields.countryCode || !fields.versionFrom || data.find(a => a.CountryCode === fields.countryCode).Submissions[0].VersionID === parseInt(fields.versionFrom)}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                );
+            case "versionTo":
+                return null;
             case "email":
                 return (
                     <div className="field">
                         <label>Email address</label>
                         <Input
                             type="text"
-                            placeholder="Enter your email adress"
+                            placeholder="Enter your email address"
                             name="email"
                             value={fields[field]}
                             onChange={onChangeFields}
@@ -177,7 +287,7 @@ const Downloads = () => {
                     </div>
                 );
             default:
-                return;
+                return null;
         }
     }
 
@@ -191,11 +301,14 @@ const Downloads = () => {
             else if(product === "SpatialData") {
                 downloadFile(product);
             }
+            else if(product === "SubmissionComparer") {
+                downloadRequest(product);
+            }
             else {
                 setDownloading(true);
                 let release = data.find(a => a.ReleaseId.toString() === fields.releaseId);
                 let url = "";
-                let filename = "";
+                let filename;
                 switch(product) {
                     case "DescriptiveDataSensitive":
                         url = release["SensitiveMDB"];
