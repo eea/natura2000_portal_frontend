@@ -497,6 +497,17 @@
 			"Fields": [
 				"releaseId"
 			]
+		},
+		{
+			"Product": "SubmissionComparer",
+			"Name": "Descriptive data delivery change report by submission",
+			"Description": "Compares different database versions submitted by a Member State.",
+			"Fields": [
+				"countryCode",
+				"versionFrom",
+				"versionTo",
+				"email"
+			]
 		}
 	],
 	"ReleasesFilters": "?internalPortalSDFSensitive=true",
