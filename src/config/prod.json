@@ -8,9 +8,11 @@
 	"DownloadResultsHabitats": "https://n2kportal.eea.europa.eu/N2kPortal_back/api/Download/HabitatsSearchResults",
 	"DownloadResultsSpecies": "https://n2kportal.eea.europa.eu/N2kPortal_back/api/Download/SpeciesSearchResults",
 	"GetReports": "https://n2kportal.eea.europa.eu/N2kPortal_back/api/Download/FileFinder",
+	"GetSubmissions": "https://n2kportal.eea.europa.eu/N2kPortal_back/api/Info/GetSubmissions",
 	"DownloadReports": "https://n2kportal.eea.europa.eu/N2kPortal_back/api/Download/FileDownloader",
 	"DownloadComputingSAC": "https://n2kportal.eea.europa.eu/N2kPortal_back/api/Download/ComputingSAC",
 	"DownloadSpatialData": "https://n2kportal.eea.europa.eu/N2kPortal_back/api/Download/SpatialDataSDI",
-    	"SensitiveSDF": "https://n2kportal.eea.europa.eu/N2kPortal_back/api/SDF/GetReleaseData",
+	"DownloadSubmissionComparer": "https://n2kportal.eea.europa.eu/N2kPortal_back/api/Download/SubmissionComparer",
+	"SensitiveSDF": "https://n2kportal.eea.europa.eu/N2kPortal_back/api/SDF/GetReleaseData",
 	"MapReleases": "https://bio.discomap.eea.europa.eu/arcgis/rest/services/N2K_Backbone/Releases/MapServer/0"
 }

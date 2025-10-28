@@ -376,7 +376,7 @@ const Search = () => {
                                         <div className="search-counter">
                                             <span className="search-number">{results}</span> results
                                         </div>
-                                        {data &&
+                                        {data.length > 0 &&
                                             <div className="legend-sensitive">
                                                 <i className="ri-alert-line"></i>
                                                 Contains sensitive species
