@@ -14,5 +14,6 @@
 	"DownloadSpatialData": "https://blackneckedswan:480/N2kPortal_back/api/Download/SpatialDataSDI",
 	"DownloadSubmissionComparer": "https://blackneckedswan:480/N2kPortal_back/api/Download/SubmissionComparer",
 	"SensitiveSDF": "https://blackneckedswan:480/N2kPortal_back/api/SDF/GetReleaseData",
+	"GetLastReleaseId": "https://blackneckedswan:480/N2kPortal_back/api/SDF/GetLastReleaseId",
 	"MapReleases": "https://bio.discomap.eea.europa.eu/arcgis/rest/services/N2K_Backbone/Releases_Spatial_stg/MapServer/0"
 }

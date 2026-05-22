@@ -14,5 +14,6 @@
 	"DownloadSpatialData": "https://n2kportal.eea.europa.eu/N2kPortal_back/api/Download/SpatialDataSDI",
 	"DownloadSubmissionComparer": "https://n2kportal.eea.europa.eu/N2kPortal_back/api/Download/SubmissionComparer",
 	"SensitiveSDF": "https://n2kportal.eea.europa.eu/N2kPortal_back/api/SDF/GetReleaseData",
+	"GetLastReleaseId": "https://n2kportal.eea.europa.eu/N2kPortal_back/api/SDF/GetLastReleaseId",
 	"MapReleases": "https://bio.discomap.eea.europa.eu/arcgis/rest/services/N2K_Backbone/Releases/MapServer/0"
 }

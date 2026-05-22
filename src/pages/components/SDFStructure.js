@@ -40,8 +40,8 @@ const SDFVisualization = (props) => {
 
     const showMainData = () => {
         return (
-            <div className="ui container">
-                <div className="sdf-index py-4">
+            <div className="ui container sdf-index">
+                <div className="py-4">
                     <div className="column">
                         <h2>Table of contents</h2>
                         <ol>
@@ -71,7 +71,7 @@ const SDFVisualization = (props) => {
         let fields = [];
         for (let i in Object.entries(data)) {
             let field = Object.entries(data)[i];
-            let index = activekey + "." + (parseInt(i) + 1);
+            let index;
             let title;
             let value;
             let type;
@@ -80,51 +80,133 @@ const SDFVisualization = (props) => {
             switch (activekey) {
                 case 1:
                     switch (field[0]) {
-                        case "Type":
-                            title = "Type";
+                        case "F_1_1_site_type":
+                            index = "1.1";
+                            title = "Site type";
                             value = field[1];
                             type = "single";
                             layout = 2;
                             break;
-                        case "SiteCode":
-                            title = "Site Code";
+                        case "F_1_2_site_code":
+                            index = "1.2";
+                            title = "Site code";
                             value = field[1];
                             type = "single";
                             layout = 2;
                             break;
-                        case "SiteName":
-                            title = "Site Name";
-                            value = field[1];
-                            type = "single";
-                            break;
-                        case "FirstCompletionDate":
-                            title = "First Compilation date";
+                        case "F_1_3_site_name":
+                            index = "1.3";
+                            title = "Site name";
                             value = field[1];
                             type = "single";
                             layout = 2;
                             break;
-                        case "UpdateDate":
-                            title = "Update date";
+                        case "F_1_3_1_site_name_nonLatin":
+                            index = "1.3.1";
+                            title = "Site name non-latin alphabet (optional)";
                             value = field[1];
                             type = "single";
                             layout = 2;
                             break;
                         case "Respondent":
+                            index = "1.4";
                             title = "Respondent";
                             value = field[1];
                             type = "single";
                             break;
-                        case "SiteDesignation":
-                            title = "Site indication and designation / classification dates";
-                            value = field[1][0];
-                            let tableHeader = ConfigSDF.TableHeader.SiteDesignationGroup;
-                            let filter = (obj, keys) => keys.reduce((a, b) => {a[b] = obj[b]; return a},{});
-                            let explanations = filter(value, tableHeader.e);
-                            value = [filter(value, tableHeader.a), filter(value, tableHeader.b)];
-                            if(explanations.Explanations) {
-                                value.push(explanations);
-                            }
-                            type = "multiple";
+                        case "F_1_4_1_respond_name":
+                            index = "1.4.1";
+                            title = "Name of the organisation";
+                            value = field[1];
+                            type = "single";
+                            layout = 2;
+                            break;
+                        case "F_1_4_2_respond_contact":
+                            index = "1.4.2";
+                            title = "Contact point in the organisation (optional)";
+                            value = field[1];
+                            type = "single";
+                            layout = 2;
+                            break;
+                        case "F_1_4_3_respond_address":
+                            index = "1.4.3";
+                            title = "Postal address";
+                            value = field[1];
+                            type = "single";
+                            break;
+                        case "F_1_4_4_respond_email":
+                            index = "1.4.4";
+                            title = "Functional mailbox email address";
+                            value = field[1];
+                            type = "single";
+                            layout = 2;
+                            break;
+                        case "F_1_4_5_respond_URI":
+                            index = "1.4.5";
+                            title = "Website with contact information";
+                            value = field[1];
+                            type = "single";
+                            layout = 2;
+                            break;
+                        case "F_1_5_1_SPA_date":
+                            index = "1.5.1";
+                            title = "Date site first classified as SPA";
+                            value = field[1];
+                            type = "single";
+                            break;
+                        case "F_1_5_2_a_SPA_act_URI":
+                            index = "1.5.2";
+                            title = "SPA classification act (URI or free text)";
+                            value = field[1];
+                            type = "single";
+                            layout = 2;
+                            break;
+                        case "F_1_5_2_b_SPA_act_freetext":
+                            index = "";
+                            title = " ";
+                            value = field[1];
+                            type = "single";
+                            layout = 2;
+                            break;
+                        case "F_1_5_3_pSCI_date":
+                            index = "1.5.3";
+                            title = "Date site first proposed as SCI";
+                            value = field[1];
+                            type = "single";
+                            layout = 2;
+                            break;
+                        case "cSCI_date":
+                            index = "";
+                            title = "Date confirmed as SCI";
+                            value = field[1];
+                            type = "single";
+                            layout = 2;
+                            break;
+                        case "F_1_5_4_SAC_date":
+                            index = "1.5.4";
+                            title = "Date site designated as SAC";
+                            value = field[1];
+                            type = "single";
+                            break;
+                        case "F_1_5_5_a_SAC_act_URI":
+                            index = "1.5.5";
+                            title = "SAC designation act (URI or free text)";
+                            value = field[1];
+                            type = "single";
+                            layout = 2;
+                            break;
+                        case "F_1_5_5_b_SAC_act_freetext":
+                            index = "";
+                            title = " ";
+                            value = field[1];
+                            type = "single";
+                            layout = 2;
+                            break;
+                        case "F_1_5_6_site_text":
+                            index = "1.5.6";
+                            title = "Explanations (optional)";
+                            value = field[1];
+                            type = "single";
                             break;
                         default:
                             break;
@@ -132,33 +214,49 @@ const SDFVisualization = (props) => {
                     break;
                 case 2:
                     switch (field[0]) {
-                        case "Longitude":
-                            title = "Site-centre location [decimal degrees]";
+                        case "longitude":
+                            index = "";
+                            title = "Longitude";
+                            value = field[1];
+                            type = "single";
+                            layout = 2;
+                            break;
+                        case "latitude":
+                            index = "";
+                            title = "Latitude";
+                            value = field[1];
+                            type = "single";
+                            layout = 2;
+                            break;
+                        case "F_2_1_1_site_area":
+                            index = "2.1.1";
+                            title = "Area (ha)";
+                            value = field[1];
+                            type = "single";
+                            layout = 2;
+                            break;
+                        case "F_2_1_2_a_area_diff":
+                            index = "2.1.2";
+                            title = "Reason for area difference with spatial dataset (if any)";
+                            value = field[1];
+                            type = "single";
+                            layout = 2;
+                            break;
+                        case "F_2_1_3_a_area_diff_text":
+                            index = "2.1.3";
+                            title = "Reason for area difference - explanations";
                             value = field[1];
                             type = "single";
                             break;
-                        case "Area":
-                            title = "Area [ha]";
-                            value = field[1];
-                            type = "single";
-                            break;
-                        case "MarineArea":
-                            title = "Marine area [%]";
-                            value = field[1];
-                            type = "single";
-                            break;
-                        case "SiteLength":
-                            title = "Sitelength [km] (optional)";
-                            value = field[1];
-                            type = "single";
-                            break;
-                        case "Region":
-                            title = "Administrative region code and name";
+                        case "F_2_2_administrative_region":
+                            index = "2.2";
+                            title = "Administrative region (optional)";
                             value = field[1];
                             type = "table";
                             break;
-                        case "BiogeographicalRegions":
-                            title = "Biogeographical Region(s)";
+                        case "F_2_3_biogeographical_regions":
+                            index = "2.3";
+                            title = "Biogeographical and marine regions";
                             value = field[1];
                             type = "table";
                             break;
@@ -168,27 +266,47 @@ const SDFVisualization = (props) => {
                     break;
                 case 3:
                     switch (field[0]) {
-                        case "HabitatTypes":
-                            title = "Habitat types present on the site and assessment for them";
+                        case "F_3_1_a_essential_information":
+                            index = "3.1.a";
+                            title = "";
                             value = field[1];
                             type = "table";
-                            legend = ConfigSDF.Legend.HabitatTypes;
+                            legend = ConfigSDF.Legend.F_3_1_a_essential_information;
                             break;
-                        case "Species":
-                            title = "Species referred to in Article 4 of Directive 2009/147/EC and listed in Annex II of Directive 92/43/EEC and site evaluation for them";
+                        case "F_3_1_b_site_assessment":
+                            index = "3.1.b";
+                            title = "";
                             value = field[1];
-                            value.map(a => ConfigSDF.SpeciesFilters.forEach(b => delete a[b]));
-                            value = value.map(obj => ({ ...obj, "Group": ConfigSDF.SpeciesGroups[obj.Group] }));
                             type = "table";
-                            legend = ConfigSDF.Legend.Species;
+                            legend = ConfigSDF.Legend.F_3_1_b_site_assessment;
                             break;
-                        case "OtherSpecies":
+                        case "F_3_2_a_essential_information":
+                            index = "3.2.a";
+                            title = "";
+                            value = field[1];
+                            type = "table";
+                            legend = ConfigSDF.Legend.F_3_2_a_essential_information;
+                            break;
+                        case "F_3_2_b_site_assessment":
+                            index = "3.2.b";
+                            title = "";
+                            value = field[1];
+                            type = "table";
+                            legend = ConfigSDF.Legend.F_3_2_b_site_assessment;
+                            break;
+                        case "F_3_3_other_species":
+                            index = "3.3";
                             title = "Other important species of flora and fauna (optional)";
                             value = field[1];
-                            value.map(a => ConfigSDF.OtherSpeciesFilters.forEach(b => delete a[b]));
-                            value = value.map(obj => ({ ...obj, "Group": ConfigSDF.SpeciesGroups[obj.Group] }));
                             type = "table";
-                            legend = ConfigSDF.Legend.OtherSpecies;
+                            legend = ConfigSDF.Legend.F_3_3_other_species;
+                            break;
+                        case "F_3_3_8_species_motivation":
+                            index = "3.3.8";
+                            title = "Motivation";
+                            value = field[1];
+                            type = "table";
+                            legend = ConfigSDF.Legend.F_3_3_8_species_motivation;
                             break;
                         default:
                             break;
@@ -196,60 +314,51 @@ const SDFVisualization = (props) => {
                     break;
                 case 4:
                     switch (field[0]) {
-                        case "GeneralCharacter":
-                            title = "General site character";
-                            value = field[1].GeneralCharacter;
-                            value = value.map(obj => ({ "Code": obj.Code, "HabitatClass": ConfigSDF.HabitatClasses[obj.Code], "Cover": obj.Cover }));
-                            let total = value.map(a => a["Cover"]).reduce((a, b) => a + b, 0);
-                            value.push({ "Code": "", "HabitatClass": "Total Habitat Cover", "Cover": parseFloat((total).toFixed(4)) });
-                            legend = field[1].OtherCharacteristics;
-                            type = "table";
-                            break;
-                        case "Quality":
-                            title = "Quality and importance";
+                        case "F_4_1_site_characteristics":
+                            index = "4.1";
+                            title = "Site characteristics";
                             value = field[1];
                             type = "single";
                             break;
-                        case "NegativeThreats":
-                            title = "Threats, pressures and activities with impacts on the site";
+                        case "F_4_2_site_quality":
+                            index = "4.2";
+                            title = "Quality and importance of the site";
                             value = field[1];
-                            type = "double-table";
-                            legend = ConfigSDF.Legend.Threats;
+                            type = "single";
                             break;
-                        case "Ownership":
-                            title = "Ownership (optional)";
+                        case "F_4_3_pressures":
+                            index = "4.3";
+                            title = "";
                             value = field[1];
-                            if(value.length) {
-                                let tableHeader = ConfigSDF.TableHeader.OwnershipType;
-                                let val = [];
-                                value.forEach(item => {
-                                    let check = Object.entries(tableHeader).find(a => a[1].toLowerCase().includes(item.Type.toLowerCase()));
-                                    if(check) {
-                                        item.Type = check[0];
-                                    }
-                                    let found = val.find(a => a.Type === item.Type);
-                                    if(found) {
-                                        found.Percent += item.Percent;
-                                    }
-                                    else {
-                                        val.push({ "Type": item.Type, "Percent": item.Percent });
-                                    }
-                                });
-                                value = Object.keys(tableHeader).map(a => ({ "Type": tableHeader[a], "Percent": val.filter(b => b.Type === a).length ? val.find(b => b.Type === a).Percent : 0 }));
-                                let total = value.map(a => a["Percent"]).reduce((a, b) => a + b, 0);
-                                value.push({ "Type": "Total", "Percent": parseFloat((total).toFixed(4)) });
-                            }
+                            value = value.map(item => ({
+                                ...item,
+                                F_4_3_3_pressure_location: ConfigSDF.PressureLocation[item.F_4_3_3_pressure_location]
+                            }));
                             type = "table";
+                            legend = ConfigSDF.Legend.F_4_3_pressures;
                             break;
-                        case "Documents":
-                            title = "Documentation (optional)";
+                        case "F_4_3_5_pressure_date":
+                            index = "4.3.5";
+                            title = "Last update of the information on the preassures on the site";
                             value = field[1];
-                            if(!value.Links?.length) {
-                                delete value.Links;
-                                if(!value.Documents) {
-                                    value = null;
-                                }
-                            }
+                            type = "single";
+                            break;
+                        case "F_4_4_a_documentation":
+                            index = "4.4";
+                            title = "Documentation";
+                            value = field[1];
+                            type = "single";
+                            break;
+                        case "F_4_4_1_documentation_URI":
+                            index = "4.4.1";
+                            title = "Link(s)";
+                            value = field[1];
+                            type = "single";
+                            break;
+                        case "F_4_4_2_documentation_date":
+                            index = "4.4.2";
+                            title = "Last update of the documentation information";
+                            value = field[1];
                             type = "single";
                             break;
                         default:
@@ -258,39 +367,97 @@ const SDFVisualization = (props) => {
                     break;
                 case 5:
                     switch (field[0]) {
-                        case "DesignationTypes":
-                            title = "Designation types at national and regional level (optional)";
-                            value = field[1];
-                            type = "table";
-                            break;
-                        case "RelationSites":
-                            title = "Relation of the described site with other sites (optional)";
-                            value = field[1];
-                            type = "table";
-                            break;
-                        case "SiteDesignation":
-                            title = "Site designation (optional)";
+                        case "F_5_1_1_a_management_body":
+                            index = "5.1.1";
+                            title = "Name of the organisation";
                             value = field[1];
                             type = "single";
                             break;
-                        default:
-                            break;
-                    }
-                    break;
-                case 6:
-                    switch (field[0]) {
-                        case "BodyResponsible":
-                            title = "Body(ies) responsible for the site management";
+                        case "F_5_1_2_management_body_contact":
+                            index = "5.1.2";
+                            title = "Contact point in the organisation (optional)";
                             value = field[1];
-                            type = "multiple";
+                            type = "single";
                             break;
-                        case "ManagementPlan":
-                            title = "Management Plan(s)";
+                        case "F_5_1_3_a_management_body_address":
+                            index = "5.1.3";
+                            title = "Postal address";
                             value = field[1];
-                            type = "check"
+                            type = "single";
                             break;
-                        case "ConservationMeasures":
-                            title = "Conservation measures (optional)";
+                        case "F_5_1_4_management_body_email":
+                            index = "5.1.4";
+                            title = "Functional mailbox email address";
+                            value = field[1];
+                            type = "single";
+                            layout = 2;
+                            break;
+                        case "F_5_1_5_management_URI":
+                            index = "5.1.5";
+                            title = "Website with contact information";
+                            value = field[1];
+                            type = "single";
+                            layout = 2;
+                            break;
+                        case "F_5_2_1_management_plans_exist":
+                            index = "5.2.1";
+                            title = "Existence of management plan(s)";
+                            value = field[1];
+                            type = "single";
+                            break;
+                        case "F_5_2_2_management_list":
+                            index = "5.2.2";
+                            title = "";
+                            value = field[1];
+                            type = "table";
+                            break;
+                        case "F_5_2_3_a_management_text":
+                            index = "5.2.3";
+                            title = "Further explanations";
+                            value = field[1];
+                            type = "single";
+                            break;
+                        case "F_5_3_1_a_measures_MP_included":
+                            index = "5.3.1";
+                            title = "Detailed information on measures \n5.3.1.a Necessary conservation measures are included in the management plan(s)";
+                            value = field[1];
+                            type = "single";
+                            break;
+                        case "F_5_3_1_measures_list":
+                            index = "";
+                            title = "";
+                            value = field[1];
+                            type = "table";
+                            break;
+                        case "F_5_3_1_d_measures_text":
+                            index = "5.3.1.d";
+                            title = "Further explanations on detailed conservation measures";
+                            value = field[1];
+                            type = "single";
+                            break;
+                        case "F_5_3_2_a_measures_established":
+                            index = "";
+                            title = "Are the necessary measures established?";
+                            value = field[1];
+                            type = "single";
+                            layout = 2;
+                            break;
+                        case "F_5_3_2_b_measures_implemented":
+                            index = "";
+                            title = "Are the established measures implemented?";
+                            value = field[1];
+                            type = "single";
+                            layout = 2;
+                            break;
+                        case "F_5_4_a_measures_effectiveness":
+                            index = "";
+                            title = "Is the effectiveness of the conservation measures periodically assessed?";
+                            value = field[1];
+                            type = "single";
+                            break;
+                        case "F_5_4_b_measures_results":
+                            index = "";
+                            title = "Are the conservation measures delivering the set conservation objectives?";
                             value = field[1];
                             type = "single";
                             break;
@@ -298,15 +465,23 @@ const SDFVisualization = (props) => {
                             break;
                     }
                     break
-                case 7:
+                case 6:
                     switch (field[0]) {
-                        case "INSPIRE":
-                            title = "INSPIRE ID";
+                        case "F_6_1_1_inspire_namespace":
+                            index = "6.1.1";
+                            title = "Namespace";
                             value = field[1];
                             type = "single";
                             break;
-                        case "MapDelivered":
-                            title = "Map delivered as PDF in electronic format (optional)";
+                        case "F_6_1_2_inspire_local_id":
+                            index = "6.1.2";
+                            title = "Local identifier";
+                            value = field[1];
+                            type = "single";
+                            break;
+                        case "F_6_1_3_inspire_version":
+                            index = "6.1.3";
+                            title = "Version identifier (optional)";
                             value = field[1];
                             type = "single";
                             break;
@@ -318,7 +493,7 @@ const SDFVisualization = (props) => {
                     break;
             }
             if((!value || value.length === 0) && value !== 0) {
-                value = "No information provided";
+                value = "";
                 type = "single";
             }
             let labels = ConfigSDF[field[0]];
@@ -326,31 +501,22 @@ const SDFVisualization = (props) => {
                 if(Array.isArray(value)) {
                     value = value.map(a => { let b = {}; Object.keys(a).forEach(key => b[labels[key]] = a[key] ? (isNaN(a[key]) && !isNaN(Date.parse(a[key].replaceAll(' ', ""))) ? formatDate(a[key]) : a[key]) : a[key]); return b });
                 }
-                else if(type === "double-table") {
-                    let c = {};
-                    Object.keys(value).forEach(i => c[i] = value[i].map(a => { let b = {}; Object.keys(a).forEach(key => b[ConfigSDF[i][key]] = a[key]); return b }))
-                    value = c;
-                }
-                else if(typeof value === "object" && type !== "double-table") {
-                    let b = {};
-                    Object.keys(value).forEach(key => b[labels[key]] = value[key] ? (isNaN(value[key]) && !isNaN(Date.parse(value[key].replaceAll(' ', ""))) ? formatDate(value[key]) : value[key]) : value[key]);
-                    value = b;
-                }
             }
             else {
                 value = typeof value !== "object" && isNaN(value) && !isNaN(Date.parse(value.replaceAll(' ', ""))) ? formatDate(value) : value;
             }
 
             const parseLinks = (text) => {
-                const reg = new RegExp(/(^|\s)(https?:\/\/[^\s]+|www\.[^\s]+|[\w-]+\.com[^\s]*)/g, 'gi');
-                let parts = text;
-                if(isNaN(text)) {
-                    parts = !Array.isArray(text) ? text.split(reg) : text;
-                    return parts.map((part, i) => (part.match(reg) ? <a className="sdf-link" href={part} target="_blank" rel="noreferrer" key={i + "_" + part}>{part}</a> : part));
+                if (typeof text !== 'string') {
+                    return text; 
                 }
-                else {
-                    return parts;
-                }
+                const reg = new RegExp(/(https?:\/\/[^\s]+|www\.[^\s]+|[\w-]+\.com[^\s]*)/gi);
+                const parts = text.split(reg);
+                return parts.map((part, i) => (
+                reg.test(part) 
+                    ? <a className="sdf-link" href={part.startsWith('http') ? part : `https://${part}`} target="_blank" rel="noreferrer" key={i}>{part}</a> 
+                    : part
+                ));
             }
 
             const dataType = (field, type, data) => {
@@ -358,47 +524,56 @@ const SDFVisualization = (props) => {
                     case "single":
                         return (
                             <div className="sdf-row-field">
-                                {typeof data === "object" ? Object.entries(data).map(a => <p key={"v_" + a}><b>{a[0]}</b>: {a[1] ? parseLinks(a[1]) : "No information provided"}</p>) : parseLinks(data)}
+                                {typeof data === "object" ? Object.entries(data).map(a => <p key={"v_" + a}><b>{a[0]}</b>: {a[1] ? parseLinks(a[1]) : ""}</p>) : parseLinks(data)}
                             </div>
                         )
                     case "multiple":
                         return (
                             Array.isArray(data) && data.map((a, i) =>
                                 <div className="sdf-row-field" key={"a_" + i}>
-                                    {typeof a === "object" ? Object.entries(a).map(b => <p key={"b_" + b}><b>{b[0]}</b>: {b[1] ? parseLinks(b[1]) : "No information provided"}</p>) : parseLinks(a[1])}
+                                    {typeof a === "object" ? Object.entries(a).map(b => <p key={"b_" + b}><b>{b[0]}</b>: {b[1] ? parseLinks(b[1]) : ""}</p>) : parseLinks(a[1])}
                                 </div>
                             )
                         )
                     case "table":
                         let header = Object.keys(value[0]).map(a => {
+                            const isStrictlyNumeric = typeof value[0][a] === 'number';
                             return (
-                                <th className={order[section+field]?.column === a ? "sorted" : ""} scope="col" key={a} onClick={()=>sortFields(section, field, a)}>
+                                <th className={order[section + field]?.column === a ? "sorted" : ""} scope="col" key={a} onClick={() => sortFields(section, field, a)} style={{ verticalAlign: isStrictlyNumeric ? 'bottom' : 'top' }}>
                                     {a}
                                     {order[section+field]?.column === a && (<div className="sort-icon">{order[section+field]?.order === "asc" ? <i className="ri-arrow-up-s-fill"></i> : <i className="ri-arrow-down-s-fill"></i>}</div>)}
                                 </th>
                             )
                         });
                         let checkCellLink = (cell, value) => {
-                            if(field === "HabitatTypes" && cell === "Code") {
+                            if ((field === "F_3_1_a_essential_information" || field === "F_3_1_b_site_assessment") && cell === "3.1.1 Code") {
                                 value = <a href={"https://eunis.eea.europa.eu/habitats_code2000/" + value} target="blank">{value}</a>
                             }
-                            else if((field === "Species" || field === "OtherSpecies") && cell === "Scientific Name" && value !== "-") {
-                                value = <a href={"https://eunis.eea.europa.eu/species/" + value} target="blank">{value}</a>
+                            else if (field === "F_3_2_a_essential_information" || field === "F_3_2_b_site_assessment" || field === "F_3_3_other_species" || field === "F_3_3_8_species_motivation") {
+                                if (cell.includes("Code") && value !== "-") {
+                                    value = <a href={"https://eunis.eea.europa.eu/species_code2000/" + value} target="blank">{value}</a>
+                                }
+                                else if (cell.includes("Scientific name") && value !== "-") {
+                                    value = <a href={"https://eunis.eea.europa.eu/species/" + value} target="blank">{value}</a>
+                                }
                             }
-                            else if((field === "Species" || field === "OtherSpecies") && cell === "Code" && value !== "-") {
-                                value = <a href={"https://eunis.eea.europa.eu/species_code2000/" + value} target="blank">{value}</a>
-                            }
-                            return value;
+                            return parseLinks(value);
                         }
                         let body = value.map((row, i) => {
                             let color;
-                            if((field === "Species" || field === "OtherSpecies") && Object.entries(row).find(a => a[0] === "S" && a[1] === "Yes")) {
+                            if((field === "F_3_2_a_essential_information" || field === "F_3_3_other_species") && Object.entries(row).find(a => (a[0] === "3.2.4 Sensitive" || a[0] === "3.3.4 Sensitive") && a[1] === "Yes")) {
                                 color = ConfigSDF.Colors.Red;
                             }
                             return (
                                 <tr style={{ backgroundColor: color ? color : "" }} key={"tr_" + i}>
                                     {Object.keys(value[0]).map((cell, ii) => {
-                                        return <td key={"tc_" + i + ii}><span>{checkCellLink(cell, row[cell])}</span></td>
+                                        const cellValue = row[cell];
+                                        const isStrictlyNumeric = typeof cellValue === 'number';
+                                        return (
+                                        <td key={"tc_" + i + ii} style={{ textAlign: isStrictlyNumeric ? 'right' : 'left' }}>
+                                            {cell.includes("Scientific name") ? <i>{checkCellLink(cell, cellValue)}</i> : <span>{checkCellLink(cell, cellValue)}</span>}
+                                        </td>
+                                        );
                                     })}
                                 </tr>
                             )
@@ -418,7 +593,7 @@ const SDFVisualization = (props) => {
                                                     )}
                                                 </tr>
                                             }
-                                            <tr>
+                                            <tr className={field.startsWith("F_3_") ? "th-rotate" : ""}>
                                                 {header}
                                             </tr>
                                         </thead>
@@ -428,135 +603,43 @@ const SDFVisualization = (props) => {
                                     </table>
                                 </div>
                                 {legend &&
-                                    (field === "GeneralCharacter" ?
-                                        <>
-                                            <div className="sdf-legend mt-2">
-                                                <b>Other Site Characteristics</b>
-                                            </div>
-                                            <div className="sdf-row-field">
-                                                {typeof legend === "object" ? Object.entries(legend).map(a => <p key={"v_" + a}><b>{a[0]}</b>: {a[1] ? parseLinks(a[1]) : "No information provided"}</p>) : parseLinks(legend)}
-                                            </div>
-                                        </>
-                                        :
-                                        <div className="sdf-legend mt-2">
-                                            {Object.keys(legend).map(a => <div key={a}><b>{a}: </b>{checkLegendLinks(legend[a])}</div>)}
-                                        </div>
-                                    )
+                                    <div className="sdf-legend mt-2">
+                                        {Object.keys(legend).map(a => <div key={a}><b>{a}: </b>{checkLegendLinks(legend[a])}</div>)}
+                                    </div>
                                 }
                             </>
-                        )
-                    case "double-table":
-                        let tables = [];
-                        Object.entries(value).forEach(a => {
-                            let header = a[1].length > 0 ? Object.keys(a[1][0]).map(b => {
-                                return (
-                                    <th className={order[section+a[0]]?.column === b ? "sorted" : ""} scope="col" key={b} onClick={()=>sortFields(section, a[0], b)}>
-                                    {b}
-                                    {order[section+a[0]]?.column === b && (<div className="sort-icon">{order[section+a[0]]?.order === "asc" ? <i className="ri-arrow-up-s-fill"></i> : <i className="ri-arrow-down-s-fill"></i>}</div>)}
-                                </th>
-                                )
-                            }) : null;
-                            let body = a[1].length > 0 && a[1].map((row, i) => {
-                                return (
-                                    <tr key={"tr_" + i}>
-                                        {Object.keys(a[1][0]).map((cell, ii) => {
-                                            return <td key={"tc_" + i + ii}>{row[cell]}</td>
-                                        })}
-                                    </tr>
-                                )
-                            });
-                            if(!body.length) {
-                                body = <tr><td>No data</td></tr>;
-                            }
-                            let tableHeader = ConfigSDF.TableHeader[a[0]];
-                            tables.push(
-                                <div className="twelve wide mobile twelve wide tablet six wide computer column" key={a[0]}>
-                                    <div className="mb-2">
-                                        <div className="sdf-row-field">
-                                            <table className="ui table unstackable">
-                                                <thead>
-                                                    <tr>
-                                                        {tableHeader.map((a, i) =>
-                                                            <th colSpan={a.span} key={"th_" + i}>
-                                                                {a.text}
-                                                            </th>
-                                                        )}
-                                                    </tr>
-                                                    <tr>
-                                                        {header}
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {body}
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            );
-                        });
-                        return (
-                            <div className="ui grid">
-                                {tables}
-                                {legend &&
-                                    <div className="sdf-legend">
-                                        {Object.keys(legend).map(a => <div key={a}><b>{a}: </b>{legend[a]}</div>)}
-                                    </div>
-                                }
-                            </div>
-                        );
-                    case "check":
-                        let options = ConfigSDF.TableHeader.ManagementPlan;
-                        let checked = value[0].Exists ? value[0].Exists : "N";
-                        let check = options.map((a, i) => {
-                            return (
-                                <div key={"m_" + i}>
-                                    <div className="ui checkbox">
-                                        <input type="checkbox" className="input-checkbox" id={"management_check_" + i} defaultChecked={checked === a.value} disabled={checked !== a.value} />
-                                        <label htmlFor={"management_check_" + i} className="input-label">{a.text}</label>
-                                    </div >
-                                    {checked === "Y" && checked === a.value &&
-                                        Array.isArray(data) && data.map((a, i) =>
-                                            <div className="mb-3" key={"a_" + i}>
-                                                {typeof a === "object" ? Object.entries(a).map(b => b[0] !== "Exists" && <p className="mb-1" key={"b_" + b}><b>{b[0]}</b>: {b[1] ? parseLinks(b[1]) : "No information provided"}</p>) : parseLinks(a[1])}
-                                            </div>
-                                        )
-                                    }
-                                </div>
-                            )
-                        });
-                        return (
-                            <div className="sdf-row-field">
-                                {check}
-                            </div>
                         )
                     default:
                         break;
                 }
             }
 
-            fields.push(
-                <div className={"sdf-row" + (layout === 2 ? " twelve wide mobile six wide tablet six wide computer column" : "")} key={index}>
+            fields.push([
+                (ConfigSDF.Subtitles[index] || ConfigSDF.Subtitles[title]) && (
+                    <div className="sdf-subtitle" key={section + "-" + field[0] + "-subtitle"}>
+                        <div className="sdf-row-title">{ConfigSDF.Subtitles[index] || ConfigSDF.Subtitles[title]}</div>
+                    </div>
+                ),
+                <div className={"sdf-row" + (layout === 2 ? " twelve wide mobile six wide tablet six wide computer column" : "")} key={section + "-" + field[0] + "-row"}>
                     <div className="column">
-                        <div className="sdf-row-title">{index + " " + title}</div>
+                        {index && title && <div className="sdf-row-title">{index + " " + title}</div>}
                         {dataType(field[0], type, value)}
                     </div>
                 </div>
-            );
+            ]);
         }
         return fields;
     }
 
     const sortFields = (section, field, column) => {
         let colName = column;
-        column = Object.keys(ConfigSDF[field]).find(key => ConfigSDF[field][key] === column);
-        var collator = new Intl.Collator([], {numeric: true});
+        column = ConfigSDF[field] && Object.keys(ConfigSDF[field]).find(key => ConfigSDF[field][key] === column);
+        var collator = new Intl.Collator([], { numeric: false, sensitivity: 'base' });
         function getValue(obj, path) {
             if (!path) return obj;
             const properties = path.split('.');
             return getValue(obj[properties.shift()], properties.join('.'))
         }
-        let path = field === "GeneralCharacter" || field === "NegativeThreats" ? [field, field].join(".") : field === "PositiveThreats" ? ["NegativeThreats", field].join(".") : field;
         
         if(order[section+field]?.column === colName && order[section+field].order === "asc") {
             setOrder((prevState) => ({
@@ -567,20 +650,7 @@ const SDFVisualization = (props) => {
                 ...prevState,
                 [section]: {
                     ...prevState[section],
-                    ...(field === "GeneralCharacter" && {
-                        [field]: {
-                            [field]: getValue(prevState,[section, path].join('.')).sort((a, b) => collator.compare(field === "GeneralCharacter" && column === "HabitatClass" ? ConfigSDF.HabitatClasses[b.Code] : b[column] === null ? "" : b[column], field === "GeneralCharacter" && column === "HabitatClass" ? ConfigSDF.HabitatClasses[a.Code] : a[column] === null ? "" : a[column]))
-                        }  
-                    }),
-                    ...(field.includes("Threats") && {
-                        ["NegativeThreats"]: {
-                            ...prevState[section]["NegativeThreats"],
-                            [field]: getValue(prevState,[section, path].join('.')).sort((a, b) => collator.compare(b[column] === null ? "" : b[column], a[column] === null ? "" : a[column]))
-                        }  
-                    }),
-                    ...((field !== "GeneralCharacter" && !field.includes("Threats")) && {
-                        [field]: getValue(prevState,[section, path].join('.')).sort((a, b) => collator.compare(b[column] === null ? "" : b[column], a[column] === null ? "" : a[column]))
-                    }),
+                    [field]: getValue(prevState,[section, field].join('.')).sort((a, b) => collator.compare(b[column] === null ? "" : b[column], a[column] === null ? "" : a[column]))
                 }
             }));
         }
@@ -593,20 +663,7 @@ const SDFVisualization = (props) => {
                 ...prevState,
                 [section]: {
                     ...prevState[section],
-                    ...(field === "GeneralCharacter" && {
-                        [field]: {
-                            [field]: getValue(prevState,[section, path].join('.')).sort((a, b) => collator.compare(field === "GeneralCharacter" && column === "HabitatClass" ? ConfigSDF.HabitatClasses[a.Code] : a[column] === null ? "" : a[column], field === "GeneralCharacter" && column === "HabitatClass" ? ConfigSDF.HabitatClasses[b.Code] : b[column] === null ? "" : b[column]))
-                        }  
-                    }),
-                    ...(field.includes("Threats") && {
-                        ["NegativeThreats"]: {
-                            ...prevState[section]["NegativeThreats"],
-                            [field]: getValue(prevState,[section, path].join('.')).sort((a, b) => collator.compare(a[column] === null ? "" : a[column], b[column] === null ? "" : b[column]))
-                        }
-                    }),
-                    ...((field !== "GeneralCharacter" && !field.includes("Threats")) && {
-                        [field]: getValue(prevState,[section, path].join('.')).sort((a, b) => collator.compare(a[column] === null ? "" : a[column], b[column] === null ? "" : b[column]))
-                    }),
+                    [field]: getValue(prevState,[section, field].join('.')).sort((a, b) => collator.compare(a[column] === null ? "" : a[column], b[column] === null ? "" : b[column]))
                 }
             }));
         }  
@@ -626,7 +683,7 @@ const SDFVisualization = (props) => {
         Object.keys(data).filter(a => a !== "SiteInfo").forEach((item, i) => {
             sections.push(
                 <div id={i + 1} key={i}>
-                    <div className="ui grid pb-4">
+                    <div className="ui grid py-4">
                         <h2>{i + 1}. {ConfigSDF.Titles[i]}</h2>
                         {sectionsContent(i + 1, data[item], item)}
                     </div>
@@ -639,7 +696,7 @@ const SDFVisualization = (props) => {
     return (
         <>
             {showMainData()}
-            <div className="ui container">
+            <div className="ui container sdf-content">
                 {renderSections(data)}
                 {siteCode && siteCode !== "nodata" && release && showMap()}
             </div>

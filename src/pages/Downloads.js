@@ -44,7 +44,7 @@ const Downloads = () => {
         let promises = [];
         let url;
         if(downloadType === "SubmissionComparer") {
-            url = ConfigJson.GetSubmissions + ConfigData.ReleasesFilters;
+            url = ConfigJson.GetSubmissions;
             promises.push(
                 fetch(url)
                 .then(response => response.json())
