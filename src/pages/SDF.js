@@ -114,7 +114,13 @@ const SDF = () => {
                     let releases = data.Data.SiteInfo.Releases.sort((a, b) => new Date(b.ReleaseDate) - new Date(a.ReleaseDate));
                     setReleases(releases);
                     setData(isLegacy ? formatData(data): data.Data);
-                    let hasSensitives = data.Data.EcologicalInformation.Species.some(a => a.Sensitive === "Yes") || data.Data.EcologicalInformation.OtherSpecies.some(a => a.Sensitive === "Yes");
+                    let hasSensitives;
+                    if(isLegacy) {
+                        hasSensitives = data.Data.EcologicalInformation.Species.some(a => a.Sensitive === "Yes") || data.Data.EcologicalInformation.OtherSpecies.some(a => a.Sensitive === "Yes");
+                    }
+                    else {
+                        hasSensitives = data.Data.EcologicalInformation.F_3_2_a_essential_information.some(a => a.F_3_2_4_species_sensitive === "Yes") || data.Data.EcologicalInformation.F_3_3_other_species.some(a => a.F_3_3_4_species_sensitive === "Yes");
+                    }
                     setSensitive(hasSensitives);
                     if(!release) {
                         let release = releases[0].ReleaseId;
