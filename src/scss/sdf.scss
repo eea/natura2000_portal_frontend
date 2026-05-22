@@ -31,15 +31,16 @@
         color: $text;
         h1 {
             margin-bottom: 0;
-            .sensitive {
-                color: $messageError;
-            }
+
         }
         b {
             color: $naturaGreen;
             font-size: 1.25rem;
             display: block;
             line-height: normal;
+            &.sensitive {
+                color: $messageError;
+            }
         }
         h2 {
             font-size: 1.25rem;
