@@ -199,7 +199,7 @@ const SDF = () => {
                                                     {release && releases.length > 0 && <b>RELEASE {releases.find(a => a.ReleaseId === release)?.ReleaseName} ({formatDate(releases.find(a => a.ReleaseId === release)?.ReleaseDate, true)})</b>}
                                                     {
                                                         !isLoading && siteCode && siteCode !== "nodata" && data !== "nodata" && Object.keys(data).length > 0 && !errorLoading &&
-                                                        <h2>{data.SiteInfo.SiteName} ({data.SiteInfo.SiteCode} - {ConfigSDF.SiteType[data.SiteInfo.Directive]})</h2>
+                                                        <h2>{data.SiteInfo.SiteName} ({data.SiteInfo.SiteCode} - {ConfigSDF.SiteType[data.SiteInfo.Directive ?? data.SiteInfo.SiteType]})</h2>
                                                     }
                                                     {sensitive && <b className="sensitive">SENSITIVE</b>}
                                                 </div>
