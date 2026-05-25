@@ -53,14 +53,9 @@ const SDF = () => {
 
     useEffect(() => {
         if(nav && !isLoading && siteCode && siteCode !== "nodata" && data !== "nodata" && !errorLoading) {
-            let element = document.getElementById(nav);
-            const y = element.getBoundingClientRect().top + window.scrollY;
-            window.scroll({
-                top: y,
-                behavior: "instant"
-            });
+            scrollTo(nav);
         }
-    }, [isLoading, nav, siteCode, data, errorLoading]);
+    }, [isLoading]);
 
     const getSiteCode = () => {
         let params = Object.fromEntries([...searchParams]);
@@ -162,6 +157,22 @@ const SDF = () => {
         setRelease("");
         setData([]);
         setErrorLoading(false);
+    }
+
+    const scrollTo = (item, e = null) => {
+        if (e) {
+            e.stopPropagation();
+            e.preventDefault();
+        }
+        const element = document.getElementById(item);
+        if (!element) return;
+        const y = element.getBoundingClientRect().top + window.scrollY;
+        const baseUrl = window.location.href.split("&nav")[0];
+        window.history.pushState(null, null, `${baseUrl}&nav=${item}`);
+        window.scroll({
+            top: y,
+            behavior: 'instant'
+        });
     }
 
     const formatDate = (date, ddmmyyyy) => {
