@@ -46,7 +46,7 @@ class MapViewer extends React.Component {
                 center: [0,40],
                 zoom: 5,
                 ui: {
-                    components: ["attribution"]
+                    components: []
                 }
             }
             this.view = new MapView(mapFeats);
@@ -103,6 +103,14 @@ class MapViewer extends React.Component {
         return(
             <>
                 <div id={this.mapDiv} style={{ width: '100%', height: '600px' }} />
+                <div className="map-attribution">
+                    Powered by <a class="esri-attribution__link" href="http://www.esri.com/" target="_blank" rel="noopener noreferrer">Esri</a>
+                    {' | © '}
+                    <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">
+                        OpenStreetMap
+                    </a>
+                    {' contributors'}
+                </div>
             </>
         );
     }
