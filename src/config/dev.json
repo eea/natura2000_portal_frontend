@@ -13,6 +13,7 @@
 	"DownloadComputingSAC": "https://n2k-portal-back-bzbwe0e9ambdegcf.spaincentral-01.azurewebsites.net/api/Download/ComputingSAC",
 	"DownloadSpatialData": "https://n2k-portal-back-bzbwe0e9ambdegcf.spaincentral-01.azurewebsites.net/api/Download/SpatialDataSDI",
 	"DownloadSubmissionComparer": "https://n2k-portal-back-bzbwe0e9ambdegcf.spaincentral-01.azurewebsites.net/api/Download/SubmissionComparer",
+	"DownloadSufficiencyHabitatsSpecies": "https://n2k-portal-back-bzbwe0e9ambdegcf.spaincentral-01.azurewebsites.net/api/Download/SufficiencyHabitatsSpecies",
 	"SensitiveSDF": "https://n2k-portal-back-bzbwe0e9ambdegcf.spaincentral-01.azurewebsites.net/api/SDF/GetReleaseData",
 	"GetLastReleaseId": "https://n2k-portal-back-bzbwe0e9ambdegcf.spaincentral-01.azurewebsites.net/api/SDF/GetLastReleaseId",
 	"MapReleases": "https://bio.discomap.eea.europa.eu/arcgis/rest/services/N2K_Backbone/Releases/MapServer/0"

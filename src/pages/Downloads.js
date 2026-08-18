@@ -43,8 +43,8 @@ const Downloads = () => {
         setLoading(true);
         let promises = [];
         let url;
-        if(downloadType === "SubmissionComparer") {
-            url = ConfigJson.GetSubmissions;
+        if(downloadType === "SubmissionComparer" || downloadType === "SufficiencyHabitatsSpecies") {
+            url = ConfigJson.GetSubmissions + ConfigData.ReleasesFilters;
             promises.push(
                 fetch(url)
                 .then(response => response.json())
@@ -270,14 +270,44 @@ const Downloads = () => {
                 );
             case "versionTo":
                 return null;
+            case "countryVersionId":
+                return (
+                    <div className="field">
+                        <div className="ui grid">
+                            <div className="six wide computer twelve wide mobile six wide tablet column column-blocks-wrapper">
+                                <div className="field">
+                                    <label>Submission</label>
+                                    <Select
+                                        placeholder="Select a submission"
+                                        name="countryVersionId"
+                                        options={
+                                            data && fields.countryCode && data.find(a => a.CountryCode === fields.countryCode).Submissions.map((item, i) => ({
+                                                key: item.VersionID,
+                                                value: item.VersionID.toString(),
+                                                text: item.ImportDate +" (" + item.VersionID + ")"
+                                           }))
+                                        }
+                                        value={fields.countryVersionId?.toString() || null}
+                                        onChange={onChangeFields}
+                                        selectOnBlur={false}
+                                        error={errors["countryVersionId"]}
+                                        loading={loading}
+                                        disabled={loading || errorLoading || downloading || !fields.countryCode}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                );
             case "email":
+            case "mailNotifier":
                 return (
                     <div className="field">
                         <label>Email address</label>
                         <Input
                             type="text"
                             placeholder="Enter your email address"
-                            name="email"
+                            name={field}
                             value={fields[field]}
                             onChange={onChangeFields}
                             autoComplete="off"
@@ -295,14 +325,11 @@ const Downloads = () => {
         e.preventDefault();
         e.stopPropagation();
         if(validateFields(product)) {
-            if(product === "ComputingSAC") {
+            if(product === "ComputingSAC" || product === "SubmissionComparer" || product === "SufficiencyHabitatsSpecies") {
                 downloadRequest(product);
             }
             else if(product === "SpatialData") {
                 downloadFile(product);
-            }
-            else if(product === "SubmissionComparer") {
-                downloadRequest(product);
             }
             else {
                 setDownloading(true);
@@ -335,7 +362,7 @@ const Downloads = () => {
         for (let item in productFields) {
             let field = productFields[item];
             let value = fields[field];
-            if(field === "email") {
+            if(field === "email" || field === "mailNotifier") {
                 const validateEmail = (email) => {
                     return email.toLowerCase().match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
                 };
