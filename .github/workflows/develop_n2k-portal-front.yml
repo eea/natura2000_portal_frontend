@@ -57,7 +57,7 @@ jobs:
         with:
           app-name: 'n2k-portal-front'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3E7A011220844019952D5B61B7B3ABE6 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_4D58E54C48404286B80F50D66EB06255 }}
           package: .
 
   delete:

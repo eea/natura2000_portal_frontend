@@ -7,6 +7,7 @@ import BackgroundImage from "../img/home_background.jpg";
 import SitesImage from "../img/sites_image.jpg";
 import HabitatsImage from "../img/habitats_image.jpg";
 import SpeciesImage from "../img/species_image.jpg";
+import ErrorImage from "../img/error_image.svg";
 import {
     Input,
     Loader
@@ -15,6 +16,7 @@ import {
 const Home = () => {
 
     const [loadingData, setLoadingData] = useState(false);
+    const [errorLoading, setErrorLoading] = useState(false);
     const [data, setData] = useState({});
     const [site, setSite] = useState();
     const [habitat, setHabitat] = useState();
@@ -33,11 +35,14 @@ const Home = () => {
             if(data?.Success) {
                 setData(data.Data);
             }
+            else {
+                setErrorLoading(true);
+            }
             setLoadingData(false);
         })
     }
 
-    if(!loadingData && Object.keys(data).length === 0) {
+    if(!loadingData && !errorLoading && Object.keys(data).length === 0) {
         loadData();
     }
 
@@ -93,8 +98,13 @@ const Home = () => {
                                                             placeholder="Search by site code or site name"
                                                             name="site"
                                                             value={site}
-                                                            onChange={(e) => setSite(e.currentTarget.value)}
                                                             autoComplete="off"
+                                                            onChange={(e) => setSite(e.currentTarget.value)}
+                                                            onKeyDown={(e) => {
+                                                                if (e.key === "Enter" && site) {
+                                                                    window.location.href = "/#/search/sites?site=" + site;
+                                                                }
+                                                            }}
                                                         />
                                                     </div>
                                                     <a className={"ui button" + (!site ? " disabled" : "")} href={"/#/search/sites?site=" + site}>Search</a>
@@ -123,8 +133,13 @@ const Home = () => {
                                                             placeholder="Search by habitat code or habitat name"
                                                             name="habitat"
                                                             value={habitat}
-                                                            onChange={(e) => setHabitat(e.currentTarget.value)}
                                                             autoComplete="off"
+                                                            onChange={(e) => setHabitat(e.currentTarget.value)}
+                                                            onKeyDown={(e) => {
+                                                                if (e.key === "Enter" && habitat) {
+                                                                    window.location.href = "/#/search/habitats?habitat=" + habitat;
+                                                                }
+                                                            }}
                                                         />
                                                     </div>
                                                     <a className={"ui button" + (!habitat ? " disabled" : "")} href={"/#/search/habitats?habitat=" + habitat}>Search</a>
@@ -153,8 +168,13 @@ const Home = () => {
                                                             placeholder="Search by species code or species name"
                                                             name="species"
                                                             value={species}
-                                                            onChange={(e) => setSpecies(e.currentTarget.value)}
                                                             autoComplete="off"
+                                                            onChange={(e) => setSpecies(e.currentTarget.value)}
+                                                            onKeyDown={(e) => {
+                                                                if (e.key === "Enter" && species) {
+                                                                    window.location.href = "/#/search/species?species=" + species;
+                                                                }
+                                                            }}
                                                         />
                                                     </div>
                                                     <a className={"ui button" + (!species ? " disabled" : "")} href={"/#/search/species?species=" + species}>Search</a>
@@ -168,66 +188,73 @@ const Home = () => {
                             <div className="statistics-container content-box">
                                 <div className="content-box-inner pb-0">
                                     <h2 id="eea-in-numbers" className="mt-3">Natura 2000 in numbers</h2>
-                                    {
-                                        (!loadingData || Object.keys(data).length < 0) &&
+                                    {!loadingData && !errorLoading && Object.keys(data).length > 0 && (
                                         <div>
                                             Search in the last release ({Utils.formatDate(data.ReleaseDate)}) by:
                                         </div>
-                                    }
+                                    )}
+                                    {!loadingData && (errorLoading || !data || Object.keys(data).length === 0) && (
+                                        <div className="error-container pb-6">
+                                            <img src={ErrorImage} alt="Error" />
+                                            Something went wrong
+                                        </div>
+                                    )}
                                 </div>
-                                <div className="ui grid">
-                                    <div className="four wide computer twelve wide mobile six wide tablet column column-blocks-wrapper">
-                                        <div className="ui small one statistics center">
-                                            <span className="ui statistic">
-                                                {
-                                                    (loadingData || Object.keys(data).length === 0) ?
-                                                    <Loader active={loadingData} inline="centered" className="my-5" />
-                                                    :
-                                                    <div className="value slate text-center secondary">
-                                                        <p>{formatNumber(data.SitesNumber)}</p>
+                                {!errorLoading &&
+                                    <div className="ui grid">
+                                        <div className="four wide computer twelve wide mobile six wide tablet column column-blocks-wrapper">
+                                            <div className="ui small one statistics center">
+                                                <span className="ui statistic">
+                                                    {
+                                                        (loadingData || Object.keys(data).length === 0) ?
+                                                        <Loader active={loadingData} inline="centered" className="my-5" />
+                                                        :
+                                                        <div className="value slate text-center secondary">
+                                                            <p>{formatNumber(data.SitesNumber)}</p>
+                                                        </div>
+                                                    }
+                                                    <div className="label slate text-center tertiary">
+                                                        <p>Natura 2000 sites</p>
                                                     </div>
-                                                }
-                                                <div className="label slate text-center tertiary">
-                                                    <p>Natura 2000 sites</p>
-                                                </div>
-                                            </span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div className="four wide computer twelve wide mobile six wide tablet column column-blocks-wrapper">
+                                            <div className="ui small one statistics center">
+                                                <span className="ui statistic">
+                                                    {
+                                                        (loadingData || Object.keys(data).length === 0) ?
+                                                        <Loader active={loadingData} inline="centered" className="my-5" />
+                                                        :
+                                                        <div className="value slate text-center secondary">
+                                                            <p>{formatNumber(data.HabitatsNumber)}</p>
+                                                        </div>
+                                                    }
+                                                    <div className="label slate text-center tertiary">
+                                                        <p>Habitats</p>
+                                                    </div>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div className="four wide computer twelve wide mobile six wide tablet column column-blocks-wrapper">
+                                            <div className="ui small one statistics center">
+                                                <span className="ui statistic">
+                                                    {
+                                                        (loadingData || Object.keys(data).length === 0) ?
+                                                        <Loader active={loadingData} inline="centered" className="my-5" />
+                                                        :
+                                                        <div className="value slate text-center secondary">
+                                                            <p>{formatNumber(data.SpeciesNumber)}</p>
+                                                        </div>
+                                                    }
+                                                    <div className="label slate text-center tertiary">
+                                                        <p>Species</p>
+                                                    </div>
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div className="four wide computer twelve wide mobile six wide tablet column column-blocks-wrapper">
-                                        <div className="ui small one statistics center">
-                                            <span className="ui statistic">
-                                                {
-                                                    (loadingData || Object.keys(data).length === 0) ?
-                                                    <Loader active={loadingData} inline="centered" className="my-5" />
-                                                    :
-                                                    <div className="value slate text-center secondary">
-                                                        <p>{formatNumber(data.HabitatsNumber)}</p>
-                                                    </div>
-                                                }
-                                                <div className="label slate text-center tertiary">
-                                                    <p>Habitats</p>
-                                                </div>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div className="four wide computer twelve wide mobile six wide tablet column column-blocks-wrapper">
-                                        <div className="ui small one statistics center">
-                                            <span className="ui statistic">
-                                                {
-                                                    (loadingData || Object.keys(data).length === 0) ?
-                                                    <Loader active={loadingData} inline="centered" className="my-5" />
-                                                    :
-                                                    <div className="value slate text-center secondary">
-                                                        <p>{formatNumber(data.SpeciesNumber)}</p>
-                                                    </div>
-                                                }
-                                                <div className="label slate text-center tertiary">
-                                                    <p>Species</p>
-                                                </div>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
+                                }
                             </div>
                         </div>
                     </div>

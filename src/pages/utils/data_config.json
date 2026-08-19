@@ -508,6 +508,16 @@
 				"versionTo",
 				"email"
 			]
+		},
+		{
+			"Product": "SufficiencyHabitatsSpecies",
+			"Name": "Sufficiency fields for Habitats and Species",
+			"Description": "Extracts sufficiency data for habitats and species, by Member State and submission.",
+			"Fields": [
+				"countryCode",
+				"countryVersionId",
+				"mailNotifier"
+			]
 		}
 	],
 	"ReleasesFilters": "?internalPortalSDFSensitive=true",

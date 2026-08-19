@@ -4,6 +4,7 @@ import ConfigJson from "../config.json";
 import ConfigData from "./utils/data_config.json";
 import ConfigSDF from "./utils/sdf_config.json";
 import SDFStructure from "./components/SDFStructure";
+import SDFLegacyStructure from "./components/SDFLegacyStructure";
 import Logo from "../img/natura2000_logo.svg";
 import {
     Select,
@@ -25,6 +26,18 @@ const SDF = () => {
     const [showScrollBtn, setShowScrollBtn] = useState(false);
 
     useEffect(() => {
+        if(!siteCode) {
+            getSiteCode();
+        }
+    }, [searchParams]);
+
+    useEffect(() => {
+        if( !isLoading && siteCode && siteCode !== "nodata" && Object.keys(data).length === 0 && !errorLoading) {
+            loadData();
+        }
+    }, [siteCode, release]);
+
+    useEffect(() => {
         window.addEventListener("scroll", () => {
             if(window.scrollY === 0) {
                 setShowScrollBtn(false);
@@ -40,14 +53,9 @@ const SDF = () => {
 
     useEffect(() => {
         if(nav && !isLoading && siteCode && siteCode !== "nodata" && data !== "nodata" && !errorLoading) {
-            let element = document.getElementById(nav);
-            const y = element.getBoundingClientRect().top + window.scrollY;
-            window.scroll({
-                top: y,
-                behavior: "instant"
-            });
+            scrollTo(nav);
         }
-    }, [isLoading, nav, siteCode, data, errorLoading]);
+    }, [isLoading]);
 
     const getSiteCode = () => {
         let params = Object.fromEntries([...searchParams]);
@@ -59,43 +67,68 @@ const SDF = () => {
     const loadData = () => {
         if(siteCode !== "" && !isLoading) {
             setIsLoading(true);
-            let url = ConfigJson.SensitiveSDF + ConfigData.ReleasesFilters;
             if(release) {
-                url += "&siteCode=" + siteCode + "&releaseId=" + release;
+                fetchSDF(release);
             }
             else {
-                url += "&siteCode=" + siteCode;
-            }
-            fetch(url)
+                let url = ConfigJson.GetLastReleaseId + ConfigData.ReleasesFilters + "&siteCode=" + siteCode;
+                fetch(url)
                 .then(response => response.json())
-                .then(data => {
-                    if(data?.Success) {
-                        if(!data.Data.SiteInfo.SiteCode) {
-                            setData("nodata");
-                        }
-                        else {
-                            let releases = data.Data.SiteInfo.Releases.sort((a, b) => new Date(b.ReleaseDate) - new Date(a.ReleaseDate));
-                            setReleases(releases);
-                            setData(formatData(data));
-                            let hasSensitives = data.Data.EcologicalInformation.Species.some(a => a.Sensitive === "Yes") || data.Data.EcologicalInformation.OtherSpecies.some(a => a.Sensitive === "Yes");
-                            setSensitive(hasSensitives);
-                            if(!release) {
-                                let release = releases[0].ReleaseId;
-                                setRelease(release);
-                                setSearchParams({"site": siteCode, "release": release});
-                            }
-                        }
+                .then(releaseData => {
+                    if(releaseData?.Success) {
+                        fetchSDF(releaseData.Data);
                     }
                     else {
                         setErrorLoading(true);
+                        setIsLoading(false);
                     }
-                    setIsLoading(false);
                 });
+            }
         }
         else {
             setData("nodata");
             setIsLoading(false);
         }
+    }
+
+    const fetchSDF = (lastRelease) => {
+        const isLegacy = lastRelease < 100;
+        let url = ConfigJson.SensitiveSDF + (isLegacy ? "Legacy" : "") + ConfigData.ReleasesFilters;
+        url += "&siteCode=" + siteCode;
+        if(lastRelease) {
+            url += "&releaseId=" + lastRelease;
+        }
+        fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            if(data?.Success) {
+                if(!data.Data.SiteInfo.SiteCode) {
+                    setData("nodata");
+                }
+                else {
+                    let releases = data.Data.SiteInfo.Releases.sort((a, b) => new Date(b.ReleaseDate) - new Date(a.ReleaseDate));
+                    setReleases(releases);
+                    setData(isLegacy ? formatData(data): data.Data);
+                    let hasSensitives;
+                    if(isLegacy) {
+                        hasSensitives = data.Data.EcologicalInformation.Species.some(a => a.Sensitive === "Yes") || data.Data.EcologicalInformation.OtherSpecies.some(a => a.Sensitive === "Yes");
+                    }
+                    else {
+                        hasSensitives = data.Data.EcologicalInformation.F_3_2_a_essential_information.some(a => a.F_3_2_4_species_sensitive === "Yes") || data.Data.EcologicalInformation.F_3_3_other_species.some(a => a.F_3_3_4_species_sensitive === "Yes");
+                    }
+                    setSensitive(hasSensitives);
+                    if(!release) {
+                        let release = releases[0].ReleaseId;
+                        setRelease(release);
+                        setSearchParams({"site": siteCode, "release": release});
+                    }
+                }
+            }
+            else {
+                setErrorLoading(true);
+            }
+            setIsLoading(false);
+        });
     }
 
     const formatData = (data) => {
@@ -114,14 +147,6 @@ const SDF = () => {
         return data.Data;
     }
 
-    if(!siteCode) {
-        getSiteCode();
-    }
-
-    if(!isLoading && siteCode && siteCode !== "nodata" && Object.keys(data).length === 0 && !errorLoading) {
-        loadData();
-    }
-
     const changeRelease = (event, release) => {
         setSearchParams(searchParams => {
             searchParams.set("release", release.value);
@@ -132,6 +157,22 @@ const SDF = () => {
         setRelease("");
         setData([]);
         setErrorLoading(false);
+    }
+
+    const scrollTo = (item, e = null) => {
+        if (e) {
+            e.stopPropagation();
+            e.preventDefault();
+        }
+        const element = document.getElementById(item);
+        if (!element) return;
+        const y = element.getBoundingClientRect().top + window.scrollY;
+        const baseUrl = window.location.href.split("&nav")[0];
+        window.history.pushState(null, null, `${baseUrl}&nav=${item}`);
+        window.scroll({
+            top: y,
+            behavior: 'instant'
+        });
     }
 
     const formatDate = (date, ddmmyyyy) => {
@@ -156,51 +197,49 @@ const SDF = () => {
                         <div id="page-document" className="ui container">
                             <div className="sdf">
                                 <div className="container--main min-vh-100">
-                                    <div className="ui container">
+                                    <div className="ui container sdf-header">
                                         <div className="ui grid py-4">
-                                            <div className="sdf-general">
-                                                <div className="sdf-head">
-                                                    <div className="logo">
-                                                        <a title="Site logo" className="logo" href="/.">
-                                                            <img title="Site" src={Logo} alt="Natura 2000" className="ui image eea-logo" />
-                                                        </a>
-                                                    </div>
-                                                    <div>
-                                                        <h1>NATURA 2000 - STANDARD DATA FORM</h1>
-                                                        {release && releases.length > 0 && <b>RELEASE {releases.find(a => a.ReleaseId === release)?.ReleaseName} ({formatDate(releases.find(a => a.ReleaseId === release)?.ReleaseDate, true)})</b>}
-                                                        {
-                                                            !isLoading && siteCode && siteCode !== "nodata" && data !== "nodata" && Object.keys(data).length > 0 && !errorLoading &&
-                                                            <h2>{data.SiteInfo.SiteName} ({data.SiteInfo.SiteCode} - {ConfigSDF.SiteType[data.SiteInfo.Directive]})</h2>
-                                                        }
-                                                        {sensitive && <b className="sensitive">SENSITIVE</b>}
-                                                    </div>
-                                                    <div className="select--right">
-                                                        <Select
-                                                            placeholder="Select a release"
-                                                            name="release"
-                                                            options=
-                                                                {
-                                                                    releases && releases.map((item, i) => (
-                                                                        {
-                                                                            key: item.ReleaseId, value: item.ReleaseId, text: (item.ReleaseName + " (" + formatDate(item.ReleaseDate, true) + ")")
-                                                                        }
-                                                                    ))
-                                                                }
-                                                            value={releases.find(a => a.ReleaseId === release) ? release : ""}
-                                                            onChange={changeRelease}
-                                                            selectOnBlur={false}
-                                                            loading={isLoading}
-                                                            disabled={isLoading || errorLoading || siteCode === "nodata"}
-                                                        />
-                                                        {
-                                                            !isLoading && siteCode && siteCode !== "nodata" && data !== "nodata" && Object.keys(data).length > 0 && !errorLoading &&
-                                                            <div className="sdf-download">
-                                                                <button className="ui button secondary" onClick={() => { window.print() }}>
-                                                                    <i className="icon ri-download-line"></i> Download PDF
-                                                                </button>
-                                                            </div>
-                                                        }
-                                                    </div>
+                                            <div className="sdf-head">
+                                                <div className="logo">
+                                                    <a title="Site logo" className="logo" href="/.">
+                                                        <img title="Site" src={Logo} alt="Natura 2000" className="ui image eea-logo" />
+                                                    </a>
+                                                </div>
+                                                <div>
+                                                    <h1>NATURA 2000 - STANDARD DATA FORM</h1>
+                                                    {release && releases.length > 0 && <b>RELEASE {releases.find(a => a.ReleaseId === release)?.ReleaseName} ({formatDate(releases.find(a => a.ReleaseId === release)?.ReleaseDate, true)})</b>}
+                                                    {
+                                                        !isLoading && siteCode && siteCode !== "nodata" && data !== "nodata" && Object.keys(data).length > 0 && !errorLoading &&
+                                                        <h2>{data.SiteInfo.SiteName} ({data.SiteInfo.SiteCode} - {ConfigSDF.SiteType[data.SiteInfo.Directive ?? data.SiteInfo.SiteType]})</h2>
+                                                    }
+                                                    {sensitive && <b className="sensitive">SENSITIVE</b>}
+                                                </div>
+                                                <div className="select--right">
+                                                    <Select
+                                                        placeholder="Select a release"
+                                                        name="release"
+                                                        options=
+                                                            {
+                                                                releases && releases.map((item, i) => (
+                                                                    {
+                                                                        key: item.ReleaseId, value: item.ReleaseId, legacy: item.Legacy, text: (item.ReleaseName + " (" + formatDate(item.ReleaseDate, true) + ")")
+                                                                    }
+                                                                ))
+                                                            }
+                                                        value={releases.find(a => a.ReleaseId === release) ? release : ""}
+                                                        onChange={changeRelease}
+                                                        selectOnBlur={false}
+                                                        loading={isLoading}
+                                                        disabled={isLoading || errorLoading || siteCode === "nodata"}
+                                                    />
+                                                    {
+                                                        !isLoading && siteCode && siteCode !== "nodata" && data !== "nodata" && Object.keys(data).length > 0 && !errorLoading &&
+                                                        <div className="sdf-download">
+                                                            <button className="ui button secondary" onClick={() => { window.print() }}>
+                                                                <i className="icon ri-download-line"></i> Download PDF
+                                                            </button>
+                                                        </div>
+                                                    }
                                                 </div>
                                             </div>
                                         </div>
@@ -221,13 +260,23 @@ const SDF = () => {
                                         siteCode === "nodata" || data === "nodata" ? <div className="nodata-container"><em>No Data</em></div> :
                                             siteCode && Object.keys(data).length > 0 &&
                                             <>
-                                                <SDFStructure
-                                                    data={data}
-                                                    siteCode={siteCode}
-                                                    release={release}
-                                                    formatDate={formatDate}
-                                                    mapUrl={ConfigJson.MapReleases}
-                                                ></SDFStructure>
+                                                {release < 100 ?
+                                                    <SDFLegacyStructure
+                                                        data={data}
+                                                        siteCode={siteCode}
+                                                        release={release}
+                                                        formatDate={formatDate}
+                                                        mapUrl={ConfigJson.MapReleases}
+                                                    ></SDFLegacyStructure>
+                                                    :
+                                                    <SDFStructure
+                                                        data={data}
+                                                        siteCode={siteCode}
+                                                        release={release}
+                                                        formatDate={formatDate}
+                                                        mapUrl={ConfigJson.MapReleases}
+                                                    ></SDFStructure>
+                                                }
                                             </>
                                     }
                                     {showScrollBtn &&

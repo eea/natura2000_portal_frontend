@@ -7,6 +7,7 @@
         font-size: 1.5rem;
         width: 100%;
         margin: 0;
+        margin-bottom: 0.25rem;
     }
     .message {
         width: 100%;
@@ -21,48 +22,49 @@
             margin-left: auto;
         }
     }
-    &-general {
-        width: 100%;
+    .sdf-head {
         display: flex;
+        gap: 2rem;
+        align-items: start;
+        flex-grow: 1;
+        width: 100%;
         color: $text;
-        .sdf-head {
-            display: flex;
-            gap: 2rem;
-            align-items: start;
-            flex-grow: 1;
-            h1 {
-                margin-bottom: 0;
-            }
-            .sensitive {
+        h1 {
+            margin-bottom: 0;
+
+        }
+        b {
+            color: $naturaGreen;
+            font-size: 1.25rem;
+            display: block;
+            line-height: normal;
+            &.sensitive {
                 color: $messageError;
             }
-            b {
-                color: $naturaGreen;
-                font-size: 1.5rem;
-                display: block;
-                line-height: normal;
-            }
-            .logo {
-                width: 8rem;
-                min-width: 8rem;
-            }
         }
-        .select--right {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            align-items: end;
-            width: auto;
-            margin-left: auto;
-            .ui.dropdown {
-                &.loading {
-                    .dropdown.icon {
-                        position: sticky !important;
-                    }
+        h2 {
+            font-size: 1.25rem;
+        }
+        .logo {
+            width: 8rem;
+            min-width: 8rem;
+        }
+    }
+    .select--right {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        align-items: end;
+        width: auto;
+        margin-left: auto;
+        .ui.dropdown {
+            &.loading {
+                .dropdown.icon {
+                    position: sticky !important;
                 }
-                .text {
-                    line-height: normal;
-                }
+            }
+            .text {
+                line-height: normal;
             }
         }
     }
@@ -76,6 +78,14 @@
             color: $naturaBlue;
         }
     }
+    &-subtitle {
+        width: 100%;
+        h3 {
+            font-size: 1.125rem;
+            margin-bottom: 0.5rem;
+            margin-top: 0.25rem;
+        }
+    }
     &-row {
         margin-bottom: 1rem;
         width: 100%;
@@ -86,11 +96,15 @@
         &-title {
             font-weight: bold;
             margin-bottom: 0.5rem;
+            font-size: 1rem;
+            min-height: 1.5rem;
+            white-space: pre-line;
         }
         &-field {
             border: solid 1px $grey-2;
             padding: 0.5rem 0.75rem;
             border-radius: 0.25rem;
+            min-height: 2.5rem;
             ~.sdf-row-field {
                 margin-top: 0.5rem;
             }
@@ -100,8 +114,13 @@
             .ui.table {
                 margin-bottom: 0;
                 overflow: auto;
-                tr:last-of-type td {
-                    border-bottom: none;
+                tr {
+                    &:last-of-type td {
+                        border-bottom: none;
+                    }
+                    &:hover {
+                        background-color: #f2f2f2;
+                    }
                 }
                 th, td {
                     border-color: $grey-2;
@@ -110,6 +129,7 @@
                 th {
                     position: relative;
                     padding: 0.875rem 1rem;
+                    vertical-align: top;
                     &[colspan] {
                         background: none !important;
                         cursor: auto !important;
@@ -120,9 +140,38 @@
                     }
                     .sort-icon {
                         position: absolute;
-                        left: 100%;
-                        transform: translate(-100%, -100%);
+                        right: 0.25rem;
+                        top: 50%;
+                        transform: translateY(-50%);
                         line-height: 1rem;
+                    }
+                }
+                .th-rotate th {
+                    writing-mode: sideways-lr;
+                    text-orientation: mixed;
+                    text-align: start;
+                    white-space: nowrap;
+                    padding: 0.25rem;
+                    padding-top: 1rem;
+                    padding-bottom: 0.5rem;
+                    .sort-icon {
+                        position: absolute;
+                        top: 0.25rem;
+                        left: 0.5rem;
+                        transform: none;
+                    }
+                }
+                tbody {
+                    tr {
+                        &:last-of-type td {
+                            border-bottom: none;
+                        }
+                        &:hover {
+                            background-color: #f2f2f2;
+                        }
+                        td {
+                            font-size: 0.875rem;
+                        }
                     }
                 }
             }
@@ -207,6 +256,9 @@
     .select--right, .sdf-download, .sdf-scroll, .esri-zoom {
         display: none !important;
     }
+    .sdf .sdf-row[class*="six wide computer"].column, .sdf .sdf-row [class*="six wide computer"].column {
+        width: 50% !important;
+    }
     table {
         .sorted {
             background: none !important;
@@ -236,5 +288,8 @@
     }
     .sdf-download .ui.button {
         margin-left: 0;
+    }
+    .sdf-row-title {
+        min-height: 0;
     }
 }
