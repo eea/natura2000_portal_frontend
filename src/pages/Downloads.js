@@ -50,10 +50,15 @@ const Downloads = () => {
                 .then(response => response.json())
                 .then(data => {
                     if(data?.Success) {
-                        const releases = data.Data.map(country => ({
-                            ...country,
-                            Submissions: country.Submissions.sort((a, b) => convertToDate(b.ImportDate) - convertToDate(a.ImportDate))
-                        }));
+                        const getCountryName = (countryCode) => ConfigData.ReportsCountries.find(a => a.CountryCode === countryCode)?.CountryName ?? '';
+                        const releases = data.Data
+                            .map(country => ({
+                                ...country,
+                                Submissions: country.Submissions
+                                    .filter(sub => sub.VersionID <= 100)
+                                    .sort((a, b) => convertToDate(b.ImportDate) - convertToDate(a.ImportDate))
+                            }))
+                            .sort((a, b) => getCountryName(a.CountryCode).localeCompare(getCountryName(b.CountryCode)));
                         setData(releases);
                     }
                     else {
