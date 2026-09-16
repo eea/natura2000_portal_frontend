@@ -261,7 +261,7 @@ const Search = () => {
                                                                 label={item.HabitatGroupName}
                                                                 name="habitatGroup"
                                                                 value={item.HabitatGroupCode}
-                                                                checked={item.HabitatGroupCode === filters.habitatGroup}
+                                                                checked={filters.habitatGroup ? item.HabitatGroupCode === filters.habitatGroup : item.HabitatGroupCode === ""}
                                                                 onChange={onChangeFilters}
                                                             />
                                                         </div>

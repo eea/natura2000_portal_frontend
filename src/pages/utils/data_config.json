@@ -314,6 +314,10 @@
 	],
 	"HabitatGroups": [
 		{
+			"HabitatGroupName": "All",
+			"HabitatGroupCode": ""
+		},
+		{
 			"HabitatGroupName": "Coastal and halophytic habitats",
 			"HabitatGroupCode": "1"
 		},
@@ -351,6 +355,10 @@
 		}
 	],
 	"SpeciesGroups": [
+		{
+			"SpeciesGroupName": "All",
+			"SpeciesGroupCode": ""
+		},
 		{
 			"SpeciesGroupName": "Amphibians",
 			"SpeciesGroupCode": "A"
