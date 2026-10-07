@@ -118,7 +118,7 @@ const Search = () => {
                 value = filters[field]?.split(",").filter(item => item !== value).join(",");
             }
         }
-        if(value === "") {
+        if(value === "" || (field === "speciesGroup" && value === "All")) {
             setFilters(Object.entries(filters).reduce((a,[k,v]) => (k !==field ? (a[k]=v, a) : a), {}));
         }
         else {
@@ -262,7 +262,7 @@ const Search = () => {
                                                                 label={item.SpeciesGroupName}
                                                                 name="speciesGroup"
                                                                 value={item.SpeciesGroupName}
-                                                                checked={item.SpeciesGroupName === filters.speciesGroup}
+                                                                checked={filters.speciesGroup ? item.SpeciesGroupName === filters.speciesGroup : item.SpeciesGroupName === "All"}
                                                                 onChange={onChangeFilters}
                                                             />
                                                         </div>
@@ -334,7 +334,7 @@ const Search = () => {
                                     </AccordionContent>
                                 </Accordion>
                                 <div className="search-buttons mt-3">
-                                    <button className="ui button" disabled={loadingData} onClick={()=>addParameters()}>Search</button>
+                                    <button className="ui button" disabled={loadingData || loadingReleases} onClick={()=>addParameters()}>Search</button>
                                     <button className="ui button text" disabled={loadingData} onClick={()=>removeParameters()}>Clear filters</button>
                                 </div>
                             </div>

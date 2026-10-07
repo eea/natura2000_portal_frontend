@@ -261,7 +261,7 @@ const Search = () => {
                                                                 label={item.HabitatGroupName}
                                                                 name="habitatGroup"
                                                                 value={item.HabitatGroupCode}
-                                                                checked={item.HabitatGroupCode === filters.habitatGroup}
+                                                                checked={filters.habitatGroup ? item.HabitatGroupCode === filters.habitatGroup : item.HabitatGroupCode === ""}
                                                                 onChange={onChangeFilters}
                                                             />
                                                         </div>
@@ -319,7 +319,7 @@ const Search = () => {
                                     </AccordionContent>
                                 </Accordion>
                                 <div className="search-buttons mt-3">
-                                    <button className="ui button" disabled={loadingData} onClick={()=>addParameters()}>Search</button>
+                                    <button className="ui button" disabled={loadingData || loadingReleases} onClick={()=>addParameters()}>Search</button>
                                     <button className="ui button text" disabled={loadingData} onClick={()=>removeParameters()}>Clear filters</button>
                                 </div>
                             </div>
