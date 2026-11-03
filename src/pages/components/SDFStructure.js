@@ -235,7 +235,7 @@ const SDFVisualization = (props) => {
                             type = "single";
                             layout = 2;
                             break;
-                        case "F_2_1_2_a_area_diff":
+                        case "F_2_1_2_b_area_diff_reason":
                             index = "2.1.2";
                             title = "Reason for area difference with spatial dataset (if any)";
                             value = field[1];
